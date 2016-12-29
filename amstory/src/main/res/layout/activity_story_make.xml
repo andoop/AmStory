@@ -1,0 +1,126 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="andoop.android.amstory.view.StoryMakeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:padding="6dp"
+        android:fadeScrollbars="true"
+        android:scrollbars="none"
+        >
+        <TextView
+            android:id="@+id/tv_story_make_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:lineSpacingExtra="6dp"
+            />
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0px"
+        android:layout_weight="1">
+        <!--ImageView
+         android:id="@+id/bkgnd"
+         android:layout_width="fill_parent"
+         android:layout_height="fill_parent"
+         android:scaleType="centerCrop"
+         android:src="@drawable/bkgnd"-->
+
+        <andoop.android.amstory.customview.WaveformView
+            android:id="@+id/waveform"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/waveform_unselected_bkgnd_overlay"/>
+
+        <andoop.android.amstory.customview.MarkerView
+            android:id="@+id/startmarker"
+            android:nextFocusDown="@+id/endmarker"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:src="@drawable/marker_left"
+            android:contentDescription="@string/start_marker" />
+
+        <andoop.android.amstory.customview.MarkerView
+            android:id="@+id/endmarker"
+            android:nextFocusUp="@+id/startmarker"
+            android:nextFocusDown="@+id/info"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:src="@drawable/marker_right"
+            android:contentDescription="@string/end_marker" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:gravity="center"
+        android:visibility="visible"
+        android:padding="3dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="音效添加"
+            />
+        <Button
+            android:id="@+id/takevoice"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="录音"
+            android:onClick="takevoice"
+            />
+        <Button
+            android:id="@+id/stoptake"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="停止"
+            android:enabled="false"
+            android:onClick="stoptake"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="保存"
+            android:onClick="saveRecord"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="我的列表"
+            android:onClick="showMyList"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>

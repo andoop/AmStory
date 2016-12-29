@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/aapp" />
+            <option value="$PROJECT_DIR$/amstory" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/atext" />
+            <option value="$PROJECT_DIR$/ringdroid" />
+            <option value="$PROJECT_DIR$/stylishmp" />
+            <option value="$PROJECT_DIR$/voicecutdemo" />
+            <option value="$PROJECT_DIR$/voicemixdemo" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

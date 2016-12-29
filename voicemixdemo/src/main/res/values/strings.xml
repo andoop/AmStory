@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">测试混音</string>
+    
+    <string name="save">保存</string>
+    <string name="playback">回放</string>
+
+</resources>

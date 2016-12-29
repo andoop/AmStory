@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\layout-land\\after_save_action.xml",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\layout-land\\after_save_action.xml"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\layout-land\\media_select.xml",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\layout-land\\media_select.xml"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\layout-land\\editor.xml",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\layout-land\\editor.xml"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\layout-land\\media_select_row.xml",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\layout-land\\media_select_row.xml"
+    }
+]

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="22dp"
+    android:background="@drawable/loading_bg"
+    android:layout_height="match_parent">
+
+    <andoop.android.amstory.customview.ProgressWheel
+        android:id="@+id/wheel"
+        android:layout_width="57dp"
+        android:layout_centerInParent="true"
+        android:background="@color/transparent"
+        android:layout_height="57dp"/>
+</RelativeLayout>
