@@ -103,7 +103,7 @@ public class MPlayerActivity extends AppCompatActivity {
 
         Log.e("----->" + "MPlayerActivity", "loadData:" + soundFile.getFileSizeBytes()+":"+soundFile.getAvgBitrateKbps());
 
-        mpv.setMax(soundFile.getFileSizeBytes()/(soundFile.getAvgBitrateKbps()*(100)));
+        mpv.setMax(soundFile.getNumSamples()/soundFile.getSampleRate());
         startplay();
     }
 

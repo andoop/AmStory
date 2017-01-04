@@ -73,12 +73,7 @@
         android:orientation="horizontal"
         >
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="音效添加"
-            />
+
         <Button
             android:id="@+id/takevoice"
             android:layout_width="0dp"
@@ -95,6 +90,15 @@
             android:text="停止"
             android:enabled="false"
             android:onClick="stoptake"
+            />
+
+        <Button
+            android:id="@+id/play"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="播放"
+            android:onClick="playRecord"
             />
         <Button
             android:layout_width="0dp"
@@ -113,11 +117,66 @@
         >
 
         <Button
+            android:id="@+id/bt_delete_choose"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="删除选中"
+            android:onClick="deleteChoose"
+            />
+
+        <Button
+            android:id="@+id/bt_new_record"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="重新录取"
+            android:onClick="newRecord"
+            />
+
+        <Button
+            android:id="@+id/bt_insert_pos"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="从选中位置录"
+            android:textSize="11sp"
+            android:onClick="restartRecordrFromPos"
+            />
+
+
+        <Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="我的列表"
             android:onClick="showMyList"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/bt_add_bg_music"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="添加背景"
+            android:onClick="addBgMusic"
+            />
+        <Button
+            android:id="@+id/bt_add_music"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="添加音效"
+            android:onClick="addMusic"
             />
 
 
