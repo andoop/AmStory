@@ -1,14 +1,18 @@
 package andoop.android.amstory;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,36 +61,61 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     @InjectView(R.id.endmarker)
     MarkerView mEndMarker;
     //是否继续录制
-    private boolean mRecordingKeepGoing = false;
-    private long mLoadingLastUpdateTime;
-    private long mRecordingLastUpdateTime;
-    private double mRecordingTime;
     //录制状态
     private final int STATE_RECORDING = 1;
     private final int STATE_RECORDSTOP = 2;
     private final int STATE_RECORDPAUSE = 3;
     private final int STATE_RECORDERR = -1;
 
-    private Thread mLoadSoundFileThread;
-    private Thread mRecordAudioThread;
-    private Thread mSaveSoundFileThread;
-
-    private SoundFile mSoundFile;
-
-    private SamplePlayer mPlayer;
-    private boolean mIsPlaying = false;
-
-    private Handler mHandler;
     //一个操作线的位置
     private int startX;
     //第二个操作线的位置
     private int endX;
+
+
+    private long mLoadingLastUpdateTime;
+    private boolean mLoadingKeepGoing;
+    private long mRecordingLastUpdateTime;
+    private boolean mRecordingKeepGoing;
+    private double mRecordingTime;
+    private boolean mFinishActivity;
+    private TextView mTimerTextView;
+    private AlertDialog mAlertDialog;
+    private ProgressDialog mProgressDialog;
+    private SoundFile mSoundFile;
+
+    private boolean mKeyDown;
+    private int mWidth;
+    private int mMaxPos;
     private int mStartPos;
-    private int mStopPos;
+    private int mEndPos;
+    private boolean mStartVisible;
+    private boolean mEndVisible;
+    private int mLastDisplayedStartPos;
+    private int mLastDisplayedEndPos;
+    private int mOffset;
+    private int mOffsetGoal;
+    private int mFlingVelocity;
+    private int mPlayStartMsec;
+    private int mPlayEndMsec;
+    private Handler mHandler;
+    private boolean mIsPlaying;
+    private SamplePlayer mPlayer;
+    private boolean mTouchDragging;
+    private float mTouchStart;
+    private int mTouchInitialOffset;
+    private int mTouchInitialStartPos;
+    private int mTouchInitialEndPos;
+    private long mWaveformTouchStartMsec;
+    private float mDensity;
+    private int mMarkerLeftInset;
+    private int mMarkerRightInset;
     private int mMarkerTopOffset;
     private int mMarkerBottomOffset;
 
-    private int WaveViewMaxPos;
+    private Thread mLoadSoundFileThread;
+    private Thread mRecordAudioThread;
+    private Thread mSaveSoundFileThread;
 
 
     @Override
@@ -94,6 +123,26 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_make);
         ButterKnife.inject(this);
+
+        mPlayer = null;
+        mIsPlaying = false;
+
+        mAlertDialog = null;
+        mProgressDialog = null;
+
+        mLoadSoundFileThread = null;
+        mRecordAudioThread = null;
+        mSaveSoundFileThread = null;
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        mDensity = metrics.density;
+
+        mMarkerLeftInset = (int)(46 * mDensity);
+        mMarkerRightInset = (int)(48 * mDensity);
+        mMarkerTopOffset = (int)(10 * mDensity);
+        mMarkerBottomOffset = (int)(10 * mDensity);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             Log.e("----->" + "StoryMakeActivity", "onCreate:" + "extra");
@@ -107,11 +156,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                 mPresenter.loadData(storyModule);
             }
         }
-
         mWaveformView.setListener(this);
-        //设置数据源
-      // mSoundFile=new SoundFile();
-
 
         mStartMarker = (MarkerView) findViewById(R.id.startmarker);
         mStartMarker.setListener(this);
@@ -127,6 +172,8 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         mEndMarker.setFocusableInTouchMode(true);
 
         mHandler = new Handler();
+        mSoundFile = null;
+        mKeyDown = false;
 
     }
 
@@ -141,6 +188,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         tv_content.setText(Html.fromHtml(data.text));
     }
 
+
     /**
      * 开始录音
      *
@@ -148,7 +196,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
      */
     public void takevoice(View view) {
         mRecordingKeepGoing = true;
-        mStopPos=WaveViewMaxPos;
+        mEndPos=mMaxPos;
         recordAudio();
     }
 
@@ -165,7 +213,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     public void newRecord(View view) {
        mSoundFile=null;
         mRecordingKeepGoing = true;
-        mStopPos=0;
+        mEndPos=0;
         recordAudio();
 
     }
@@ -179,7 +227,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     //删除选中
     public void deleteChoose(View view) {
         double startTime = mWaveformView.pixelsToSeconds(mStartPos);
-        double endTime = mWaveformView.pixelsToSeconds(mStopPos);
+        double endTime = mWaveformView.pixelsToSeconds(mEndPos);
         final int startFrame = mWaveformView.secondsToFrames(startTime);
         final int endFrame = mWaveformView.secondsToFrames(endTime);
         new AsyncTask<Void,Void,Void>(){
@@ -192,7 +240,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                mStopPos=0;
+                mEndPos=0;
                 finishRecord();
             }
         }.execute();
@@ -207,7 +255,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         if(mStartMarker.isSelected()){
             startpx=mStartPos;
         }else {
-            startpx=mStopPos;
+            startpx=mEndPos;
         }
         double pixelsToSeconds = mWaveformView.pixelsToSeconds(startpx);
         startframe=mWaveformView.secondsToFrames(pixelsToSeconds);
@@ -260,8 +308,10 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
             }
         });
         mIsPlaying = true;
+        Log.e("----->" + "StoryMakeActivity", "playRecord:" + mStartPos);
         mPlayer.seekTo(mWaveformView.pixelsToMillisecs(mStartPos));
         mPlayer.start();
+        mWaveformView.invalidate();
     }
 
     private synchronized void handlePause() {
@@ -314,10 +364,10 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                     });
                     return;
                 }
-                mPlayer = new SamplePlayer(mSoundFile);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        mPlayer = new SamplePlayer(mSoundFile);
                         finishRecord();
                     }
                 });
@@ -328,14 +378,25 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
     //完成录制，或停止了录制
     private void finishRecord() {
-        Log.e("----->" + "StoryMakeActivity", "finishRecord:" + mSoundFile);
         mWaveformView.setSoundFile(mSoundFile);
-        WaveViewMaxPos = mWaveformView.maxPos();
-        mStartPos=mStopPos;
-        mStopPos=WaveViewMaxPos;
-        mWaveformView.invalidate();
-    }
+        mMaxPos = mWaveformView.maxPos();
+        mStartPos=mEndPos;
+        mEndPos=mMaxPos;
+        mLastDisplayedStartPos = -1;
+        mLastDisplayedEndPos = -1;
 
+        mTouchDragging = false;
+
+        mOffset = 0;
+        mOffsetGoal = 0;
+        mFlingVelocity = 0;
+       // resetPositions();
+        updateWaveView();
+    }
+    /*private void resetPositions() {
+        mStartPos = mWaveformView.secondsToPixels(0.0);
+        mEndPos = mWaveformView.secondsToPixels(15.0);
+    }*/
     private long getCurrentTime() {
         return System.nanoTime() / 1000000;
     }
@@ -420,23 +481,101 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     private synchronized void updateWaveView() {
         if (mIsPlaying) {
             int now = mPlayer.getCurrentPosition();
-            int pixels = mWaveformView.millisecsToPixels(now);
-            mWaveformView.setPlayback(pixels);
-            if (now >= mWaveformView.pixelsToMillisecs(mStopPos)) {
+            int frames = mWaveformView.millisecsToPixels(now);
+            Log.e("----->" + "StoryMakeActivity", "updateWaveView:" + frames);
+            mWaveformView.setPlayback(frames);
+            setOffsetGoalNoUpdate(frames - mWidth / 2);
+            if (now >= mWaveformView.pixelsToMillisecs(mEndPos)) {
                 handlePause();
             }
         }
 
-        mWaveformView.setParameters(mStartPos, mStopPos, 0);
+        if (!mTouchDragging) {
+            int offsetDelta;
 
+            if (mFlingVelocity != 0) {
+                offsetDelta = mFlingVelocity / 30;
+                if (mFlingVelocity > 80) {
+                    mFlingVelocity -= 80;
+                } else if (mFlingVelocity < -80) {
+                    mFlingVelocity += 80;
+                } else {
+                    mFlingVelocity = 0;
+                }
+
+                mOffset += offsetDelta;
+
+                if (mOffset + mWidth / 2 > mMaxPos) {
+                    mOffset = mMaxPos - mWidth / 2;
+                    mFlingVelocity = 0;
+                }
+                if (mOffset < 0) {
+                    mOffset = 0;
+                    mFlingVelocity = 0;
+                }
+                mOffsetGoal = mOffset;
+            } else {
+                offsetDelta = mOffsetGoal - mOffset;
+
+                if (offsetDelta > 10)
+                    offsetDelta = offsetDelta / 10;
+                else if (offsetDelta > 0)
+                    offsetDelta = 1;
+                else if (offsetDelta < -10)
+                    offsetDelta = offsetDelta / 10;
+                else if (offsetDelta < 0)
+                    offsetDelta = -1;
+                else
+                    offsetDelta = 0;
+
+                mOffset += offsetDelta;
+            }
+        }
+
+        mWaveformView.setParameters(mStartPos, mEndPos, mOffset);
         mWaveformView.invalidate();
 
-        startX = mStartPos - (mStartMarker.getWidth() / 2);
-        endX = mStopPos - (mStartMarker.getWidth() / 2);
+        int startX = mStartPos - mOffset - mMarkerLeftInset;
+        if (startX + mStartMarker.getWidth() >= 0) {
+            if (!mStartVisible) {
+                // Delay this to avoid flicker
+                mHandler.postDelayed(new Runnable() {
+                    public void run() {
+                        mStartVisible = true;
+                        mStartMarker.setAlpha(1f);
+                    }
+                }, 0);
+            }
+        } else {
+            if (mStartVisible) {
+                mStartMarker.setAlpha(0f);
+                mStartVisible = false;
+            }
+            startX = 0;
+        }
+
+        int endX = mEndPos - mOffset - mEndMarker.getWidth() + mMarkerRightInset;
+        if (endX + mEndMarker.getWidth() >= 0) {
+            if (!mEndVisible) {
+                // Delay this to avoid flicker
+                mHandler.postDelayed(new Runnable() {
+                    public void run() {
+                        mEndVisible = true;
+                        mEndMarker.setAlpha(1f);
+                    }
+                }, 0);
+            }
+        } else {
+            if (mEndVisible) {
+                mEndMarker.setAlpha(0f);
+                mEndVisible = false;
+            }
+            endX = 0;
+        }
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                mStartMarker.getWidth(),
-                mStartMarker.getHeight());
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(
                 startX,
                 mMarkerTopOffset,
@@ -445,8 +584,8 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         mStartMarker.setLayoutParams(params);
 
         params = new RelativeLayout.LayoutParams(
-                mStartMarker.getWidth(),
-                mStartMarker.getHeight());
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(
                 endX,
                 mWaveformView.getMeasuredHeight() - mEndMarker.getHeight() - mMarkerBottomOffset,
@@ -461,7 +600,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
      */
     private void saveVoice() {
         double startTime = mWaveformView.pixelsToSeconds(mStartPos);
-        double endTime = mWaveformView.pixelsToSeconds(mStopPos);
+        double endTime = mWaveformView.pixelsToSeconds(mEndPos);
         final int startFrame = mWaveformView.secondsToFrames(startTime);
         final int endFrame = mWaveformView.secondsToFrames(endTime);
         final int duration = (int) (endTime - startTime + 0.5);
@@ -513,8 +652,25 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
     @Override
     protected void onDestroy() {
+        Log.v("Ringdroid", "EditActivity OnDestroy");
+
+        mLoadingKeepGoing = false;
         mRecordingKeepGoing = false;
+        closeThread(mLoadSoundFileThread);
         closeThread(mRecordAudioThread);
+        closeThread(mSaveSoundFileThread);
+        mLoadSoundFileThread = null;
+        mRecordAudioThread = null;
+        mSaveSoundFileThread = null;
+        if(mProgressDialog != null) {
+            mProgressDialog.dismiss();
+            mProgressDialog = null;
+        }
+        if(mAlertDialog != null) {
+            mAlertDialog.dismiss();
+            mAlertDialog = null;
+        }
+
         if (mPlayer != null) {
             if (mPlayer.isPlaying() || mPlayer.isPaused()) {
                 mPlayer.stop();
@@ -522,7 +678,49 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
             mPlayer.release();
             mPlayer = null;
         }
+
         super.onDestroy();
+    }
+
+    private int trap(int pos) {
+        if (pos < 0)
+            return 0;
+        if (pos > mMaxPos)
+            return mMaxPos;
+        return pos;
+    }
+
+    private void setOffsetGoalStart() {
+        setOffsetGoal(mStartPos - mWidth / 2);
+    }
+    private void setOffsetGoal(int offset) {
+        setOffsetGoalNoUpdate(offset);
+        updateWaveView();
+    }
+
+    private void setOffsetGoalNoUpdate(int offset) {
+        if (mTouchDragging) {
+            return;
+        }
+
+        mOffsetGoal = offset;
+        if (mOffsetGoal + mWidth / 2 > mMaxPos)
+            mOffsetGoal = mMaxPos - mWidth / 2;
+        if (mOffsetGoal < 0)
+            mOffsetGoal = 0;
+    }
+
+
+    private void setOffsetGoalStartNoUpdate() {
+        setOffsetGoalNoUpdate(mStartPos - mWidth / 2);
+    }
+
+    private void setOffsetGoalEnd() {
+        setOffsetGoal(mEndPos - mWidth / 2);
+    }
+
+    private void setOffsetGoalEndNoUpdate() {
+        setOffsetGoalNoUpdate(mEndPos - mWidth / 2);
     }
 
 
@@ -530,37 +728,67 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
     @Override
     public void waveformTouchStart(float x) {
-
+        mTouchDragging = true;
+        mTouchStart = x;
+        mTouchInitialOffset = mOffset;
+        mFlingVelocity = 0;
+        mWaveformTouchStartMsec = getCurrentTime();
     }
 
     @Override
     public void waveformTouchMove(float x) {
-
+        mOffset = trap((int)(mTouchInitialOffset + (mTouchStart - x)));
+        updateWaveView();
     }
 
     @Override
     public void waveformTouchEnd() {
+        mTouchDragging = false;
+        mOffsetGoal = mOffset;
 
     }
 
     @Override
     public void waveformFling(float x) {
-
-    }
-
-    @Override
-    public void waveformDraw() {
+        mTouchDragging = false;
+        mOffsetGoal = mOffset;
+        mFlingVelocity = (int)(-x);
         updateWaveView();
     }
 
     @Override
-    public void waveformZoomIn() {
+    public void waveformDraw() {
+        mWidth = mWaveformView.getMeasuredWidth();
+        if (mOffsetGoal != mOffset && !mKeyDown)
+            updateWaveView();
+        else if (mIsPlaying) {
+            updateWaveView();
+        } else if (mFlingVelocity != 0) {
+            updateWaveView();
+        }
 
     }
 
     @Override
-    public void waveformZoomOut() {
+    public void waveformZoomIn() {
+        mWaveformView.zoomIn();
+        mStartPos = mWaveformView.getStart();
+        mEndPos = mWaveformView.getEnd();
+        mMaxPos = mWaveformView.maxPos();
+        mOffset = mWaveformView.getOffset();
+        mOffsetGoal = mOffset;
+        updateWaveView();
+    }
 
+    @Override
+    public void waveformZoomOut() {
+        mWaveformView.zoomOut();
+        mStartPos = mWaveformView.getStart();
+        mEndPos = mWaveformView.getEnd();
+        mMaxPos = mWaveformView.maxPos();
+        mOffset = mWaveformView.getOffset();
+        mOffsetGoal = mOffset;
+        updateWaveView();
     }
 
     /**********************************
@@ -568,63 +796,106 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
      ***************************************************/
     @Override
     public void markerTouchStart(MarkerView marker, float pos) {
-        if (marker == mStartMarker) {
-            mStartPos = (int) pos;
-        } else {
-            mStopPos = (int) pos;
-        }
+        mTouchDragging = true;
+        mTouchStart = pos;
+        mTouchInitialStartPos = mStartPos;
+        mTouchInitialEndPos = mEndPos;
 
     }
 
     @Override
     public void markerTouchMove(MarkerView marker, float pos) {
+        float delta = pos - mTouchStart;
+
         if (marker == mStartMarker) {
-            if (Math.abs(pos - mStartPos) < 5)
-                return;
-            mStartPos += (pos - mStartPos);
-            if (mStartPos < mStopPos) {
-
-            } else {
-                mStartPos = mStopPos;
-                return;
-            }
-            if (mStartPos < 0) {
-                mStartPos = 0;
-            }
+            mStartPos = trap((int)(mTouchInitialStartPos + delta));
+            mEndPos = trap((int)(mTouchInitialEndPos + delta));
         } else {
-            if (Math.abs(pos - mStopPos) < 5)
-                return;
-            mStopPos += (pos - mStopPos);
-            if (mStopPos > mStartPos) {
-
-            } else {
-                mStopPos = mStartPos;
-                return;
-            }
-            if (mStopPos > WaveViewMaxPos) {
-                mStopPos = WaveViewMaxPos;
-            }
+            mEndPos = trap((int)(mTouchInitialEndPos + delta));
+            if (mEndPos < mStartPos)
+                mEndPos = mStartPos;
         }
         updateWaveView();
     }
 
     @Override
     public void markerTouchEnd(MarkerView marker) {
+        mTouchDragging = false;
+        if (marker == mStartMarker) {
+            setOffsetGoalStart();
+        } else {
+            setOffsetGoalEnd();
+        }
     }
 
     @Override
     public void markerFocus(MarkerView marker) {
+        mKeyDown = false;
+        if (marker == mStartMarker) {
+            setOffsetGoalStartNoUpdate();
+        } else {
+            setOffsetGoalEndNoUpdate();
+        }
 
+        // Delay updaing the display because if this focus was in
+        // response to a touch event, we want to receive the touch
+        // event too before updating the display.
+        mHandler.postDelayed(new Runnable() {
+            public void run() {
+               updateWaveView();
+            }
+        }, 100);
     }
 
     @Override
     public void markerLeft(MarkerView marker, int velocity) {
+        mKeyDown = true;
 
+        if (marker == mStartMarker) {
+            int saveStart = mStartPos;
+            mStartPos = trap(mStartPos - velocity);
+            mEndPos = trap(mEndPos - (saveStart - mStartPos));
+            setOffsetGoalStart();
+        }
+
+        if (marker == mEndMarker) {
+            if (mEndPos == mStartPos) {
+                mStartPos = trap(mStartPos - velocity);
+                mEndPos = mStartPos;
+            } else {
+                mEndPos = trap(mEndPos - velocity);
+            }
+
+            setOffsetGoalEnd();
+        }
+        updateWaveView();
     }
 
     @Override
     public void markerRight(MarkerView marker, int velocity) {
+        mKeyDown = true;
 
+        if (marker == mStartMarker) {
+            int saveStart = mStartPos;
+            mStartPos += velocity;
+            if (mStartPos > mMaxPos)
+                mStartPos = mMaxPos;
+            mEndPos += (mStartPos - saveStart);
+            if (mEndPos > mMaxPos)
+                mEndPos = mMaxPos;
+
+            setOffsetGoalStart();
+        }
+
+        if (marker == mEndMarker) {
+            mEndPos += velocity;
+            if (mEndPos > mMaxPos)
+                mEndPos = mMaxPos;
+
+            setOffsetGoalEnd();
+        }
+
+        updateWaveView();
     }
 
     @Override
@@ -634,7 +905,8 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
     @Override
     public void markerKeyUp() {
-
+        mKeyDown = false;
+        updateWaveView();
     }
 
     @Override
