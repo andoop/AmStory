@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -117,6 +119,8 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     private Thread mRecordAudioThread;
     private Thread mSaveSoundFileThread;
 
+    public static final int CHOOSE_BG_REQUEST_CODE=101;
+    public static final int CHOOSE_MUSIC_REQUEST_CODE=102;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,27 +254,70 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
     //从选中的位置开始录取
     public void restartRecordrFromPos(View view) {
+        mRecordingKeepGoing=true;
         int startframe=0;
         int startpx=0;
-        if(mStartMarker.isSelected()){
+       // if(mStartMarker.isSelected()){
             startpx=mStartPos;
-        }else {
-            startpx=mEndPos;
-        }
+       // }else {
+       //     startpx=mEndPos;
+      //  }
         double pixelsToSeconds = mWaveformView.pixelsToSeconds(startpx);
         startframe=mWaveformView.secondsToFrames(pixelsToSeconds);
-        mSoundFile.InsertRecord(startframe);
         changeState(STATE_RECORDING);
+        new AsyncTask<Integer,Void,Void>(){
+
+
+            @Override
+            protected Void doInBackground(Integer... params) {
+
+                SoundFile record = SoundFile.record(progressListener);
+                if(record==null){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(StoryMakeActivity.this, "插入录音失败", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else {
+                    Log.e("----->" + "StoryMakeActivity", "doInBackground:" + params[0]);
+                    mSoundFile.InsertRecord(record,params[0]);
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                mEndPos=0;
+                finishRecord();
+            }
+        }.execute(startframe);
     }
 
 
     //添加背景音效
     public void addBgMusic(View view) {
+        if(mSoundFile==null){
+            Toast.makeText(this, "先录一段音吧", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(this, BgListActivity.class);
+        intent.putExtra("type",1);
+        startActivityForResult(intent,CHOOSE_BG_REQUEST_CODE);
 
     }
 
     //添加音效
     public void addMusic(View view) {
+        if(mSoundFile==null){
+            Toast.makeText(this, "先录一段音吧", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(this, BgListActivity.class);
+        intent.putExtra("type",2);
+        startActivityForResult(intent,CHOOSE_MUSIC_REQUEST_CODE);
 
     }
 
@@ -342,6 +389,126 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         }
     };
 
+    private void readFile(final String path, final int startFrame) {
+
+        final File file = new File(path);
+        if(!file.exists()){
+            Toast.makeText(this, "file is not exist", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        new AsyncTask<Void,Void,SoundFile>(){
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                showloading();
+            }
+
+            @Override
+            protected SoundFile doInBackground(Void... params) {
+                SoundFile sf=null;
+
+                try {
+                    sf= SoundFile.create(path, new SoundFile.ProgressListener() {
+                        @Override
+                        public boolean reportProgress(double fractionComplete) {
+                            Log.e("----->" + "StoryMakeActivity", "reportProgress:" + fractionComplete);
+                            return true;
+                        }
+                    });
+
+                    if(sf==null){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(StoryMakeActivity.this, "操作失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else {
+                        mSoundFile.MixMusic(sf,startFrame,false);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SoundFile.InvalidInputException e) {
+                    e.printStackTrace();
+                }
+                return sf;
+            }
+
+            @Override
+            protected void onPostExecute(SoundFile aVoid) {
+                super.onPostExecute(aVoid);
+                stoploading();
+                Toast.makeText(StoryMakeActivity.this, "混入音效成功", Toast.LENGTH_SHORT).show();
+                mEndPos=0;
+                finishRecord();
+            }
+        }.execute();
+
+    }
+
+    private void readFile(final String path) {
+
+        final File file = new File(path);
+        if(!file.exists()){
+            Toast.makeText(this, "file is not exist", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+     new AsyncTask<Void,Void,SoundFile>(){
+         @Override
+         protected void onPreExecute() {
+             super.onPreExecute();
+             showloading();
+         }
+
+
+         @Override
+         protected SoundFile doInBackground(Void... params) {
+             SoundFile sf=null;
+
+             try {
+                sf= SoundFile.create(path, new SoundFile.ProgressListener() {
+                     @Override
+                     public boolean reportProgress(double fractionComplete) {
+                         Log.e("----->" + "StoryMakeActivity", "reportProgress:" + fractionComplete);
+                         return true;
+                     }
+                 });
+
+                 if(sf==null){
+                     runOnUiThread(new Runnable() {
+                         @Override
+                         public void run() {
+                             Toast.makeText(StoryMakeActivity.this, "操作失败", Toast.LENGTH_SHORT).show();
+                         }
+                     });
+                 }else {
+                     mSoundFile.MixBgMusic(sf);
+                 }
+
+             } catch (IOException e) {
+                 e.printStackTrace();
+             } catch (SoundFile.InvalidInputException e) {
+                 e.printStackTrace();
+             }
+             return sf;
+         }
+
+         @Override
+         protected void onPostExecute(SoundFile aVoid) {
+             super.onPostExecute(aVoid);
+             stoploading();
+             Toast.makeText(StoryMakeActivity.this, "混入背景成功", Toast.LENGTH_SHORT).show();
+             mEndPos=0;
+          finishRecord();
+         }
+     }.execute();
+
+    }
+
+
     private void recordAudio() {
         changeState(STATE_RECORDING);
         mRecordingLastUpdateTime = getCurrentTime();
@@ -367,7 +534,6 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mPlayer = new SamplePlayer(mSoundFile);
                         finishRecord();
                     }
                 });
@@ -378,6 +544,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
     //完成录制，或停止了录制
     private void finishRecord() {
+        mPlayer = new SamplePlayer(mSoundFile);
         mWaveformView.setSoundFile(mSoundFile);
         mMaxPos = mWaveformView.maxPos();
         mStartPos=mEndPos;
@@ -482,7 +649,6 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         if (mIsPlaying) {
             int now = mPlayer.getCurrentPosition();
             int frames = mWaveformView.millisecsToPixels(now);
-            Log.e("----->" + "StoryMakeActivity", "updateWaveView:" + frames);
             mWaveformView.setPlayback(frames);
             setOffsetGoalNoUpdate(frames - mWidth / 2);
             if (now >= mWaveformView.pixelsToMillisecs(mEndPos)) {
@@ -647,6 +813,34 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
             }
         });
         mSaveSoundFileThread.start();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==CHOOSE_BG_REQUEST_CODE&&resultCode==100){
+            String path = data.getStringExtra("path");
+            Toast.makeText(this, path, Toast.LENGTH_SHORT).show();
+            if(TextUtils.isEmpty(path)){
+                Toast.makeText(this, "path invalid", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            readFile(path);
+        }else if(requestCode==CHOOSE_MUSIC_REQUEST_CODE&&resultCode==100) {
+            String path = data.getStringExtra("path");
+            Toast.makeText(this, path, Toast.LENGTH_SHORT).show();
+            if(TextUtils.isEmpty(path)){
+                Toast.makeText(this, "path invalid", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            double startTime = mWaveformView.pixelsToSeconds(mStartPos);
+            int startFrame = mWaveformView.secondsToFrames(startTime);
+            Log.e("----->" + "StoryMakeActivity", "onActivityResult:" + startFrame);
+            readFile(path,startFrame);
+        }
     }
 
 
@@ -913,6 +1107,5 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     public void markerDraw() {
 
     }
-
     /*************************************************************************************/
 }

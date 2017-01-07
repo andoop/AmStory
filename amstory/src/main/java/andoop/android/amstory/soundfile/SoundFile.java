@@ -48,9 +48,14 @@ public class SoundFile {
     private int mAvgBitRate;  // Average bit rate in kbps.
     private int mSampleRate;
     private int mChannels;
-    private int mNumSamples;  // total number of samples per channel in audio file
+    public int mNumSamples;  // total number of samples per channel in audio file
     private ByteBuffer mDecodedBytes;  // Raw audio data
+
+    /**
+     * 原生的数据
+     */
     private ShortBuffer mDecodedSamples;  // shared buffer with mDecodedBytes.
+
     // mDecodedSamples has the following format:
     // {s1c1, s1c2, ..., s1cM, s2c1, ..., s2cM, ..., sNc1, ..., sNcM}
     // where sicj is the ith sample of the jth channel (a sample is a signed short)
@@ -407,18 +412,22 @@ public class SoundFile {
             // A progress listener is mandatory here, as it will let us know when to stop recording.
             return;
         }
+
         mInputFile = null;
         mFileType = "raw";
         mFileSize = 0;
-        mSampleRate = 44100;
-        mChannels = 1;  // record mono audio.
+        mSampleRate = 44100;    // 音频...
+        mChannels = 1;  // record mono audio.  声道数
         short[] buffer = new short[1024];  // buffer contains 1 mono frame of 1024 16 bits samples
+
         int minBufferSize = AudioRecord.getMinBufferSize(
                 mSampleRate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
+
         // make sure minBufferSize can contain at least 1 second of audio (16 bits sample).
         if (minBufferSize < mSampleRate * 2) {
             minBufferSize = mSampleRate * 2;
         }
+
         AudioRecord audioRecord = new AudioRecord(
                 MediaRecorder.AudioSource.DEFAULT,
                 mSampleRate,
@@ -426,10 +435,16 @@ public class SoundFile {
                 AudioFormat.ENCODING_PCM_16BIT,
                 minBufferSize
         );
-        //如果是暂停，然后重新录音，怎再原有存储空间进行操作
+
+        // TODO
+        //如果是暂停，然后重新录音，怎再原有存储空间进行操作？
+
+        //..............................................//
         if (!restart) {
             // Allocate memory for 20 seconds first. Reallocate later if more is needed.
+            // 分配内存为20秒。重新分配后，如果有更多的需要。
             mDecodedBytes = ByteBuffer.allocate(20 * mSampleRate * 2);
+            //修改此缓冲区的字节顺序
             mDecodedBytes.order(ByteOrder.LITTLE_ENDIAN);
             mDecodedSamples = mDecodedBytes.asShortBuffer();
         } else {
@@ -439,6 +454,8 @@ public class SoundFile {
         audioRecord.startRecording();
         while (true) {
             // check if mDecodedSamples can contain 1024 additional samples.
+
+
             if (mDecodedSamples.remaining() < 1024) {
                 // Try to allocate memory for 10 additional seconds.
                 int newCapacity = mDecodedBytes.capacity() + 10 * mSampleRate * 2;
@@ -457,8 +474,11 @@ public class SoundFile {
                 mDecodedSamples = mDecodedBytes.asShortBuffer();
                 mDecodedSamples.position(position);
             }
+
+
             // TODO(nfaralli): maybe use the read method that takes a direct ByteBuffer argument.
             audioRecord.read(buffer, 0, buffer.length);
+
             mDecodedSamples.put(buffer);
             // Let the progress listener know how many seconds have been recorded.
             // The returned value tells us if we should keep recording or stop.
@@ -532,48 +552,94 @@ public class SoundFile {
     //继续录音
     public void RestartRecord() {
         restart = true;
+        /**
+         * 直接插入到最后，不算中间插入
+         */
         RecordAudio();
     }
 
     //从某一个位置继续开始录音，也就是插入录音
-    public void InsertRecord(int startFrame) {
-        int startSamplePos=startFrame*getSamplesPerFrame();
-        if(startSamplePos<0)
-            startSamplePos=0;
-        if(startSamplePos>mNumSamples)
-            startSamplePos=mNumSamples;
+    public void InsertRecord(SoundFile src, int startFrame) {
+
+        short[] shortsMy = new short[mNumSamples];
+        mDecodedSamples.get(shortsMy);
+//        Log.e("----->" + "SoundFile", "InsertRecord1:" + shortsMy.length);
+
+        if (shortsMy.length <= 0 || src == null)
+            return;
+
+        int startSamplePos = startFrame * getSamplesPerFrame();
+        if (startSamplePos < 0)
+            startSamplePos = 0;
+        if (startSamplePos > mNumSamples)
+            startSamplePos = mNumSamples;
+
         //TODO:实现方法
 
+        short[] shortsInsert = new short[src.mNumSamples];
+        src.getSamples().get(shortsInsert);
+
+//        Log.e("----->" + "SoundFile", "InsertRecord2:" + shortsInsert.length);
+
+        short[] shortsEnd = new short[shortsMy.length - startSamplePos];
+
+        short[] shortsBgn = new short[startSamplePos];
+
+
+        ByteBuffer newByteBuffer = ByteBuffer.allocate(src.getSamples().capacity() +mDecodedBytes.capacity()+10);
+        mDecodedBytes.rewind();
+        newByteBuffer.put(mDecodedBytes);
+        mDecodedBytes=newByteBuffer;
+        mDecodedBytes.rewind();
+        mDecodedSamples=mDecodedBytes.asShortBuffer();
+
+        mDecodedSamples.rewind();
+
+        for(int i = 0; i < shortsMy.length; i ++){
+            if(i < startSamplePos)
+                shortsBgn[i] = shortsMy[i];
+            else
+                shortsEnd[i - startSamplePos] = shortsMy[i];
+        }
+
+        mDecodedSamples.clear();
+
+        mDecodedSamples.put(shortsBgn);
+        mDecodedSamples.put(shortsInsert);
+        mDecodedSamples.put(shortsEnd);
+        initData();
     }
 
     //删除指定区间的录音
     public void DeleteRecord(int startFrame, int endFrame) {
-        int startSamplePos=startFrame*getSamplesPerFrame();
-        int endSamplePos=endFrame*getSamplesPerFrame();
 
-        if(startSamplePos<0)
-            startSamplePos=0;
-        if(endSamplePos>mNumSamples)
-            endSamplePos=mNumSamples;
+        int startSamplePos = startFrame * getSamplesPerFrame();
+        int endSamplePos = endFrame * getSamplesPerFrame();
+
+        if (startSamplePos < 0)
+            startSamplePos = 0;
+        if (endSamplePos > mNumSamples)
+            endSamplePos = mNumSamples;
+
         //新建一个bytebuffer，存储从0至startSamplePos的数据
-        short[] newShorts_left=null;
-        if(startSamplePos>0){
+        short[] newShorts_left = null;
+        if (startSamplePos > 0) {
             newShorts_left = new short[startSamplePos];
             mDecodedSamples.get(newShorts_left);
         }
         //新建一个bytebuffer，存储endsamplepos至所有数据
-        short[] newShorts_right=null;
-        if(endSamplePos<mNumSamples){
-            newShorts_right=new short[mNumSamples-endSamplePos];
+        short[] newShorts_right = null;
+        if (endSamplePos < mNumSamples) {
+            newShorts_right = new short[mNumSamples - endSamplePos];
             mDecodedSamples.position(endSamplePos);
             mDecodedSamples.get(newShorts_right);
         }
         mDecodedSamples.clear();
-        if(newShorts_left!=null){
+        if (newShorts_left != null) {
             mDecodedSamples.put(newShorts_left);
         }
 
-        if(newShorts_right!=null){
+        if (newShorts_right != null) {
             mDecodedSamples.put(newShorts_right);
         }
         if (!mProgressListener.reportProgress(
@@ -582,14 +648,68 @@ public class SoundFile {
         initData();
     }
 
-    //混入背景音乐，如果背景音乐不够长，自动循环混入
+    // 混入背景音乐，如果背景音乐不够长，自动循环混入
     public void MixBgMusic(SoundFile src) {
         //TODO:实现方法
+        MixMusic(src, 0, true);
     }
 
-    //从某个位置开始混入音效
-    public void MixMusic(SoundFile src, int startFrame) {
+    // 从某个位置开始混入音效
+    public void MixMusic(SoundFile src, int startFrame, boolean bLoop) {
         //TODO:实现方法
+        // 背景音乐
+
+        short[] shorts = new short[src.mNumSamples];
+        src.getSamples().get(shorts);
+        short[] myshorts = new short[mNumSamples];
+        mDecodedSamples.get(myshorts);
+
+
+        if (shorts.length <= 0)
+            return;
+
+        // 开始的混音的位置...
+        int startSamplePos = startFrame * getSamplesPerFrame();
+
+        if (startSamplePos < 0)
+            startSamplePos = 0;
+        if (startSamplePos > myshorts.length)
+            return;
+
+        int srcLength = shorts.length;
+
+        int remixesLength = bLoop ? myshorts.length :
+                (srcLength < myshorts.length - startSamplePos ?
+                        srcLength : myshorts.length - startSamplePos);
+
+        for (int i = startSamplePos, j = 0; i < remixesLength; i++, j++) {
+
+            /**
+             * 这里就是网上的混合了
+             */
+
+            if (bLoop && j >= shorts.length) {
+                j = 0;
+            }
+
+            float samplefPoint1 = myshorts[i] / 32768.0f;
+            float samplefPoint2 = shorts[j] / 32768.0f;
+            float mixed = samplefPoint1 + samplefPoint2;
+
+            mixed *= 0.8;
+            if (mixed > 1.0f)
+                mixed = 1.0f;
+            if (mixed < -1.0f)
+                mixed = -1.0f;
+
+            short value = (short) (mixed * 32768.0f);
+
+            myshorts[i] = value;
+        }
+
+        mDecodedSamples.clear();
+        mDecodedSamples.put(myshorts);
+        initData();
     }
 
 
@@ -771,22 +891,60 @@ public class SoundFile {
             throws IOException {
         float startTime = (float) startFrame * getSamplesPerFrame() / mSampleRate;
         float endTime = (float) (startFrame + numFrames) * getSamplesPerFrame() / mSampleRate;
+
+
+        Log.e("TAG", "WriteWAVFile - startTime = " + startTime);
+
+        Log.e("TAG", "WriteWAVFile - endTime = " + endTime);
+
         WriteWAVFile(outputFile, startTime, endTime);
     }
 
+    /**
+     * 把录音内容保存为文件...
+     *
+     * @param outputFile
+     * @param startTime
+     * @param endTime
+     * @throws IOException
+     */
     public void WriteWAVFile(File outputFile, float startTime, float endTime)
             throws IOException {
+
         int startOffset = (int) (startTime * mSampleRate) * 2 * mChannels;
         int numSamples = (int) ((endTime - startTime) * mSampleRate);
 
+        Log.e("TAG", "写文件Proc()中：startOffset = " + startOffset + ", numSamples = " + numSamples);
+
+        /**
+         * 通过打印我们打到的公式有：
+         *
+         * numSamples * 2 + headSize = FileSize
+         * startOffset 是录音内容的开始偏移量（就是截取掉的前面那部分），在写入的时候，我们只需要这部分跳过即可
+         * numSamples 是endTime - startTime 后乘上采样率，得到采样率是我们一秒中保存文件的大小
+         *
+         * 因为我们保存了头部，打印出来的结果就是headSize
+         *
+         *
+         *
+         *
+         */
+
         // Start by writing the RIFF header.
         FileOutputStream outputStream = new FileOutputStream(outputFile);
+
         outputStream.write(WAVHeader.getWAVHeader(mSampleRate, mChannels, numSamples));
+        Log.e("TAG", "File size of head = " + outputFile.length());
 
         // Write the samples to the file, 1024 at a time.
         byte buffer[] = new byte[1024 * mChannels * 2];  // Each sample is coded with a short.
+        /**
+         * 把前面截取不要的字节跳过...
+         */
         mDecodedBytes.position(startOffset);
+
         int numBytesLeft = numSamples * mChannels * 2;
+
         while (numBytesLeft >= buffer.length) {
             if (mDecodedBytes.remaining() < buffer.length) {
                 // This should not happen.
@@ -818,6 +976,7 @@ public class SoundFile {
             }
             outputStream.write(buffer, 0, numBytesLeft);
         }
+        Log.e("TAG", "File Size() = " + outputFile.length());
         outputStream.close();
     }
 
@@ -826,6 +985,7 @@ public class SoundFile {
     // "<presentation time in seconds>\t<channel 1>\t...\t<channel N>\n"
     // File will be written on the SDCard under media/audio/debug/
     // If fileName is null or empty, then the default file name (samples.tsv) is used.
+
     private void DumpSamples(String fileName) {
         String externalRootDir = Environment.getExternalStorageDirectory().getPath();
         if (!externalRootDir.endsWith("/")) {

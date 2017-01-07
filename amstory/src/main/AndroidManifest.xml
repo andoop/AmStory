@@ -25,11 +25,15 @@
             android:name=".StoryMakeActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".MRecordListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MPlayerActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MRecordListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MPlayerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".BgListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

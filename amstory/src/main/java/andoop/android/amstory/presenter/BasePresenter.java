@@ -29,4 +29,7 @@ public class BasePresenter<T extends IBaseView> {
         if(mView!=null)
             mView.showEmpty();
     }
+
+
+
 }
