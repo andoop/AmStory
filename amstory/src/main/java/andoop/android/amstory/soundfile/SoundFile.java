@@ -560,7 +560,8 @@ public class SoundFile {
 
     //从某一个位置继续开始录音，也就是插入录音
     public void InsertRecord(SoundFile src, int startFrame) {
-
+        Log.e("----->" + "SoundFile", "InsertRecord1:" +mNumSamples+":"+mDecodedSamples.position() );
+        mDecodedSamples.rewind();
         short[] shortsMy = new short[mNumSamples];
         mDecodedSamples.get(shortsMy);
 //        Log.e("----->" + "SoundFile", "InsertRecord1:" + shortsMy.length);
@@ -577,23 +578,23 @@ public class SoundFile {
         //TODO:实现方法
 
         short[] shortsInsert = new short[src.mNumSamples];
+        src.getSamples().rewind();
         src.getSamples().get(shortsInsert);
 
-//        Log.e("----->" + "SoundFile", "InsertRecord2:" + shortsInsert.length);
+        Log.e("----->" + "SoundFile", "InsertRecord2:" + shortsInsert.length);
 
         short[] shortsEnd = new short[shortsMy.length - startSamplePos];
 
         short[] shortsBgn = new short[startSamplePos];
 
 
-        ByteBuffer newByteBuffer = ByteBuffer.allocate(src.getSamples().capacity() +mDecodedBytes.capacity()+10);
+        ByteBuffer newByteBuffer = ByteBuffer.allocate(src.getSamples().capacity() +mDecodedBytes.capacity()+10 * mSampleRate * 2);
         mDecodedBytes.rewind();
         newByteBuffer.put(mDecodedBytes);
         mDecodedBytes=newByteBuffer;
+        mDecodedBytes.order(ByteOrder.LITTLE_ENDIAN);
         mDecodedBytes.rewind();
         mDecodedSamples=mDecodedBytes.asShortBuffer();
-
-        mDecodedSamples.rewind();
 
         for(int i = 0; i < shortsMy.length; i ++){
             if(i < startSamplePos)
@@ -603,11 +604,17 @@ public class SoundFile {
         }
 
         mDecodedSamples.clear();
-
         mDecodedSamples.put(shortsBgn);
         mDecodedSamples.put(shortsInsert);
         mDecodedSamples.put(shortsEnd);
+        Log.e("----->" + "SoundFile", "InsertRecord2:" +mNumSamples+":"+mDecodedSamples.position() );
+        if (!mProgressListener.reportProgress(
+                (float) (mDecodedSamples.position()) / mSampleRate)) {
+        }
+
         initData();
+
+        Log.e("----->" + "SoundFile", "InsertRecord3:" +mNumSamples+":"+mDecodedSamples.position() );
     }
 
     //删除指定区间的录音
