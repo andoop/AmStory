@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,7 +40,7 @@ public class IndeViewPresenter extends BasePresenter<IIndexView> {
         //从本地文件中加载txt数据
 
         String basepath = Environment.getExternalStorageDirectory().getAbsolutePath();
-        File amstorysfile = new File(basepath, "amstorys");
+        File amstorysfile = new File(basepath, "amstory/storys");
         if(!amstorysfile.exists()){
             amstorysfile.mkdirs();
         }
@@ -81,15 +83,16 @@ public class IndeViewPresenter extends BasePresenter<IIndexView> {
                         storyModule.story_pic=parse.getQueryParameter("story_pic");
                         storyModule.story_content=file.getAbsolutePath();
                         list.add(storyModule);
-
+                        Log.e("----->" + "IndeViewPresenter", "doInBackground:" + list.size());
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Log.e("----->" + "IndeViewPresenter", "doInBackground:" + e.toString());
                     }finally {
                         if(bufferedReader!=null){
                             try {
                                 bufferedReader.close();
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                Log.e("----->" + "IndeViewPresenter", "doInBackground:" + e.toString());
                             }
                         }
                     }

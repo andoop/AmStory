@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            >
+            <andoop.android.amstory.customview.XCRoundImageView
+                android:id="@+id/iv_title_music"
+                android:layout_width="23dp"
+                android:layout_height="23sp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/music_title"/>
+            <TextView
+                android:id="@+id/iv_title_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:layout_marginLeft="8dp"
+                android:textColor="#666666"
+                android:text="搜索"
+                android:gravity="center"
+                android:background="@drawable/search_bg"
+                android:drawableLeft="@drawable/search_icon"/>
+
+            <andoop.android.amstory.customview.XCRoundImageView
+                android:id="@+id/iv_title_person"
+                android:layout_width="23dp"
+                android:layout_height="23sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/person_title"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <andoop.android.amstory.customview.FoldView
+        android:id="@+id/ll_above"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="100dp">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_listen_banner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <LinearLayout
+                android:id="@+id/ll_listen_vp_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_alignBottom="@+id/vp_listen_banner"
+                >
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_height="80dp">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_finishedlist"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:layout_marginTop="3dp"
+                    android:textColor="#666666"
+                    android:text="我的录制"/>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_uncompleted"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:layout_marginTop="3dp"
+                        android:textColor="#666666"
+                        android:text="我的草稿"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </andoop.android.amstory.customview.FoldView>
+
+
+
+
+    <andoop.android.amstory.customview.FoldView
+        android:id="@+id/ll_below"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tl_listen_list_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextColor="@color/colorPrimary"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_record_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </andoop.android.amstory.customview.FoldView>
+
+</LinearLayout>

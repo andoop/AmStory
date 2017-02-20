@@ -227,7 +227,8 @@ public class SoundFile {
             throw new InvalidInputException("No audio track found in " + mInputFile);
         }
         mChannels = format.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
-        mSampleRate = format.getInteger(MediaFormat.KEY_SAMPLE_RATE);
+        mSampleRate =44100 /*format.getInteger(MediaFormat.KEY_SAMPLE_RATE)*/;
+        Log.e("----->" + "SoundFile", "ReadFile111:" + mSampleRate+":"+mChannels);
         // Expected total number of samples per channel.
         int expectedNumSamples =
                 (int) ((format.getLong(MediaFormat.KEY_DURATION) / 1000000.f) * mSampleRate + 0.5f);
@@ -667,6 +668,7 @@ public class SoundFile {
         // 背景音乐
 
         short[] shorts = new short[src.mNumSamples];
+        src.getSamples().rewind();
         src.getSamples().get(shorts);
         short[] myshorts = new short[mNumSamples];
         mDecodedSamples.get(myshorts);
@@ -685,11 +687,14 @@ public class SoundFile {
 
         int srcLength = shorts.length;
 
+        Log.e("----->" + "SoundFile", "MixMusic1:" + srcLength);
+
         int remixesLength = bLoop ? myshorts.length :
                 (srcLength < myshorts.length - startSamplePos ?
                         srcLength : myshorts.length - startSamplePos);
 
-        for (int i = startSamplePos, j = 0; i < remixesLength; i++, j++) {
+
+        for (int i = startSamplePos, j = 0; i <remixesLength; i++, j++) {
 
             /**
              * 这里就是网上的混合了

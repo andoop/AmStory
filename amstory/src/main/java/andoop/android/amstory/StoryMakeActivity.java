@@ -12,9 +12,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewOutlineProvider;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,11 +20,14 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 import andoop.android.amstory.base.BaseActivity;
+import andoop.android.amstory.customview.LyricRecordView;
 import andoop.android.amstory.customview.MarkerView;
 import andoop.android.amstory.customview.WaveformView;
-import andoop.android.amstory.module.StoryModule;
+import andoop.android.amstory.module.Story;
 import andoop.android.amstory.presenter.StoryMakeViewPresenter;
 import andoop.android.amstory.presenter.view.IStoryMakeView;
 import andoop.android.amstory.soundfile.SoundFile;
@@ -35,25 +36,18 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> implements IStoryMakeView, WaveformView.WaveformListener, MarkerView.MarkerListener {
-
-    @InjectView(R.id.tv_story_make_content)
-    TextView tv_content;
+    @InjectView(R.id.lrv_story_make)
+    LyricRecordView lyricRecordView;
     @InjectView(R.id.takevoice)
-    Button bt_takevoice;
-    @InjectView(R.id.stoptake)
-    Button bt_stoptake;
+    ImageView bt_takevoice;
+    @InjectView(R.id.iv_play_icon)
+    ImageView iv_play_icon;
     @InjectView(R.id.play)
-    Button bt_play;
-    @InjectView(R.id.bt_insert_pos)
-    Button bt_insert;
+    TextView bt_play;
     @InjectView(R.id.bt_delete_choose)
-    Button bt_delete_choose;
+    TextView bt_delete_choose;
     @InjectView(R.id.bt_add_bg_music)
-    Button bt_add_bg_music;
-    @InjectView(R.id.bt_add_music)
-    Button bt_add_music;
-    @InjectView(R.id.bt_new_record)
-    Button bt_new_record;
+    TextView bt_add_bg_music;
     @InjectView(R.id.tv_timer)
     TextView tv_timer;
     @InjectView(R.id.waveform)
@@ -153,9 +147,9 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
             //获取传入的数据
             Serializable story_data = extras.getSerializable("story_data");
             //检查数据
-            if (story_data instanceof StoryModule) {
-                StoryModule storyModule = (StoryModule) story_data;
-                setTitle(storyModule.story_name);
+            if (story_data instanceof Story) {
+                Story storyModule = (Story) story_data;
+                setTitle(storyModule.title);
                 //根据数据，去加载文本
                 mPresenter.loadData(storyModule);
             }
@@ -187,9 +181,17 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     }
 
     @Override
-    public void showData(StoryModule data) {
+    public void showData(Story data) {
+        Log.e("----->" + "StoryMakeActivity", "showData:");
         stoploading();
-        tv_content.setText(Html.fromHtml(data.text));
+        if(data.content!=null){
+            String[] split = data.content.split("&&&");
+            List<String> stringList = Arrays.asList(split);
+            lyricRecordView.setLyricData(stringList);
+            lyricRecordView.invalidate();
+        }else {
+            Log.e("----->" + "StoryMakeActivity", "showData:" + "lyc is null");
+        }
     }
 
 
@@ -199,20 +201,21 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
      * @param view
      */
     public void takevoice(View view) {
-        mRecordingKeepGoing = true;
-        mEndPos=mMaxPos;
-        recordAudio();
+
+        Log.e("----->" + "StoryMakeActivity", "takevoice:");
+
+        if(mRecordingKeepGoing){
+            mRecordingKeepGoing = false;
+            bt_takevoice.setImageResource(R.drawable.ic_record_bt);
+        }else {
+            bt_takevoice.setImageResource(R.drawable.ic_recording_bt);
+            mRecordingKeepGoing = true;
+            mEndPos=mMaxPos;
+            recordAudio();
+        }
+
     }
 
-    /**
-     * 停止、播放录音
-     *
-     * @param view
-     */
-    public void stoptake(View view) {
-        mRecordingKeepGoing = false;
-        changeState(STATE_RECORDSTOP);
-    }
     //重新录取
     public void newRecord(View view) {
        mSoundFile=null;
@@ -224,12 +227,26 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
     //播放
     public void playRecord(View view) {
-        //播放
-        playRecord();
+        if(mSoundFile==null){
+            Toast.makeText(this, "赶快录段故事吧", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(mIsPlaying){
+            handlePause();
+        }else {
+            iv_play_icon.setSelected(true);
+            playRecord();
+            bt_play.setText("暂停");
+        }
     }
 
     //删除选中
     public void deleteChoose(View view) {
+        if(mSoundFile==null){
+            Toast.makeText(this, "还没有录制故事", Toast.LENGTH_SHORT).show();
+            return;
+        }
         double startTime = mWaveformView.pixelsToSeconds(mStartPos);
         double endTime = mWaveformView.pixelsToSeconds(mEndPos);
         final int startFrame = mWaveformView.secondsToFrames(startTime);
@@ -365,6 +382,8 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         if (mPlayer != null && mPlayer.isPlaying()) {
             mPlayer.pause();
         }
+        bt_play.setText("播放");
+        iv_play_icon.setSelected(false);
         mWaveformView.setPlayback(-1);
         mIsPlaying = false;
     }
@@ -412,7 +431,6 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                     sf= SoundFile.create(path, new SoundFile.ProgressListener() {
                         @Override
                         public boolean reportProgress(double fractionComplete) {
-                            Log.e("----->" + "StoryMakeActivity", "reportProgress:" + fractionComplete);
                             return true;
                         }
                     });
@@ -428,10 +446,9 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                         mSoundFile.MixMusic(sf,startFrame,false);
                     }
 
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
-                } catch (SoundFile.InvalidInputException e) {
-                    e.printStackTrace();
+                    Log.e("----->" + "StoryMakeActivity", "doInBackground:" + e.toString());
                 }
                 return sf;
             }
@@ -472,7 +489,6 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                 sf= SoundFile.create(path, new SoundFile.ProgressListener() {
                      @Override
                      public boolean reportProgress(double fractionComplete) {
-                         Log.e("----->" + "StoryMakeActivity", "reportProgress:" + fractionComplete);
                          return true;
                      }
                  });
@@ -585,58 +601,16 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     private void changeState(int state) {
         switch (state) {
             case STATE_RECORDING:
-                //录取按钮
-                bt_takevoice.setEnabled(false);
-                //停止按钮
-                bt_stoptake.setEnabled(true);
-                //添加背景按钮
-                bt_add_bg_music.setEnabled(false);
-                //添加音效按钮
-                bt_add_music.setEnabled(false);
-                //插入录音按钮
-                bt_insert.setEnabled(false);
-                //播放按钮
-                bt_play.setEnabled(false);
-                //重新录取
-                bt_new_record.setEnabled(false);
-                //删除选中按钮
-                bt_delete_choose.setEnabled(false);
-                tv_timer.setVisibility(View.VISIBLE);
                 break;
             case STATE_RECORDSTOP:
-                //录取按钮
-                bt_takevoice.setEnabled(true);
-                //停止按钮
-                bt_stoptake.setEnabled(false);
-                //添加背景按钮
-                bt_add_bg_music.setEnabled(true);
-                //添加音效按钮
-                bt_add_music.setEnabled(true);
-                //插入录音按钮
-                bt_insert.setEnabled(true);
-                //播放按钮
-                bt_play.setEnabled(true);
-                //重新录取
-                bt_new_record.setEnabled(true);
-                //删除选中按钮
-                bt_delete_choose.setEnabled(true);
-                tv_timer.setVisibility(View.VISIBLE);
                 break;
             case STATE_RECORDERR:
                 //录取按钮
                 bt_takevoice.setEnabled(true);
-                //停止按钮
-                bt_stoptake.setEnabled(false);
                 //添加背景按钮
                 bt_add_bg_music.setEnabled(false);
-                //添加音效按钮
-                bt_add_music.setEnabled(false);
-                //插入录音按钮
-                bt_insert.setEnabled(false);
                 //播放按钮
                 bt_play.setEnabled(false);
-                //重新录取
-                bt_new_record.setEnabled(true);
                 //删除选中按钮
                 bt_delete_choose.setEnabled(false);
                 tv_timer.setVisibility(View.GONE);
@@ -774,7 +748,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         mSaveSoundFileThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                String savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "amstory_audios";
+                String savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "amstory/amstory_audios";
                 String fileName = getTitle().toString() + "_" + System.currentTimeMillis() + ".wav";
                 File outFile = new File(savePath, fileName);
                 if (!new File(savePath).exists()) {
@@ -806,9 +780,31 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                                     return true;  // Keep going
                                 }
                             };
-                    SoundFile.create(outFile.getAbsolutePath(), listener);
+                    SoundFile soundFile = SoundFile.create(outFile.getAbsolutePath(), listener);
+                    if(soundFile!=null){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(StoryMakeActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(StoryMakeActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
                 } catch (final Exception e) {
                     e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(StoryMakeActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });
@@ -838,7 +834,6 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
             double startTime = mWaveformView.pixelsToSeconds(mStartPos);
             int startFrame = mWaveformView.secondsToFrames(startTime);
-            Log.e("----->" + "StoryMakeActivity", "onActivityResult:" + startFrame);
             readFile(path,startFrame);
         }
     }
@@ -1068,7 +1063,6 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     @Override
     public void markerRight(MarkerView marker, int velocity) {
         mKeyDown = true;
-
         if (marker == mStartMarker) {
             int saveStart = mStartPos;
             mStartPos += velocity;

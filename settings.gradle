@@ -1,1 +1,2 @@
-include ':app', ':voicecutdemo', ':voicemixdemo', ':atext', ':aapp', ':ringdroid', ':amstory', ':stylishmp'
+include ':app', ':voicecutdemo', ':voicemixdemo', ':atext', ':aapp', ':ringdroid', ':amstory', ':stylishmp', ':andooptabframe', ':sample', ':mupdflibrary'
+include ':sfhmgturntestturntest1'

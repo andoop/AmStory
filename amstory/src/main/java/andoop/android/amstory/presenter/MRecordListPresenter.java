@@ -29,7 +29,7 @@ public class MRecordListPresenter extends BasePresenter<IMyRecordListView>{
        showloading();
 
         //从文件中读取数据
-        String savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "amstory_audios";
+        String savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "amstory/amstory_audios";
         File savefile = new File(savePath);
         if(!savefile.exists()){
             showEmpty();

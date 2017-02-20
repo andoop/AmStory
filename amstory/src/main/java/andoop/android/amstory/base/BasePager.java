@@ -7,13 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.andoop.andooptabframe.AndoopPage;
+import com.andoop.andooptabframe.AndoopTabFrame;
+import com.andoop.andooptabframe.core.AndoopFrame;
+
 /* * * * * * * * * * * * * * * * * * *
 * author :andoop　　　　　　　　　　　
 * time   :2016/12/27
 * explain：页面基类
 * * * * * * * * * * * * * * * * * * */
 
-public abstract class BasePager extends Fragment {
+public abstract class BasePager extends AndoopPage {
 
     @Nullable
     @Override

@@ -48,13 +48,13 @@ public class BgListActivity extends BaseActivity<BgListPresenter> implements IBg
 
     private void initMusic() {
         setTitle("选择音效");
-        mPath= Environment.getExternalStorageDirectory().getAbsolutePath() + "/amstory_music";
+        mPath= Environment.getExternalStorageDirectory().getAbsolutePath() + "/amstory/yinxiao";
 
     }
 
     private void initBgMusic() {
         setTitle("选择背景音乐");
-        mPath= Environment.getExternalStorageDirectory().getAbsolutePath() + "/amstory_bgmusic";
+        mPath= Environment.getExternalStorageDirectory().getAbsolutePath() + "/amstory/background";
     }
 
     @Override

@@ -3,24 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="andoop.android.amstory.view.StoryMakeFragment">
+    android:background="#eeeeee"
+  >
 
-    <ScrollView
+    <andoop.android.amstory.customview.LyricRecordView
+        android:id="@+id/lrv_story_make"
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:padding="6dp"
-        android:fadeScrollbars="true"
-        android:scrollbars="none"
-        >
-        <TextView
-            android:id="@+id/tv_story_make_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:lineSpacingExtra="6dp"
-            />
-    </ScrollView>
-
+        />
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="0px"
@@ -69,117 +60,143 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#fff"
         >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="playRecord"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/iv_play_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/play_state_selector"/>
+            <TextView
+                android:id="@+id/play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="播放"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="deleteChoose"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delate_bt"/>
+
+            <TextView
+                android:id="@+id/bt_delete_choose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="删除"
+                android:layout_marginTop="3dp"
+                android:gravity="center"
+
+                />
+
+        </LinearLayout>
 
 
-        <Button
+
+        <ImageView
             android:id="@+id/takevoice"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="录音"
             android:onClick="takevoice"
+            android:src="@drawable/record_state_selector"
             />
-        <Button
-            android:id="@+id/stoptake"
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="停止"
-            android:enabled="false"
-            android:onClick="stoptake"
-            />
-
-        <Button
-            android:id="@+id/play"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="播放"
-            android:onClick="playRecord"
-            />
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="保存"
-            android:onClick="saveRecord"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-
-        <Button
-            android:id="@+id/bt_delete_choose"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="删除选中"
-            android:onClick="deleteChoose"
-            />
-
-        <Button
-            android:id="@+id/bt_new_record"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="重新录取"
-            android:onClick="newRecord"
-            />
-
-        <Button
-            android:id="@+id/bt_insert_pos"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="从选中位置录"
-            android:textSize="11sp"
-            android:onClick="restartRecordrFromPos"
-            />
-
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="我的列表"
-            android:onClick="showMyList"
-            />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-
-        <Button
-            android:id="@+id/bt_add_bg_music"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="添加背景"
+            android:gravity="center"
             android:onClick="addBgMusic"
-            />
-        <Button
-            android:id="@+id/bt_add_music"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_bt_yinxiao"/>
+            <TextView
+                android:id="@+id/bt_add_bg_music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="加配乐"
+                android:layout_marginTop="3dp"
+
+                />
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="添加音效"
-            android:onClick="addMusic"
-            />
-
+            android:gravity="center"
+            android:onClick="saveRecord"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_save_bt_cg"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="存草稿"
+                android:layout_marginTop="3dp"
+                />
+        </LinearLayout>
 
     </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#fff"
+        android:layout_marginTop="8dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:text="编辑"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="完成"/>
+
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>
