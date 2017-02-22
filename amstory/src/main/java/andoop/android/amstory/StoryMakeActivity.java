@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import java.util.List;
 import andoop.android.amstory.base.BaseActivity;
 import andoop.android.amstory.customview.LyricRecordView;
 import andoop.android.amstory.customview.MarkerView;
+import andoop.android.amstory.customview.ShaderView;
 import andoop.android.amstory.customview.WaveformView;
 import andoop.android.amstory.module.Story;
 import andoop.android.amstory.presenter.StoryMakeViewPresenter;
@@ -38,6 +40,10 @@ import butterknife.InjectView;
 public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> implements IStoryMakeView, WaveformView.WaveformListener, MarkerView.MarkerListener {
     @InjectView(R.id.lrv_story_make)
     LyricRecordView lyricRecordView;
+    @InjectView(R.id.ib_story_make_next)
+    ImageButton imageButton;
+    @InjectView(R.id.sv_story_make)
+    ShaderView shaderView;
     @InjectView(R.id.takevoice)
     ImageView bt_takevoice;
     @InjectView(R.id.iv_play_icon)
@@ -173,6 +179,32 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         mSoundFile = null;
         mKeyDown = false;
 
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lyricRecordView.moveToNext();
+            }
+        });
+
+        lyricRecordView.setScrollerViewer(new LyricRecordView.OnScrollListener() {
+            @Override
+            public void onScroll(long stime, long etime, String text) {
+                int pixels_start = mWaveformView.millisecsToPixels((int) stime);
+                mStartPos=pixels_start;
+                int pixels_end = mWaveformView.millisecsToPixels((int) etime);
+                mEndPos=pixels_end;
+                Log.e("----->" + "StoryMakeActivity", "onScroll:" + mStartPos + ":" + mEndPos);
+                updateWaveView();
+
+            }
+
+            @Override
+            public void onScooll2(long duration) {
+
+
+            }
+        });
+
     }
 
     @Override
@@ -187,6 +219,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         if(data.content!=null){
             String[] split = data.content.split("&&&");
             List<String> stringList = Arrays.asList(split);
+            lyricRecordView.setShaderView(shaderView);
             lyricRecordView.setLyricData(stringList);
             lyricRecordView.invalidate();
         }else {
@@ -206,11 +239,13 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
         if(mRecordingKeepGoing){
             mRecordingKeepGoing = false;
+            lyricRecordView.stopRc();
             bt_takevoice.setImageResource(R.drawable.ic_record_bt);
         }else {
             bt_takevoice.setImageResource(R.drawable.ic_recording_bt);
             mRecordingKeepGoing = true;
             mEndPos=mMaxPos;
+            lyricRecordView.startRc();
             recordAudio();
         }
 

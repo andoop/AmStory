@@ -2,16 +2,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#eeeeee"
-  >
+    android:orientation="vertical">
 
-    <andoop.android.amstory.customview.LyricRecordView
-        android:id="@+id/lrv_story_make"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:padding="6dp"
-        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="240dp">
+
+        <andoop.android.amstory.customview.LyricRecordView
+            android:id="@+id/lrv_story_make"
+            android:layout_width="match_parent"
+            android:layout_height="240dp" />
+
+        <andoop.android.amstory.customview.ShaderView
+            android:id="@+id/sv_story_make"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            android:background="#44000000" />
+
+        <ImageButton
+            android:id="@+id/ib_story_make_next"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+           />
+
+    </RelativeLayout>
+
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="0px"
@@ -27,176 +47,177 @@
             android:id="@+id/waveform"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@color/waveform_unselected_bkgnd_overlay"/>
+            android:background="@color/waveform_unselected_bkgnd_overlay" />
 
         <andoop.android.amstory.customview.MarkerView
             android:id="@+id/startmarker"
-            android:nextFocusDown="@+id/endmarker"
             android:layout_width="50dp"
             android:layout_height="35dp"
-            android:src="@drawable/marker_left"
-            android:contentDescription="@string/start_marker" />
+            android:contentDescription="@string/start_marker"
+            android:nextFocusDown="@+id/endmarker"
+            android:src="@drawable/marker_left" />
 
         <andoop.android.amstory.customview.MarkerView
             android:id="@+id/endmarker"
-            android:nextFocusUp="@+id/startmarker"
-            android:nextFocusDown="@+id/info"
             android:layout_width="50dp"
             android:layout_height="35dp"
-            android:src="@drawable/marker_right"
-            android:contentDescription="@string/end_marker" />
+            android:contentDescription="@string/end_marker"
+            android:nextFocusDown="@+id/info"
+            android:nextFocusUp="@+id/startmarker"
+            android:src="@drawable/marker_right" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="3dp"
         android:text=""
         android:textSize="16sp"
-        android:gravity="center"
-        android:visibility="visible"
-        android:padding="3dp"
-        />
+        android:visibility="visible" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
         android:background="#fff"
-        >
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:onClick="playRecord"
             android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/iv_play_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/play_state_selector"/>
+                android:src="@drawable/play_state_selector" />
+
             <TextView
                 android:id="@+id/play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="播放"
-                />
+                android:text="播放" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:onClick="deleteChoose"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_delate_bt"/>
+                android:src="@drawable/ic_delate_bt" />
 
             <TextView
                 android:id="@+id/bt_delete_choose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="删除"
                 android:layout_marginTop="3dp"
                 android:gravity="center"
+                android:text="删除"
 
                 />
 
         </LinearLayout>
-
 
 
         <ImageView
             android:id="@+id/takevoice"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="takevoice"
-            android:src="@drawable/record_state_selector"
-            />
+            android:src="@drawable/record_state_selector" />
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:onClick="addBgMusic"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_add_bt_yinxiao"/>
+                android:src="@drawable/ic_add_bt_yinxiao" />
+
             <TextView
                 android:id="@+id/bt_add_bg_music"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="加配乐"
                 android:layout_marginTop="3dp"
+                android:text="加配乐"
 
                 />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:onClick="saveRecord"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_save_bt_cg"/>
+                android:src="@drawable/ic_save_bt_cg" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="存草稿"
                 android:layout_marginTop="3dp"
-                />
+                android:text="存草稿" />
         </LinearLayout>
 
     </LinearLayout>
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#fff"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="8dp"
+        android:background="#fff">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="#333333"
-            android:textStyle="bold"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:layout_centerVertical="true"
-            android:text="编辑"/>
+            android:text="编辑"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="#333333"
-            android:textStyle="bold"
-            android:layout_marginRight="15dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:text="完成"/>
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:text="完成"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
 
     </RelativeLayout>
-
 
 
 </LinearLayout>
