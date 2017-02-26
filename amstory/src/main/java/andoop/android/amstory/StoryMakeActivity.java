@@ -52,8 +52,6 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     TextView bt_play;
     @InjectView(R.id.bt_delete_choose)
     TextView bt_delete_choose;
-    @InjectView(R.id.bt_add_bg_music)
-    TextView bt_add_bg_music;
     @InjectView(R.id.tv_timer)
     TextView tv_timer;
     @InjectView(R.id.waveform)
@@ -642,8 +640,6 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
             case STATE_RECORDERR:
                 //录取按钮
                 bt_takevoice.setEnabled(true);
-                //添加背景按钮
-                bt_add_bg_music.setEnabled(false);
                 //播放按钮
                 bt_play.setEnabled(false);
                 //删除选中按钮
