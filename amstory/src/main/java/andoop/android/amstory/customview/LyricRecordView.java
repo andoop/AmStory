@@ -127,34 +127,34 @@ public class LyricRecordView extends FrameLayout {
 
                     }
                 } else {
-                    if(currentView==null){
-                        return;
-                    }
-                    if (currentView != childAt) {
-                        //回调view切换
-                        if (onScrollListener != null) {
-                            Object tag = childAt.getTag();
-                            if (tag != null) {
-                                LycTime lycTime = (LycTime) tag;
-                                if(isMoveToUp){
-                                    Log.e("----->" + "move", "方向:" +"向上"+"\n"+
-                                                                "当前mDuration:"+mDuration+"\n"+
-                                                                "mDuration需要加上："+(lycTime.dtime-lycTime.stime)+"\n");
-                                    mDuration=mDuration+(lycTime.dtime-lycTime.stime);
-                                }else {
-                                    Log.e("----->" + "move", "方向:" +"向下"+"\n"+
-                                            "当前mDuration:"+mDuration+"\n"+
-                                            "mDuration需要减去："+(lycTime.dtime-lycTime.stime)+"\n");
-                                    mDuration=mDuration-(lycTime.dtime-lycTime.stime);
+                    if(currentView!=null){
+                        if (currentView != childAt) {
+                            //回调view切换
+                            if (onScrollListener != null) {
+                                Object tag = childAt.getTag();
+                                if (tag != null) {
+                                    LycTime lycTime = (LycTime) tag;
+                                    if(isMoveToUp){
+                                        Log.e("----->" + "move", "方向:" +"向上"+"\n"+
+                                                "当前mDuration:"+mDuration+"\n"+
+                                                "mDuration需要加上："+(lycTime.dtime-lycTime.stime)+"\n");
+                                        mDuration=mDuration+(lycTime.dtime-lycTime.stime);
+                                    }else {
+                                        Log.e("----->" + "move", "方向:" +"向下"+"\n"+
+                                                "当前mDuration:"+mDuration+"\n"+
+                                                "mDuration需要减去："+(lycTime.dtime-lycTime.stime)+"\n");
+                                        mDuration=mDuration-(lycTime.dtime-lycTime.stime);
+                                    }
+                                    Log.e("----->" + "move","最终mDuration："+mDuration);
+                                    onScrollListener.onScroll(lycTime.start, lycTime.end, childAt.getText().toString());
+                                    onScrollListener.onScooll2(mDuration);
                                 }
-                                Log.e("----->" + "move","最终mDuration："+mDuration);
-                                onScrollListener.onScroll(lycTime.start, lycTime.end, childAt.getText().toString());
-                                onScrollListener.onScooll2(mDuration);
+                                currentView = childAt;
                             }
-                            currentView = childAt;
-                        }
 
+                        }
                     }
+
                 }
 
             } else {

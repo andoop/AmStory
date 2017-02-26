@@ -29,8 +29,8 @@ public class MainActivity extends FragmentActivity{
         AndoopTabFrame.getInstance().build(this, R.id.fl_content, new AndoopFrameListener() {
             @Override
             public void onReady(AndoopFrame andoopFrame) {
-                andoopFrame.addPage(new ListenPager(),R.drawable.listen_selector,"听故事");
                 andoopFrame.addPage(new RecordPager(),R.drawable.speak_selector,"讲故事");
+                andoopFrame.addPage(new ListenPager(),R.drawable.listen_selector,"听故事");
                 andoopFrame.commit();
             }
 

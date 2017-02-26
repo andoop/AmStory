@@ -1050,7 +1050,6 @@ public class SoundFile {
     private void DumpSamples() {
         DumpSamples(null);
     }
-
     // Return the stack trace of a given exception.
     private String getStackTrace(Exception e) {
         StringWriter writer = new StringWriter();
