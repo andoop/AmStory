@@ -115,6 +115,7 @@
                 />
 
             <RelativeLayout
+                android:id="@+id/rl_listen_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/v_listen_seprate"
@@ -173,8 +174,6 @@
 
         </RelativeLayout>
     </andoop.android.amstory.customview.FoldView>
-
-
 
 
     <andoop.android.amstory.customview.FoldView

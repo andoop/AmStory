@@ -22,7 +22,6 @@ public class JsonReportory {
                     INSTANCE = new JsonReportory(context);
                 }
             }
-
         }
         return INSTANCE;
     }

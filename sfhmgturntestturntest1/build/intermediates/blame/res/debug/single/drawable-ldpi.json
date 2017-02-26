@@ -1,5 +1,9 @@
 [
     {
+        "merged": "D:\\story\\AmStory\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi\\icon.png",
+        "source": "D:\\story\\AmStory\\sfhmgturntestturntest1\\src\\main\\res\\drawable-ldpi\\icon.png"
+    },
+    {
         "merged": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi\\icon.png",
         "source": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\src\\main\\res\\drawable-ldpi\\icon.png"
     }

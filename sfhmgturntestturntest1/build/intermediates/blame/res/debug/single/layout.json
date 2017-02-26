@@ -4,6 +4,22 @@
         "source": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\src\\main\\res\\layout\\pdf_file_select.xml"
     },
     {
+        "merged": "D:\\story\\AmStory\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\layout\\main.xml",
+        "source": "D:\\story\\AmStory\\sfhmgturntestturntest1\\src\\main\\res\\layout\\main.xml"
+    },
+    {
+        "merged": "D:\\story\\AmStory\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\layout\\file_row.xml",
+        "source": "D:\\story\\AmStory\\sfhmgturntestturntest1\\src\\main\\res\\layout\\file_row.xml"
+    },
+    {
+        "merged": "D:\\story\\AmStory\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\layout\\pdf_file_select.xml",
+        "source": "D:\\story\\AmStory\\sfhmgturntestturntest1\\src\\main\\res\\layout\\pdf_file_select.xml"
+    },
+    {
+        "merged": "D:\\story\\AmStory\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\layout\\file_explorer.xml",
+        "source": "D:\\story\\AmStory\\sfhmgturntestturntest1\\src\\main\\res\\layout\\file_explorer.xml"
+    },
+    {
         "merged": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\layout\\main.xml",
         "source": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\src\\main\\res\\layout\\main.xml"
     },

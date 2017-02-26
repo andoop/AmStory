@@ -33,8 +33,14 @@
             android:name=".MPlayerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".BgListActivity"
+        <activity
+            android:name=".BgListActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".SplashActivity" />
+        <activity
+            android:name=".UserInfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

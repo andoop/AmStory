@@ -21,4 +21,7 @@
     <color name="type_bkgnd_music">#88000000</color>
     <color name="type_bkgnd_unsupported">#88cccccc</color>
     <color name="transparent">#00000000</color>
+
+    <color name="divider_line">#e1e1e1</color>
+    <color name="white">#ffffff</color>
 </resources>

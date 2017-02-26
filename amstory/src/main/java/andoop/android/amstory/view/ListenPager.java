@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.andoop.andooptabframe.AndoopPage;
 import com.squareup.picasso.Picasso;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import andoop.android.amstory.R;
+import andoop.android.amstory.UserInfoActivity;
 import andoop.android.amstory.base.BasePager;
 import andoop.android.amstory.customview.FoldView;
 import andoop.android.amstory.data.DataManager;
@@ -34,6 +36,7 @@ import andoop.android.amstory.module.Banner;
 import andoop.android.amstory.utils.DensityUtil;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 /* * * * * * * * * * * * * * * * * * *
 * author :andoop　　　　　　　　　　　
 * time   :2017/2/15
@@ -53,6 +56,8 @@ public class ListenPager extends BasePager {
     FoldView  ll_above;
     @InjectView(R.id.ll_listen_vp_points)
     LinearLayout ll_points;
+    @InjectView(R.id.rl_listen_info)
+    RelativeLayout rl_info;
 
     private List<DataListPager> pagers;
     private String[] titles=new String[]{
@@ -188,8 +193,6 @@ public class ListenPager extends BasePager {
         tabLayout.setupWithViewPager(cateVp);
         fragmentPagerAdapter.notifyDataSetChanged();
 
-
-
     }
 
     /**
@@ -259,4 +262,13 @@ public class ListenPager extends BasePager {
     public void onSelect(AndoopPage andoopPage, int pos) {
 
     }
+
+    @OnClick(R.id.rl_listen_info)
+    public void onClick(View view){
+        if(view == rl_info) {
+            Intent intent = new Intent(getActivity(), UserInfoActivity.class);
+            startActivity(intent);
+        }
+    }
+
 }
