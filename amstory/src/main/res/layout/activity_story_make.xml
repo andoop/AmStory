@@ -21,14 +21,6 @@
             android:layout_centerInParent="true"
             android:background="#44000000" />
 
-        <ImageButton
-            android:id="@+id/ib_story_make_next"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-           />
-
     </RelativeLayout>
 
 
@@ -51,16 +43,16 @@
 
         <andoop.android.amstory.customview.MarkerView
             android:id="@+id/startmarker"
-            android:layout_width="50dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/start_marker"
             android:nextFocusDown="@+id/endmarker"
             android:src="@drawable/marker_left" />
 
         <andoop.android.amstory.customview.MarkerView
             android:id="@+id/endmarker"
-            android:layout_width="50dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/end_marker"
             android:nextFocusDown="@+id/info"
             android:nextFocusUp="@+id/startmarker"

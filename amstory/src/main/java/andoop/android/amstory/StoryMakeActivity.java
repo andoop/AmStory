@@ -40,8 +40,6 @@ import butterknife.InjectView;
 public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> implements IStoryMakeView, WaveformView.WaveformListener, MarkerView.MarkerListener {
     @InjectView(R.id.lrv_story_make)
     LyricRecordView lyricRecordView;
-    @InjectView(R.id.ib_story_make_next)
-    ImageButton imageButton;
     @InjectView(R.id.sv_story_make)
     ShaderView shaderView;
     @InjectView(R.id.takevoice)
@@ -177,7 +175,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         mSoundFile = null;
         mKeyDown = false;
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        shaderView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 lyricRecordView.moveToNext();
@@ -190,6 +188,9 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                 int pixels_start = mWaveformView.millisecsToPixels((int) stime);
                 mStartPos=pixels_start;
                 int pixels_end = mWaveformView.millisecsToPixels((int) etime);
+               /* if(pixels_end<=0){
+                    pixels_end=mWaveformView.maxPos();
+                }*/
                 mEndPos=pixels_end;
                 Log.e("----->" + "StoryMakeActivity", "onScroll:" + mStartPos + ":" + mEndPos);
                 updateWaveView();

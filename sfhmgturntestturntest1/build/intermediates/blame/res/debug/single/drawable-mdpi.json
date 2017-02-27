@@ -4,24 +4,12 @@
         "source": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\src\\main\\res\\drawable-mdpi\\back01.png"
     },
     {
-        "merged": "D:\\story\\AmStory\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\folder.png",
-        "source": "D:\\story\\AmStory\\sfhmgturntestturntest1\\src\\main\\res\\drawable-mdpi\\folder.png"
-    },
-    {
         "merged": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\doc.png",
         "source": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\src\\main\\res\\drawable-mdpi\\doc.png"
     },
     {
         "merged": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\pdf.png",
         "source": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\src\\main\\res\\drawable-mdpi\\pdf.png"
-    },
-    {
-        "merged": "D:\\story\\AmStory\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\back02.png",
-        "source": "D:\\story\\AmStory\\sfhmgturntestturntest1\\src\\main\\res\\drawable-mdpi\\back02.png"
-    },
-    {
-        "merged": "D:\\story\\AmStory\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\icon.png",
-        "source": "D:\\story\\AmStory\\sfhmgturntestturntest1\\src\\main\\res\\drawable-mdpi\\icon.png"
     },
     {
         "merged": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\icon.png",
@@ -32,19 +20,7 @@
         "source": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\src\\main\\res\\drawable-mdpi\\folder.png"
     },
     {
-        "merged": "D:\\story\\AmStory\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\doc.png",
-        "source": "D:\\story\\AmStory\\sfhmgturntestturntest1\\src\\main\\res\\drawable-mdpi\\doc.png"
-    },
-    {
-        "merged": "D:\\story\\AmStory\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\back01.png",
-        "source": "D:\\story\\AmStory\\sfhmgturntestturntest1\\src\\main\\res\\drawable-mdpi\\back01.png"
-    },
-    {
         "merged": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\back02.png",
         "source": "G:\\sdk\\project\\XXX\\sfhmgturntestturntest1\\src\\main\\res\\drawable-mdpi\\back02.png"
-    },
-    {
-        "merged": "D:\\story\\AmStory\\sfhmgturntestturntest1\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\pdf.png",
-        "source": "D:\\story\\AmStory\\sfhmgturntestturntest1\\src\\main\\res\\drawable-mdpi\\pdf.png"
     }
 ]

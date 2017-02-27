@@ -4,14 +4,6 @@
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\menu\\select_options.xml"
     },
     {
-        "merged": "D:\\story\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\menu\\edit_options.xml",
-        "source": "D:\\story\\AmStory\\ringdroid\\src\\main\\res\\menu\\edit_options.xml"
-    },
-    {
-        "merged": "D:\\story\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\menu\\select_options.xml",
-        "source": "D:\\story\\AmStory\\ringdroid\\src\\main\\res\\menu\\select_options.xml"
-    },
-    {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\menu\\edit_options.xml",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\menu\\edit_options.xml"
     }

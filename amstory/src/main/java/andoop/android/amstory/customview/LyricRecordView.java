@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import andoop.android.amstory.module.LycTime;
+
 
 /* * * * * * * * * * * * * * * * * * *
 * author :andoop　　　　　　　　　　　
@@ -77,8 +79,6 @@ public class LyricRecordView extends FrameLayout {
         int mt = 0;
         int mr = 0;
         int mb = 0;
-
-
         for (int i = 0; i < getChildCount(); i++) {
             TextView childAt = (TextView) getChildAt(i);
             int height = childAt.getMeasuredHeight();
@@ -86,14 +86,18 @@ public class LyricRecordView extends FrameLayout {
             mt = t + (b - height) / 2 + height * i + mdis;
             mb = mt + height;
             mr = ml + width;
+            //改变子布局
             childAt.layout(ml, mt, mr, mb);
+            //初始化tag
+            if(childAt.getTag()==null){
+                childAt.setTag(new LycTime());
+            }
 
             int top = shaderView.mTextView.getTop() + shaderView.getTop();
             int bottom = shaderView.mTextView.getBottom() + shaderView.getTop();
 
             if (childAt.getTop() >= (top - (childAt.getMeasuredHeight() / 2)) && childAt.getBottom() <= (bottom + (childAt.getMeasuredHeight() / 2))) {
                 childAt.setTextColor(Color.parseColor("#ff0000"));
-
                 if (!mStop) {
                     if (currentView == null) {
                         mDuration = 0;
@@ -101,51 +105,52 @@ public class LyricRecordView extends FrameLayout {
                         LycTime lycTime1 = new LycTime();
                         lycTime1.text = childAt.getText().toString();
                         lycTime1.stime = System.currentTimeMillis();
-                        lycTime1.start=0;
+                        lycTime1.start = 0;
                         childAt.setTag(lycTime1);
                     }
                     //如果当前的view改变了
                     if (currentView != childAt) {
                         LycTime lycTime = (LycTime) currentView.getTag();
-                        lycTime.dtime = System.currentTimeMillis();
-                        Log.e("----->" + "record完成：", "行数：" +(i-1)+"\n"+
-                                                    "文本："+currentView.getText()+"\n"+
-                                                    "开始毫秒数："+lycTime.stime+"\n"+
-                                                    "结束毫秒数："+lycTime.dtime+"\n"+
-                                                    "录制秒数："+((lycTime.dtime-lycTime.stime)/1000.0));
-                        mDuration=mDuration+(lycTime.dtime-lycTime.stime);
-                        lycTime.end=mDuration;
-                        currentView.setTag(lycTime);
+                        if(lycTime!=null){
+                            lycTime.dtime = System.currentTimeMillis();
+                            Log.e("----->" + "record完成：", "行数：" + (i - 1) + "\n" +
+                                    "文本：" + currentView.getText() + "\n" +
+                                    "开始毫秒数：" + lycTime.stime + "\n" +
+                                    "结束毫秒数：" + lycTime.dtime + "\n" +
+                                    "录制秒数：" + ((lycTime.dtime - lycTime.stime) / 1000.0));
+                            mDuration = mDuration + (lycTime.dtime - lycTime.stime);
+                            lycTime.end = mDuration;
+                            currentView.setTag(lycTime);
 
 
-                        LycTime lycTime1 = new LycTime();
-                        lycTime1.text = childAt.getText().toString();
-                        lycTime1.stime = System.currentTimeMillis();
-                        lycTime1.start=mDuration;
-                        childAt.setTag(lycTime1);
-                        currentView = childAt;
-
+                            LycTime lycTime1 = new LycTime();
+                            lycTime1.text = childAt.getText().toString();
+                            lycTime1.stime = System.currentTimeMillis();
+                            lycTime1.start = mDuration;
+                            childAt.setTag(lycTime1);
+                            currentView = childAt;
+                        }
                     }
                 } else {
-                    if(currentView!=null){
+                    if (currentView != null) {
                         if (currentView != childAt) {
                             //回调view切换
                             if (onScrollListener != null) {
                                 Object tag = childAt.getTag();
                                 if (tag != null) {
                                     LycTime lycTime = (LycTime) tag;
-                                    if(isMoveToUp){
-                                        Log.e("----->" + "move", "方向:" +"向上"+"\n"+
-                                                "当前mDuration:"+mDuration+"\n"+
-                                                "mDuration需要加上："+(lycTime.dtime-lycTime.stime)+"\n");
-                                        mDuration=mDuration+(lycTime.dtime-lycTime.stime);
-                                    }else {
-                                        Log.e("----->" + "move", "方向:" +"向下"+"\n"+
-                                                "当前mDuration:"+mDuration+"\n"+
-                                                "mDuration需要减去："+(lycTime.dtime-lycTime.stime)+"\n");
-                                        mDuration=mDuration-(lycTime.dtime-lycTime.stime);
+                                    if (isMoveToUp) {
+                                        Log.e("----->" + "move", "方向:" + "向上" + "\n" +
+                                                "当前mDuration:" + mDuration + "\n" +
+                                                "mDuration需要加上：" + (lycTime.dtime - lycTime.stime) + "\n");
+                                        mDuration = mDuration + (lycTime.dtime - lycTime.stime);
+                                    } else {
+                                        Log.e("----->" + "move", "方向:" + "向下" + "\n" +
+                                                "当前mDuration:" + mDuration + "\n" +
+                                                "mDuration需要减去：" + (lycTime.dtime - lycTime.stime) + "\n");
+                                        mDuration = mDuration - (lycTime.dtime - lycTime.stime);
                                     }
-                                    Log.e("----->" + "move","最终mDuration："+mDuration);
+                                    Log.e("----->" + "move", "最终mDuration：" + mDuration);
                                     onScrollListener.onScroll(lycTime.start, lycTime.end, childAt.getText().toString());
                                     onScrollListener.onScooll2(mDuration);
                                 }
@@ -158,7 +163,7 @@ public class LyricRecordView extends FrameLayout {
                 }
 
             } else {
-                childAt.setTextColor(Color.parseColor("#000000"));
+                childAt.setTextColor(Color.parseColor("#66000000"));
             }
 
 
@@ -234,12 +239,33 @@ public class LyricRecordView extends FrameLayout {
         } else {
             isMoveToUp = true;
         }
+
+
+        for (int i = 0; i < getChildCount(); i++) {
+            View childAt = getChildAt(i);
+            if(isMoveToUp){
+                //如果向上滑，最后一行到达中线后不能向上滑
+                if(i==(getChildCount()-1)&&(childAt.getTop()+dis)<(getTop() + (getBottom() - childAt.getMeasuredHeight()) / 2)){
+                    Log.e("----->", "onLayout:" + "到达最后一行");
+                    return;
+                }
+
+            }else {//如果向下滑，第一行到达中线后不能向下滑
+                if(i==0&&(childAt.getTop()+dis)>(getTop()+ (getBottom() - childAt.getMeasuredHeight()) / 2)){
+                    return;
+                }
+            }
+        }
+
+
+
         mdis = mdis + dis;
         requestLayout();
     }
 
     public interface OnScrollListener {
         void onScroll(long stime, long etime, String text);
+
         void onScooll2(long duration);
     }
 }

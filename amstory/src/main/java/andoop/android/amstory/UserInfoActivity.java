@@ -18,7 +18,6 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,8 +41,6 @@ public class UserInfoActivity extends AppCompatActivity {
     ImageView ivUserIcon;
     @InjectView(R.id.tv_user_change)
     TextView tvUserChange;
-    @InjectView(R.id.btn_user_logout)
-    Button btnUserLogout;
     @InjectView(R.id.activity_user_info)
     LinearLayout activityUserInfo;
 
@@ -56,13 +53,11 @@ public class UserInfoActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.tv_user_change, R.id.btn_user_logout})
+    @OnClick({R.id.tv_user_change})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_user_change:
                 changeIcon();
-                break;
-            case R.id.btn_user_logout:
                 break;
         }
     }
