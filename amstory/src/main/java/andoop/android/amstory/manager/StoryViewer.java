@@ -132,14 +132,14 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         if (mPlayer != null && mPlayer.isPlaying()) {
             mPlayer.pause();
         }
+        if(playcallBack!=null){
+            playcallBack.onStop();
+        }
         mWaveformView.setPlayback(-1);
         mIsPlaying = false;
     }
 
     public void stopVoice(){
-        if(playcallBack!=null){
-            playcallBack.onStop();
-        }
         handlePause();
     }
 
@@ -375,6 +375,10 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
     private void setOffsetGoalEndNoUpdate() {
         setOffsetGoalNoUpdate(mEndPos - mWidth / 2);
     }
+
+
+
+
     //////////////////////////////////////////////////////////
 
     /*************************************************************************************/

@@ -161,6 +161,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
             lyricRecordView.setShaderView(shaderView);
             lyricRecordView.setLyricData(stringList);
             lyricRecordView.invalidate();
+            SoundFileManager.newInstance(this).setStoryData(stringList);
         }else {
             Log.e("----->" + "StoryMakeActivity", "showData:" + "lyc is null");
         }
@@ -467,6 +468,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     private void finishRecord() {
 
         SoundFileManager.newInstance(this).addSoundFile("makedata",mSoundFile);
+        SoundFileManager.newInstance(this).setLycTimes(lyricRecordView.getLycTimes());
 
         //更新声音文件
         storyViewer.updateRecordAudio(mSoundFile);

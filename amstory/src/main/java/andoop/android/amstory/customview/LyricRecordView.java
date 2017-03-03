@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import andoop.android.amstory.module.LycTime;
@@ -50,8 +51,7 @@ public class LyricRecordView extends FrameLayout {
         //  setOrientation(VERTICAL);
     }
 
-    //添加歌词数据
-    public void setLyricData(List<String> lyrics) {
+    public void setLyricData(List<String> lyrics,List<LycTime> lycTimes) {
         Log.e("----->" + "LyricRecordView", "setLyricData:" + lyrics);
         if (lyrics == null) {
             return;
@@ -61,10 +61,16 @@ public class LyricRecordView extends FrameLayout {
             textView.setText(lyrics.get(i));
             LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             textView.setGravity(Gravity.CENTER);
+            if(lycTimes!=null&&lycTimes.size()>i){
+                textView.setTag(lycTimes.get(i));
+            }
             addView(textView, layoutParams);
             Log.e("----->" + "LyricRecordView", "setLyricData:" + textView.getText());
         }
-
+    }
+    //添加歌词数据
+    public void setLyricData(List<String> lyrics) {
+       setLyricData(lyrics,null);
     }
 
     @Override
@@ -245,6 +251,18 @@ public class LyricRecordView extends FrameLayout {
 
         mdis = mdis + dis;
         requestLayout();
+    }
+
+    public List<LycTime> getLycTimes(){
+
+        List<LycTime> result=new ArrayList<>();
+        for (int i = 0; i < getChildCount(); i++) {
+            LycTime tag = (LycTime) getChildAt(i).getTag();
+            result.add(tag);
+
+        }
+
+        return result;
     }
 
     public interface OnScrollListener {

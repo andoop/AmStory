@@ -5,41 +5,246 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#eeeeee"
     tools:context="andoop.android.amstory.StoryEidtActivity">
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        >
+
+        <ImageView
+            android:id="@+id/iv_edit_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:onClick="toBack"
+            android:src="@drawable/ic_back"/>
+
+        <TextView
+            android:id="@+id/tv_edit_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上一步"
+            android:textColor="#fff"
+            android:textSize="16sp"
+            android:layout_toRightOf="@id/iv_edit_back"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            />
+
+        <TextView
+            android:id="@+id/iv_edit_ok"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="完成"
+            android:textColor="#fff"
+            android:textSize="16sp"
+            android:onClick="toOk" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
-        android:layout_height="140dp">
+        android:background="#fff"
+        android:layout_height="120dp">
 
         <andoop.android.amstory.customview.LyricRecordView
             android:id="@+id/lrv_story_edit"
             android:layout_width="match_parent"
-            android:layout_height="140dp" />
+            android:layout_height="120dp" />
 
         <andoop.android.amstory.customview.ShaderView
             android:id="@+id/sv_story_edit"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="35dp"
             android:layout_centerInParent="true"
-            android:background="#44000000" />
+            android:background="#00000000" />
 
     </RelativeLayout>
 
     <FrameLayout
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="150dp">
         <include layout="@layout/wavaview_layout"/>
     </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="#ffffff"
         >
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_left"
+            android:onClick="toLeft"
+             />
+
+        <ImageView
+            android:id="@+id/iv_edit_play"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="toPlay"
+            android:src="@drawable/play_state_selector"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="toRight"
+            android:src="@drawable/ic_right"/>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:background="#fff"
+        android:layout_height="35dp">
+
+        <TextView
+            android:id="@+id/tv_edit_bg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:onClick="toBackgroud"
+            android:text="背景音乐"/>
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="#eeeeee"/>
+
+        <TextView
+            android:id="@+id/tv_edit_yx"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:onClick="toYinxiao"
+            android:text="音效特效"/>
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_edit_yinxiao_rootview"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#eeeeee"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_edit_add_yinxiao"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_add_ee"
+                android:layout_gravity="center"
+                android:background="#fff"
+                android:onClick="addYinxiao"
+                android:layout_marginBottom="8dp"
+                />
+
+            <ListView
+                android:id="@+id/lv_edit_yinxiao_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rv_edit_bg_rootview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:layout_margin="5dp"
+            >
+
+
+            <ImageView
+                android:id="@+id/iv_edit_add_backgroud"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:onClick="addBackMusic"
+                android:src="@drawable/ic_add_ee"/>
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/rl_edit_backgroud_rootview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_centerInParent="true"
+                >
+
+                <TextView
+                    android:id="@+id/tv_edit_backgroud_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#000"
+                    android:layout_marginLeft="15dp"
+                    android:text="背景名称"/>
+
+                <ImageView
+                    android:id="@+id/iv_edit_delete_backgroud"
+                    android:layout_width="13dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="13dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/ic_delate_bt"/>
+
+                <SeekBar
+                    android:id="@+id/sb_edit_backgroud_voice"
+                    android:layout_below="@id/iv_edit_delete_backgroud"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+
+
+    </FrameLayout>
+
+
+
 
 </LinearLayout>

@@ -84,13 +84,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:onClick="deleteChoose"
             android:orientation="vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_delate_bt" />
+                android:src="@drawable/ic_save_bt_cg" />
 
             <TextView
                 android:id="@+id/bt_delete_choose"
@@ -98,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:gravity="center"
-                android:text="删除"
+                android:text="存稿"
 
                 />
 
@@ -119,24 +118,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:text="编辑"
+            android:text="下一步"
             android:textColor="#333333"
             android:textSize="16sp"
+            android:layout_alignParentRight="true"
             android:textStyle="bold"
+            android:layout_marginRight="20dp"
             android:onClick="toEdit"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:text="完成"
-            android:textColor="#333333"
-            android:textSize="16sp"
-            android:textStyle="bold" />
 
 
     </RelativeLayout>
