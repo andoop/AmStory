@@ -28,35 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0px"
         android:layout_weight="1">
-        <!--ImageView
-         android:id="@+id/bkgnd"
-         android:layout_width="fill_parent"
-         android:layout_height="fill_parent"
-         android:scaleType="centerCrop"
-         android:src="@drawable/bkgnd"-->
-
-        <andoop.android.amstory.customview.WaveformView
-            android:id="@+id/waveform"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@color/waveform_unselected_bkgnd_overlay" />
-
-        <andoop.android.amstory.customview.MarkerView
-            android:id="@+id/startmarker"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:contentDescription="@string/start_marker"
-            android:nextFocusDown="@+id/endmarker"
-            android:src="@drawable/marker_left" />
-
-        <andoop.android.amstory.customview.MarkerView
-            android:id="@+id/endmarker"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:contentDescription="@string/end_marker"
-            android:nextFocusDown="@+id/info"
-            android:nextFocusUp="@+id/startmarker"
-            android:src="@drawable/marker_right" />
+        <include layout="@layout/wavaview_layout"/>
     </RelativeLayout>
 
     <TextView
@@ -151,7 +123,9 @@
             android:text="编辑"
             android:textColor="#333333"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="toEdit"
+            />
 
         <TextView
             android:layout_width="wrap_content"

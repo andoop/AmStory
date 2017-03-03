@@ -40,12 +40,12 @@
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\button_zoom_out.png"
     },
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\type_notification.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\type_notification.png"
-    },
-    {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_right.xml",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_right.xml"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\type_notification.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\type_notification.png"
     },
     {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left_normal.png",
