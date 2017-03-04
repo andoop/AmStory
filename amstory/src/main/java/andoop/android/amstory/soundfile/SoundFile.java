@@ -228,15 +228,16 @@ public class SoundFile implements Serializable{
             throw new InvalidInputException("No audio track found in " + mInputFile);
         }
         mChannels = format.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
-        mSampleRate =44100 /*format.getInteger(MediaFormat.KEY_SAMPLE_RATE)*/;
+        mSampleRate =format.getInteger(MediaFormat.KEY_SAMPLE_RATE);
         Log.e("----->" + "SoundFile", "ReadFile111:" + mSampleRate+":"+mChannels);
         // Expected total number of samples per channel.
         int expectedNumSamples =
                 (int) ((format.getLong(MediaFormat.KEY_DURATION) / 1000000.f) * mSampleRate + 0.5f);
 
-        MediaCodec codec = MediaCodec.createDecoderByType(format.getString(MediaFormat.KEY_MIME));
-        codec.configure(format, null, null, 0);
-        codec.start();
+        MediaCodec codec = null;
+            codec = MediaCodec.createDecoderByType(format.getString(MediaFormat.KEY_MIME));
+            codec.configure(format, null, null, 0);
+            codec.start();
 
         int decodedSamplesSize = 0;  // size of the output buffer containing decoded samples.
         byte[] decodedSamples = null;

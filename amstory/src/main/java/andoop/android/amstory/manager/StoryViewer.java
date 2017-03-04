@@ -173,6 +173,9 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
             int frames = mWaveformView.millisecsToPixels(now);
             mWaveformView.setPlayback(frames);
             setOffsetGoalNoUpdate(frames - mWidth / 2);
+            if(playcallBack!=null){
+                playcallBack.onPos(mWaveformView.millisecsToPixels(now));
+            }
             if (now >= mWaveformView.pixelsToMillisecs(mEndPos)) {
                handlePause();
             }
@@ -593,6 +596,7 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
     public interface PlayCallBack{
 
         void onStop();
+        void onPos(int pos);
 
     }
 }

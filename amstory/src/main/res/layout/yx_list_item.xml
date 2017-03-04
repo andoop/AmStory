@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:gravity="center_vertical"
+    android:background="#fff"
+    >
+
+    <TextView
+        android:id="@+id/tv_yxlistitemname"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="音效名称"/>
+
+    <SeekBar
+        android:id="@+id/sb_yxlistitem"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="100"/>
+
+    <ImageView
+        android:id="@+id/iv_yxlistitemdelete"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/ic_delate_bt"/>
+
+    <ImageView
+        android:id="@+id/iv_yxlistitemlocate"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/ic_location"/>
+
+</LinearLayout>

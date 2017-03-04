@@ -100,6 +100,11 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                 iv_play_icon.setSelected(false);
                 bt_play.setText("播放");
             }
+
+            @Override
+            public void onPos(int pos) {
+
+            }
         });
 
         mIsPlaying = false;
@@ -167,6 +172,11 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         }
     }
 
+
+
+    public void cungao(View view){
+        Toast.makeText(this, "不好意思，功能正在快马加鞭开发中 ：)", Toast.LENGTH_SHORT).show();
+    }
 
     /**
      * 开始录音

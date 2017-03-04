@@ -85,9 +85,18 @@ public class WaveformView extends View {
     private ScaleGestureDetector mScaleGestureDetector;
     private boolean mInitialized;
 
+    public WaveformView(Context context) {
+        super(context);
+        init(context);
+    }
+
     public WaveformView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+       init(context);
+    }
+
+    private void init(Context context) {
         // We don't want keys, the markers get these
         setFocusable(false);
 
@@ -119,40 +128,40 @@ public class WaveformView extends View {
         mTimecodePaint.setShadowLayer(2, 1, 1, res.getColor(R.color.timecode_shadow));
 
         mGestureDetector = new GestureDetector(
-            context,
-            new GestureDetector.SimpleOnGestureListener() {
-                public boolean onFling(MotionEvent e1, MotionEvent e2, float vx, float vy) {
-                    mListener.waveformFling(vx);
-                    return true;
+                context,
+                new GestureDetector.SimpleOnGestureListener() {
+                    public boolean onFling(MotionEvent e1, MotionEvent e2, float vx, float vy) {
+                        mListener.waveformFling(vx);
+                        return true;
+                    }
                 }
-            }
         );
 
         mScaleGestureDetector = new ScaleGestureDetector(
-            context,
-            new ScaleGestureDetector.SimpleOnScaleGestureListener() {
-                public boolean onScaleBegin(ScaleGestureDetector d) {
-                    Log.v("Ringdroid", "ScaleBegin " + d.getCurrentSpanX());
-                    mInitialScaleSpan = Math.abs(d.getCurrentSpanX());
-                    return true;
-                }
-                public boolean onScale(ScaleGestureDetector d) {
-                    float scale = Math.abs(d.getCurrentSpanX());
-                    Log.v("Ringdroid", "Scale " + (scale - mInitialScaleSpan));
-                    if (scale - mInitialScaleSpan > 40) {
-                        mListener.waveformZoomIn();
-                        mInitialScaleSpan = scale;
+                context,
+                new ScaleGestureDetector.SimpleOnScaleGestureListener() {
+                    public boolean onScaleBegin(ScaleGestureDetector d) {
+                        Log.v("Ringdroid", "ScaleBegin " + d.getCurrentSpanX());
+                        mInitialScaleSpan = Math.abs(d.getCurrentSpanX());
+                        return true;
                     }
-                    if (scale - mInitialScaleSpan < -40) {
-                        mListener.waveformZoomOut();
-                        mInitialScaleSpan = scale;
+                    public boolean onScale(ScaleGestureDetector d) {
+                        float scale = Math.abs(d.getCurrentSpanX());
+                        Log.v("Ringdroid", "Scale " + (scale - mInitialScaleSpan));
+                        if (scale - mInitialScaleSpan > 40) {
+                            mListener.waveformZoomIn();
+                            mInitialScaleSpan = scale;
+                        }
+                        if (scale - mInitialScaleSpan < -40) {
+                            mListener.waveformZoomOut();
+                            mInitialScaleSpan = scale;
+                        }
+                        return true;
                     }
-                    return true;
+                    public void onScaleEnd(ScaleGestureDetector d) {
+                        Log.v("Ringdroid", "ScaleEnd " + d.getCurrentSpanX());
+                    }
                 }
-                public void onScaleEnd(ScaleGestureDetector d) {
-                    Log.v("Ringdroid", "ScaleEnd " + d.getCurrentSpanX());
-                }
-            }
         );
 
         mSoundFile = null;

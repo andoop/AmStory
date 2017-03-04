@@ -224,6 +224,7 @@
                     android:layout_width="13dp"
                     android:layout_alignParentRight="true"
                     android:layout_height="13dp"
+                    android:onClick="deleteBgMusic"
                     android:layout_marginRight="15dp"
                     android:src="@drawable/ic_delate_bt"/>
 
@@ -232,6 +233,8 @@
                     android:layout_below="@id/iv_edit_delete_backgroud"
                     android:layout_width="match_parent"
                     android:layout_marginTop="20dp"
+                    android:max="100"
+                    android:progress="100"
                     android:layout_height="wrap_content" />
 
             </RelativeLayout>
