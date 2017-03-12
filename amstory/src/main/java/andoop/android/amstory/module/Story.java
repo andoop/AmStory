@@ -31,6 +31,7 @@ public class Story implements Serializable{
     public String img;
     public String content;
     public String voice;
+    public String author;
 
     public  List<Story> parse(JSONArray json) throws JSONException {
 

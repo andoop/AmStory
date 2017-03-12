@@ -61,13 +61,11 @@ public class ListenPager extends BasePager {
 
     private List<DataListPager> pagers;
     private String[] titles=new String[]{
-            "经典",
-            "国学",
-            "科普",
-            "奇幻",
-            "名著",
-            "传说",
-            "纪实"};
+            "今日推荐",
+            "睡前故事",
+            "健康教育",
+            "品格教育",
+            "经典诗文"};
 
     private FragmentPagerAdapter fragmentPagerAdapter;
     private String ACTION_ZD="cn.andoop.zhedie";
@@ -163,10 +161,10 @@ public class ListenPager extends BasePager {
 
         //初始化标签页面
         pagers=new ArrayList<>();
-        for(String title:titles){
+        for (int i = 0; i < titles.length; i++) {
             DataListPager dataListPager = new DataListPager();
             Bundle args=new Bundle();
-            args.putString("type",title);
+            args.putInt("type",i+1);
             args.putInt("page",1);
             dataListPager.setArguments(args);
             pagers.add(dataListPager);

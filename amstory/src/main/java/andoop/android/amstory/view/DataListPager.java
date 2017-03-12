@@ -21,6 +21,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import andoop.android.amstory.MPlayerActivity;
 import andoop.android.amstory.R;
 import andoop.android.amstory.StoryMakeActivity;
 import andoop.android.amstory.data.DataManager;
@@ -59,7 +60,7 @@ public class DataListPager extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Bundle arguments = getArguments();
         if (arguments != null) {
-            String type = arguments.getString("type");
+            int type = arguments.getInt("type");
             page = arguments.getInt("page");
             Log.e("----->" + "DataListPager", "onActivityCreated:page:" + page);
             //根据类型初始化数据
@@ -74,11 +75,12 @@ public class DataListPager extends Fragment {
     }
 
 
-    private void initData(String type) {
-        if (TextUtils.isEmpty(type)) {
+    private void initData(int type) {
+        Log.e("----->" + "DataListPager", "initData:" + type);
+       /* if (type==0) {
             showEmpty();
             return;
-        }
+        }*/
 
         mData = new ArrayList<>();
 
@@ -143,7 +145,6 @@ public class DataListPager extends Fragment {
         DataManager.newInstance(getActivity()).getStories(new DataManager.StoryDataListener<List<Story>>() {
             @Override
             public void onSuccess(List<Story> stories, int page) {
-                Log.e("----->" + "DataListPager", "onSuccess:" + stories.size());
                 if (stories == null) {
                     showEmpty();
                     return;
@@ -205,7 +206,17 @@ public class DataListPager extends Fragment {
                         Story storyModule = (Story) tag;
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("story_data", storyModule);
-                        Intent intent = new Intent(DataListPager.this.getActivity(), StoryMakeActivity.class);
+
+
+                        Intent intent = null;
+
+                        if(page==1){
+                            intent=new Intent(DataListPager.this.getActivity(), MPlayerActivity.class);
+                        }else {
+
+                            intent=new Intent(DataListPager.this.getActivity(), StoryMakeActivity.class);
+                        }
+
                         intent.putExtras(bundle);
                         DataListPager.this.getActivity().startActivity(intent);
                     }

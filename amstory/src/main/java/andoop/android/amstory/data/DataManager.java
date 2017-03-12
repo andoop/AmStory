@@ -40,12 +40,17 @@ public class DataManager {
         return INSTANCE;
     }
     //获取数据
-    public void getStories(StoryDataListener<List<Story>> storyDataListener,String type,int page){
+    public void getStories(StoryDataListener<List<Story>> storyDataListener,int type,int page){
 
         String jsonstr = JsonReportory.newInstance(context).getStory(type,page);
         try {
             JSONObject jsonObject = dealWithErr(storyDataListener, page, jsonstr);
-            if (jsonObject == null) return;
+            if (jsonObject == null){
+                if(storyDataListener!=null){
+                    storyDataListener.onSuccess(null,page);
+                }
+                return;
+            }
 
             JSONObject data = jsonObject.optJSONObject("data");
             JSONArray storys = data.optJSONArray("storys");

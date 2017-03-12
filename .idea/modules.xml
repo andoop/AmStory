@@ -4,18 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AmStory.iml" filepath="$PROJECT_DIR$/AmStory.iml" />
       <module fileurl="file://$PROJECT_DIR$/XXX.iml" filepath="$PROJECT_DIR$/XXX.iml" />
-      <module fileurl="file://$PROJECT_DIR$/aapp/aapp.iml" filepath="$PROJECT_DIR$/aapp/aapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/amstory/amstory.iml" filepath="$PROJECT_DIR$/amstory/amstory.iml" />
       <module fileurl="file://$PROJECT_DIR$/andooptabframe/andooptabframe.iml" filepath="$PROJECT_DIR$/andooptabframe/andooptabframe.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/atext/atext.iml" filepath="$PROJECT_DIR$/atext/atext.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mupdflibrary/mupdflibrary.iml" filepath="$PROJECT_DIR$/mupdflibrary/mupdflibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/ringdroid/ringdroid.iml" filepath="$PROJECT_DIR$/ringdroid/ringdroid.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sfhmgturntestturntest1/sfhmgturntestturntest1.iml" filepath="$PROJECT_DIR$/sfhmgturntestturntest1/sfhmgturntestturntest1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/stylishmp/stylishmp.iml" filepath="$PROJECT_DIR$/stylishmp/stylishmp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/voicecutdemo/voicecutdemo.iml" filepath="$PROJECT_DIR$/voicecutdemo/voicecutdemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/voicemixdemo/voicemixdemo.iml" filepath="$PROJECT_DIR$/voicemixdemo/voicemixdemo.iml" />
     </modules>
   </component>
 </project>

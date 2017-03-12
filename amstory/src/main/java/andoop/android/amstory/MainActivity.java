@@ -10,6 +10,10 @@ import com.andoop.andooptabframe.AndoopTabFrame;
 import com.andoop.andooptabframe.core.AndoopFrame;
 import com.andoop.andooptabframe.core.TabFrameConfig;
 
+import andoop.android.amstory.fragments.FaxianFragment;
+import andoop.android.amstory.fragments.PersonalFragment;
+import andoop.android.amstory.fragments.TinggushiFragment;
+import andoop.android.amstory.fragments.TuijianFragment;
 import andoop.android.amstory.view.ListenPager;
 import andoop.android.amstory.view.RecordPager;
 
@@ -19,7 +23,6 @@ public class MainActivity extends FragmentActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         TabFrameConfig tabFrameConfig = new TabFrameConfig.Builder()
                 .tabColorString("#ffffff")
                 .canScroll(false)
@@ -29,8 +32,10 @@ public class MainActivity extends FragmentActivity{
         AndoopTabFrame.getInstance().build(this, R.id.fl_content, new AndoopFrameListener() {
             @Override
             public void onReady(AndoopFrame andoopFrame) {
-                andoopFrame.addPage(new RecordPager(),R.drawable.speak_selector,"讲故事");
-                andoopFrame.addPage(new ListenPager(),R.drawable.listen_selector,"听故事");
+                andoopFrame.addPage(new TuijianFragment(),R.drawable.tuijian_selector,"推荐");
+                andoopFrame.addPage(new TinggushiFragment(),R.drawable.tinggushi_selector,"听故事");
+                andoopFrame.addPage(new FaxianFragment(),R.drawable.faxian_icon_selector,"发现");
+                andoopFrame.addPage(new PersonalFragment(),R.drawable.geren_selector,"个人");
                 andoopFrame.commit();
             }
 
