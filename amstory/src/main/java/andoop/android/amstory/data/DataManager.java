@@ -22,6 +22,8 @@ import andoop.android.amstory.module.Story;
 public class DataManager {
     private Context context;
     private static DataManager INSTANCE;
+    public static final int TYPE_TUIJIAN=200;
+
 
     private DataManager(Context context) {
         this.context = context;
@@ -75,6 +77,7 @@ public class DataManager {
 
     }
 
+    //获取banner数据
     public void getBanners(StoryDataListener<List<Banner>> storyDataListener){
         String jsonstr = JsonReportory.newInstance(context).getBanner();
         try {
@@ -99,6 +102,9 @@ public class DataManager {
             Log.e("----->" + "DataManager", "getBanners:" + e.toString());
         }
     }
+
+
+
 
     @Nullable
     private JSONObject dealWithErr(StoryDataListener storyDataListener, int page, String jsonstr) throws JSONException {

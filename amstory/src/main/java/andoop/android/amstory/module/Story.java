@@ -44,6 +44,7 @@ public class Story implements Serializable{
             story.content=jsonObject.getString("content");
             story.title=jsonObject.getString("title");
             story.img=jsonObject.getString("img");
+            story.author=jsonObject.optString("author");
             story.voice=jsonObject.getString("voice");
 
             data.add(story);
