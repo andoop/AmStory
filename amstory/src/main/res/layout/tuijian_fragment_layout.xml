@@ -3,12 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent">
+    android:background="#fff">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height">
-    </RelativeLayout>
+    <include layout="@layout/comment_title_01"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +15,9 @@
         <andoop.android.amstory.customview.jazzyviewpager.JazzyViewPager
             android:id="@+id/vp_tuijian"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            >
 
         </andoop.android.amstory.customview.jazzyviewpager.JazzyViewPager>
 

@@ -120,9 +120,9 @@ class Atom {  // note: latest versions of spec simply call it 'box' instead of '
         return true;
     }
 
-    // return the child atom of the corresponding type.
+    // return_icon the child atom of the corresponding type.
     // type can contain grand children: e.g. type = "trak.mdia.minf"
-    // return null if the atom does not contain such a child.
+    // return_icon null if the atom does not contain such a child.
     public Atom getChild(String type) {
         if (mChildren == null) {
             return null;
@@ -140,7 +140,7 @@ class Atom {  // note: latest versions of spec simply call it 'box' instead of '
         return null;
     }
 
-    // return a byte array containing the full content of the atom (including header)
+    // return_icon a byte array containing the full content of the atom (including header)
     public byte[] getBytes() {
         byte[] atom_bytes = new byte[mSize];
         int offset = 0;

@@ -58,9 +58,18 @@
             android:name=".RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".StoryEidtActivity"
+        <activity
+            android:name=".StoryEidtActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".AllCatesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".StoryDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitile"
+            />
     </application>
 
 </manifest>

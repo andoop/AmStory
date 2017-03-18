@@ -50,6 +50,8 @@ public class MPlayerActivity extends AppCompatActivity {
             }
         }
         mpv.setCoverURL("http://img2.imgtn.bdimg.com/it/u=1049512083,2271296344&fm=214&gp=0.jpg");
+        mpv.start();
+        mpv.stop();
         mpv.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 if (mpv.isRotating()) {

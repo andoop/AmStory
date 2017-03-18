@@ -103,7 +103,7 @@ public class SoundFile implements Serializable{
         return false;
     }
 
-    // Create and return a SoundFile object using the file fileName.
+    // Create and return_icon a SoundFile object using the file fileName.
     public static SoundFile create(String fileName,
                                    ProgressListener progressListener)
             throws java.io.FileNotFoundException,
@@ -127,7 +127,7 @@ public class SoundFile implements Serializable{
         return soundFile;
     }
 
-    // Create and return a SoundFile object by recording a mono audio stream.
+    // Create and return_icon a SoundFile object by recording a mono audio stream.
     public static SoundFile record(ProgressListener progressListener) {
         if (progressListener == null) {
             // must have a progessListener to stop the recording.

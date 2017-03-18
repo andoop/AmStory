@@ -23,6 +23,7 @@ import java.util.List;
 
 import andoop.android.amstory.MPlayerActivity;
 import andoop.android.amstory.R;
+import andoop.android.amstory.StoryDetailActivity;
 import andoop.android.amstory.StoryMakeActivity;
 import andoop.android.amstory.data.DataManager;
 import andoop.android.amstory.module.Story;
@@ -79,12 +80,12 @@ public class DataListPager extends Fragment {
         Log.e("----->" + "DataListPager", "initData:" + type);
        /* if (type==0) {
             showEmpty();
-            return;
+            return_icon;
         }*/
 
         mData = new ArrayList<>();
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         recyclerView.setAdapter(new DataListRcvAdapter());
         //滑动监听，折叠或者展开视图
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -206,17 +207,12 @@ public class DataListPager extends Fragment {
                         Story storyModule = (Story) tag;
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("story_data", storyModule);
-
-
                         Intent intent = null;
-
                         if(page==1){
-                            intent=new Intent(DataListPager.this.getActivity(), MPlayerActivity.class);
+                            intent=new Intent(DataListPager.this.getActivity(), StoryDetailActivity.class);
                         }else {
-
                             intent=new Intent(DataListPager.this.getActivity(), StoryMakeActivity.class);
                         }
-
                         intent.putExtras(bundle);
                         DataListPager.this.getActivity().startActivity(intent);
                     }

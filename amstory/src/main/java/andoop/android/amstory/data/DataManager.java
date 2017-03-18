@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import andoop.android.amstory.module.Banner;
+import andoop.android.amstory.module.Cates;
 import andoop.android.amstory.module.Story;
 
 /* * * * * * * * * * * * * * * * * * *
@@ -20,9 +21,11 @@ import andoop.android.amstory.module.Story;
 * explain：故事数据管理类
 * * * * * * * * * * * * * * * * * * */
 public class DataManager {
+
     private Context context;
     private static DataManager INSTANCE;
     public static final int TYPE_TUIJIAN=200;
+    public static final int TYPE_FAXIAN = 201;
 
 
     private DataManager(Context context) {
@@ -53,7 +56,6 @@ public class DataManager {
                 }
                 return;
             }
-
             JSONObject data = jsonObject.optJSONObject("data");
             JSONArray storys = data.optJSONArray("storys");
             if(storys==null){
@@ -103,7 +105,31 @@ public class DataManager {
         }
     }
 
+    //获取分类信息
+    public void getCates(StoryDataListener<List<Cates>> storyDataListener){
+        String jsonstr = JsonReportory.newInstance(context).getCates();
+        try {
+            JSONObject jsonObject = dealWithErr(storyDataListener, 0, jsonstr);
+            if (jsonObject == null) return;
 
+            JSONObject data = jsonObject.optJSONObject("data");
+            JSONArray cates = data.optJSONArray("category");
+            if(cates==null){
+                if(storyDataListener!=null){
+                    storyDataListener.onSuccess(null,0);
+                }
+                return;
+            }
+            List<Cates> catesList = Cates.parse(cates);
+            if(storyDataListener!=null){
+                storyDataListener.onSuccess(catesList,0);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("----->" + "DataManager", "getCates:" + e.toString());
+        }
+    }
 
 
     @Nullable

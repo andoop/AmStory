@@ -1,5 +1,8 @@
 package andoop.android.amstory.fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import andoop.android.amstory.R;
+import andoop.android.amstory.StoryDetailActivity;
 import andoop.android.amstory.base.BasePager;
 import andoop.android.amstory.customview.jazzyviewpager.JazzyViewPager;
 import andoop.android.amstory.customview.jazzyviewpager.OutlineContainer;
@@ -102,12 +106,19 @@ public class TuijianFragment extends BasePager {
 
     //初始化itme视图
     private View initItemView(int position) {
-        Story story = mData.get(position);
+        final Story story = mData.get(position);
         View view = View.inflate(getActivity(), R.layout.tuijian_fragment_vp_item, null);
         ImageView icon= (ImageView) view.findViewById(R.id.iv_icon_tuijian_vp_item);
         TextView name= (TextView) view.findViewById(R.id.tv_name_tuijian_item);
         TextView author= (TextView) view.findViewById(R.id.tv_author_tuijian_item);
         TextView con= (TextView) view.findViewById(R.id.tv_content_tuijian_item);
+        view.findViewById(R.id.iv_play_tuijian_vp_item).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //打开详情页面
+               openDetail(getActivity(),story);
+            }
+        });
 
         icon.setScaleType(ImageView.ScaleType.FIT_XY);
         Picasso.with(getActivity()).load(story.img).into(icon);
@@ -122,6 +133,14 @@ public class TuijianFragment extends BasePager {
     @Override
     public void onSelect(AndoopPage andoopPage, int pos) {
         Log.e("----->" + "TuijianFragment", "onSelect:" + pos);
+    }
+
+    private void openDetail(Context context,Story story){
+        Intent intent=new Intent(context, StoryDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("story_data",story);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 
 

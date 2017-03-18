@@ -57,7 +57,7 @@ public class StoryMakeViewPresenter extends BasePresenter<IStoryMakeView> {
 //                        }
 //                    }
 //                }
-//                return result;
+//                return_icon result;
 //            }
 //
 //            @Override

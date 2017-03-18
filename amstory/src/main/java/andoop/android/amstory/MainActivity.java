@@ -26,7 +26,7 @@ public class MainActivity extends FragmentActivity{
         TabFrameConfig tabFrameConfig = new TabFrameConfig.Builder()
                 .tabColorString("#ffffff")
                 .canScroll(false)
-               // .setCacheCount(2)
+                .setCacheCount(3)
                 .build();
         AndoopTabFrame.getInstance().init(tabFrameConfig);
         AndoopTabFrame.getInstance().build(this, R.id.fl_content, new AndoopFrameListener() {

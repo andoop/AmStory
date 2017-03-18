@@ -9,6 +9,10 @@
 
     </style>
 
+    <style name="NoTitile" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="NotitleTheme" parent="AppTheme">
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>

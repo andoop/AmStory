@@ -1,6 +1,8 @@
 package andoop.android.amstory.base;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,9 @@ import com.andoop.andooptabframe.AndoopPage;
 import com.andoop.andooptabframe.AndoopTabFrame;
 import com.andoop.andooptabframe.core.AndoopFrame;
 
+import andoop.android.amstory.MPlayerActivity;
+import andoop.android.amstory.StoryDetailActivity;
+import andoop.android.amstory.module.Story;
 import andoop.android.amstory.utils.DialogUtils;
 
 /* * * * * * * * * * * * * * * * * * *
@@ -67,5 +72,21 @@ public abstract class BasePager extends AndoopPage {
     public void stoploading() {
         if(loadingView!=null)
             loadingView.dismiss();
+    }
+
+    private void openDetail(Context context, Story story){
+        Intent intent=new Intent(context, StoryDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("story_data",story);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
+    private void toPlay(Context context,Story story){
+        Intent intent=new Intent(context, MPlayerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("story_data",story);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 }
