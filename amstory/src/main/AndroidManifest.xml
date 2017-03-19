@@ -66,10 +66,12 @@
             android:name=".AllCatesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".StoryDetailActivity"
+        <activity
+            android:name=".StoryDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/NoTitile"
-            />
+            android:theme="@style/NoTitile" />
+        <activity android:name=".SearchActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

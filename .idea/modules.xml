@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AmStory.iml" filepath="$PROJECT_DIR$/AmStory.iml" />
-      <module fileurl="file://$PROJECT_DIR$/XXX.iml" filepath="$PROJECT_DIR$/XXX.iml" />
       <module fileurl="file://$PROJECT_DIR$/amstory/amstory.iml" filepath="$PROJECT_DIR$/amstory/amstory.iml" />
       <module fileurl="file://$PROJECT_DIR$/andooptabframe/andooptabframe.iml" filepath="$PROJECT_DIR$/andooptabframe/andooptabframe.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

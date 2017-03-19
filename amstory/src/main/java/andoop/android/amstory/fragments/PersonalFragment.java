@@ -1,5 +1,6 @@
 package andoop.android.amstory.fragments;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import andoop.android.amstory.R;
+import andoop.android.amstory.SearchActivity;
 import andoop.android.amstory.base.BasePager;
 import andoop.android.amstory.data.DataManager;
 import andoop.android.amstory.module.Story;
@@ -33,6 +35,8 @@ public class PersonalFragment extends BasePager {
     @InjectView(R.id.rv_pf)
     RecyclerView recyclerView;
     List<Story> mData;
+    @InjectView(R.id.iv_title_search)
+    ImageView search;
     @Override
     protected View initGui(LayoutInflater inflater) {
         return inflater.inflate(R.layout.personal_fragment_layout,null);
@@ -66,6 +70,18 @@ public class PersonalFragment extends BasePager {
                 Toast.makeText(PersonalFragment.this.getActivity(), error, Toast.LENGTH_SHORT).show();
             }
         },DataManager.TYPE_FAXIAN,0);
+
+        //设置监听
+        initListener();
+    }
+
+    private void initListener() {
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),SearchActivity.class));
+            }
+        });
     }
 
     @Override
