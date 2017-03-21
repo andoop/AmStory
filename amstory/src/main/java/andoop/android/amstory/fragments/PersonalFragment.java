@@ -17,6 +17,7 @@ import java.util.List;
 
 import andoop.android.amstory.R;
 import andoop.android.amstory.SearchActivity;
+import andoop.android.amstory.UserInfoActivity;
 import andoop.android.amstory.base.BasePager;
 import andoop.android.amstory.data.DataManager;
 import andoop.android.amstory.module.Story;
@@ -76,6 +77,13 @@ public class PersonalFragment extends BasePager {
     }
 
     private void initListener() {
+        //设置点击事件
+        iv_st.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),UserSettingActivity.class));
+            }
+        });
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

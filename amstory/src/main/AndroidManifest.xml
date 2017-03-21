@@ -70,8 +70,10 @@
             android:name=".StoryDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoTitile" />
-        <activity android:name=".SearchActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".SearchActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".fragments.UserSettingActivity"></activity>
     </application>
 
 </manifest>
