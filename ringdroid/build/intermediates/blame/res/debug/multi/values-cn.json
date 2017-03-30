@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-cn\\values-cn.xml",
+        "outputFile": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-cn\\values-cn.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 450
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 119,
                         "startColumn": 2,
@@ -30,7 +30,7 @@
                     "endOffset": 502
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 118,
                         "startColumn": 2,
@@ -49,7 +49,7 @@
                     "endOffset": 552
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 98,
                         "startColumn": 2,
@@ -68,7 +68,7 @@
                     "endOffset": 599
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 96,
                         "startColumn": 2,
@@ -87,7 +87,7 @@
                     "endOffset": 650
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 95,
                         "startColumn": 2,
@@ -106,7 +106,7 @@
                     "endOffset": 701
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 94,
                         "startColumn": 2,
@@ -125,7 +125,7 @@
                     "endOffset": 753
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 97,
                         "startColumn": 2,
@@ -144,7 +144,7 @@
                     "endOffset": 803
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 77,
                         "startColumn": 2,
@@ -163,7 +163,7 @@
                     "endOffset": 876
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 108,
                         "startColumn": 2,
@@ -182,7 +182,7 @@
                     "endOffset": 937
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 24,
                         "startColumn": 2,
@@ -201,7 +201,7 @@
                     "endOffset": 1003
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 41,
                         "startColumn": 2,
@@ -220,7 +220,7 @@
                     "endOffset": 1064
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 113,
                         "startColumn": 2,
@@ -239,7 +239,7 @@
                     "endOffset": 1148
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 87,
                         "startColumn": 2,
@@ -258,7 +258,7 @@
                     "endOffset": 1211
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 86,
                         "startColumn": 2,
@@ -277,7 +277,7 @@
                     "endOffset": 1267
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 61,
                         "startColumn": 2,
@@ -296,7 +296,7 @@
                     "endOffset": 1334
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 63,
                         "startColumn": 2,
@@ -315,7 +315,7 @@
                     "endOffset": 1397
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 62,
                         "startColumn": 2,
@@ -334,7 +334,7 @@
                     "endOffset": 1448
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 60,
                         "startColumn": 2,
@@ -353,7 +353,7 @@
                     "endOffset": 1497
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 59,
                         "startColumn": 2,
@@ -372,7 +372,7 @@
                     "endOffset": 1566
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 100,
                         "startColumn": 2,
@@ -391,7 +391,7 @@
                     "endOffset": 1612
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 82,
                         "startColumn": 2,
@@ -410,7 +410,7 @@
                     "endOffset": 1658
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 85,
                         "startColumn": 2,
@@ -429,7 +429,7 @@
                     "endOffset": 1710
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 89,
                         "startColumn": 2,
@@ -448,7 +448,7 @@
                     "endOffset": 1759
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 90,
                         "startColumn": 2,
@@ -467,7 +467,7 @@
                     "endOffset": 1805
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 84,
                         "startColumn": 2,
@@ -486,7 +486,7 @@
                     "endOffset": 1858
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 83,
                         "startColumn": 2,
@@ -505,7 +505,7 @@
                     "endOffset": 1906
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 88,
                         "startColumn": 2,
@@ -524,7 +524,7 @@
                     "endOffset": 1955
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 81,
                         "startColumn": 2,
@@ -543,7 +543,7 @@
                     "endOffset": 2018
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 42,
                         "startColumn": 2,
@@ -562,7 +562,7 @@
                     "endOffset": 2061
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 34,
                         "startColumn": 2,
@@ -581,7 +581,7 @@
                     "endOffset": 2103
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 33,
                         "startColumn": 2,
@@ -600,7 +600,7 @@
                     "endOffset": 2158
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 70,
                         "startColumn": 2,
@@ -619,7 +619,7 @@
                     "endOffset": 2211
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 69,
                         "startColumn": 2,
@@ -638,7 +638,7 @@
                     "endOffset": 2260
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 68,
                         "startColumn": 2,
@@ -657,7 +657,7 @@
                     "endOffset": 2318
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 23,
                         "startColumn": 2,
@@ -676,7 +676,7 @@
                     "endOffset": 2380
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 40,
                         "startColumn": 2,
@@ -695,7 +695,7 @@
                     "endOffset": 2422
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 54,
                         "startColumn": 2,
@@ -714,7 +714,7 @@
                     "endOffset": 2464
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 53,
                         "startColumn": 2,
@@ -733,7 +733,7 @@
                     "endOffset": 2505
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 52,
                         "startColumn": 2,
@@ -752,7 +752,7 @@
                     "endOffset": 2560
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 55,
                         "startColumn": 2,
@@ -771,7 +771,7 @@
                     "endOffset": 2643
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 109,
                         "startColumn": 2,
@@ -790,7 +790,7 @@
                     "endOffset": 2705
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 26,
                         "startColumn": 2,
@@ -809,7 +809,7 @@
                     "endOffset": 2769
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 107,
                         "startColumn": 2,
@@ -828,7 +828,7 @@
                     "endOffset": 2826
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 102,
                         "startColumn": 2,
@@ -847,7 +847,7 @@
                     "endOffset": 2875
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 101,
                         "startColumn": 2,
@@ -866,7 +866,7 @@
                     "endOffset": 2933
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 47,
                         "startColumn": 2,
@@ -885,7 +885,7 @@
                     "endOffset": 2990
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 44,
                         "startColumn": 2,
@@ -904,7 +904,7 @@
                     "endOffset": 3055
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 45,
                         "startColumn": 2,
@@ -923,7 +923,7 @@
                     "endOffset": 3111
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 46,
                         "startColumn": 2,
@@ -942,7 +942,7 @@
                     "endOffset": 3165
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 48,
                         "startColumn": 2,
@@ -961,7 +961,7 @@
                     "endOffset": 3211
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 106,
                         "startColumn": 2,
@@ -980,7 +980,7 @@
                     "endOffset": 3274
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 103,
                         "startColumn": 2,
@@ -999,7 +999,7 @@
                     "endOffset": 3331
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 2,
@@ -1018,7 +1018,7 @@
                     "endOffset": 3383
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 76,
                         "startColumn": 2,
@@ -1037,7 +1037,7 @@
                     "endOffset": 3435
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 71,
                         "startColumn": 2,
@@ -1056,7 +1056,7 @@
                     "endOffset": 3489
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 99,
                         "startColumn": 2,
@@ -1075,7 +1075,7 @@
                     "endOffset": 3563
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 25,
                         "startColumn": 2,
@@ -1094,7 +1094,7 @@
                     "endOffset": 3635
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 27,
                         "startColumn": 2,
@@ -1113,7 +1113,7 @@
                     "endOffset": 3704
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 39,
                         "startColumn": 2,
@@ -1132,7 +1132,7 @@
                     "endOffset": 3748
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 32,
                         "startColumn": 2,
@@ -1151,7 +1151,7 @@
                     "endOffset": 3810
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 114,
                         "startColumn": 2,
@@ -1170,7 +1170,7 @@
                     "endOffset": 3854
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 35,
                         "startColumn": 2,
@@ -1189,7 +1189,7 @@
                     "endOffset": 3917
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 104,
                         "startColumn": 2,
@@ -1208,7 +1208,7 @@
                     "endOffset": 3959
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 73,
                         "startColumn": 2,
@@ -1227,7 +1227,7 @@
                     "endOffset": 4001
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 72,
                         "startColumn": 2,
@@ -1246,7 +1246,7 @@
                     "endOffset": 4050
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 74,
                         "startColumn": 2,
@@ -1265,7 +1265,7 @@
                     "endOffset": 4095
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 75,
                         "startColumn": 2,
@@ -1284,7 +1284,7 @@
                     "endOffset": 4173
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 38,
                         "startColumn": 2,
@@ -1303,7 +1303,7 @@
                     "endOffset": 4220
                 },
                 "from": {
-                    "file": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
+                    "file": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\values-cn\\strings.xml",
                     "position": {
                         "startLine": 105,
                         "startColumn": 2,

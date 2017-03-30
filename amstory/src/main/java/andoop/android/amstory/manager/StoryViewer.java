@@ -18,7 +18,7 @@ import andoop.android.amstory.utils.SamplePlayer;
 
 public class StoryViewer implements WaveformView.WaveformListener, MarkerView.MarkerListener{
 
-    private final WaveformView mWaveformView;
+    public final WaveformView mWaveformView;
     private final MarkerView mStartMarker;
     private final MarkerView mEndMarker;
     private SoundFile mCurrentSoundFile;
@@ -71,6 +71,8 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
 
 
 
+
+
         mWaveformView.setListener(this);
 
         mStartMarker.setListener(this);
@@ -90,7 +92,7 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
 
     //设置录制声音源
     public void setRecordAudio(SoundFile soundFile){
-      updateRecordAudio(soundFile);
+      updateRecordAudio(soundFile,0);
     }
 
     //设置播放器
@@ -126,6 +128,8 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         mPlayer.seekTo(mWaveformView.pixelsToMillisecs(mStartPos));
         mPlayer.start();
         mWaveformView.invalidate();
+
+        //mWaveformView.fra
     }
 
     private synchronized void handlePause() {
@@ -144,17 +148,20 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
     }
 
     //更新录制生源
-    public void updateRecordAudio(SoundFile soundFile){
+    public void updateRecordAudio(SoundFile soundFile,int insertDurationPixels){
         mWaveformView.setSoundFile(soundFile);
         mCurrentSoundFile=soundFile;
 
         realsePlayer();
         mPlayer=new SamplePlayer(mCurrentSoundFile);
-
-
         mMaxPos = mWaveformView.maxPos();
+
         mStartPos=mEndPos;
-        mEndPos=mMaxPos;
+        if(insertDurationPixels>0){
+            mEndPos=mEndPos+insertDurationPixels;
+        }else {
+            mEndPos=mMaxPos;
+        }
         mLastDisplayedStartPos = -1;
         mLastDisplayedEndPos = -1;
 
@@ -307,6 +314,10 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
     //获取当前结束像素
     public int getEndPixels(){
         return mEndPos;
+    }
+    //获取最大像素值
+    public int getMaxPixels(){
+        return mMaxPos;
     }
     //获取当前开始帧
     public int getStartFrame(){
@@ -488,13 +499,22 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         }
     }
 
+    public void markerFocus(){
+        this.markerFocus(null);
+    }
     @Override
     public void markerFocus(MarkerView marker) {
         mKeyDown = false;
         if (marker == mStartMarker) {
             setOffsetGoalStartNoUpdate();
-        } else {
+        } else if(marker==marker){
             setOffsetGoalEndNoUpdate();
+        }else {
+            if(mStartMarker.isSelected()){
+                setOffsetGoalStartNoUpdate();
+            }else {
+                setOffsetGoalEndNoUpdate();
+            }
         }
 
         // Delay updaing the display because if this focus was in

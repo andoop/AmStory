@@ -241,7 +241,7 @@ public class StoryEidtActivity extends AppCompatActivity {
         });
 
 
-        storyViewer.updateRecordAudio(mSoundFile);
+        storyViewer.updateRecordAudio(mSoundFile,0);
         lyricRecordView.setShaderView(shaderView);
         lyricRecordView.setLyricData(SoundFileManager.newInstance(this).getStoryData(), SoundFileManager.newInstance(this).getLycTimes());
     }

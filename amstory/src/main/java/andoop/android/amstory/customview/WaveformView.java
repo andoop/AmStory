@@ -19,6 +19,7 @@ package andoop.android.amstory.customview;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.util.AttributeSet;
@@ -342,7 +343,7 @@ public class WaveformView extends View {
 
         if (mHeightsAtThisZoomLevel == null)
             computeIntsForThisZoomLevel();
-
+     //   canvas.drawColor(Color.parseColor("#cccccc"));
         // Draw waveform
         int measuredWidth = getMeasuredWidth();
         int measuredHeight = getMeasuredHeight();

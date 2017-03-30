@@ -14,6 +14,7 @@
     <color name="timecode">#ddffffdd</color>
     <color name="mbg">#eeeeee</color>
     <color name="timecode_shadow">#aa000000</color>
+    <color name="waveform_bg">#cccccc</color>
 
     <color name="type_bkgnd_alarm">#88880000</color>
     <color name="type_bkgnd_ringtone">#88008888</color>

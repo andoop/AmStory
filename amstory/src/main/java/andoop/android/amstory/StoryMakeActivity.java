@@ -60,6 +60,10 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     MarkerView mStartMarker;
     @InjectView(R.id.endmarker)
     MarkerView mEndMarker;
+    @InjectView(R.id.tv_story_title)
+    TextView tv_story_title;
+    @InjectView(R.id.tv_story_author)
+    TextView tv_story_author;
     //是否继续录制
     //录制状态
     private final int STATE_RECORDING = 1;
@@ -143,10 +147,13 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         lyricRecordView.setScrollerViewer(new LyricRecordView.OnScrollListener() {
             @Override
             public void onScroll(long stime, long etime, String text) {
+                Log.e("----->" + "StoryMakeActivity", "onScroll:" + stime + ":" + etime);
                 if(storyViewer.getCurrentSoundFile()==null)
                     return;
                 storyViewer.setStartMillisecs(stime);
                 storyViewer.setEndMillisecs(etime);
+                storyViewer.markerFocus();
+                storyViewer.updateWaveView();
             }
         });
 
@@ -160,6 +167,8 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     public void showData(Story data) {
         Log.e("----->" + "StoryMakeActivity", "showData:");
         stoploading();
+        tv_story_title.setText(data.title);
+        tv_story_author.setText(data.author);
         if(data.content!=null){
             String[] split = data.content.split("&&&");
             List<String> stringList = Arrays.asList(split);
@@ -178,6 +187,35 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         Toast.makeText(this, "不好意思，功能正在快马加鞭开发中 ：)", Toast.LENGTH_SHORT).show();
     }
 
+    public void return_next(View view){
+        Toast.makeText(this, "回退上一步", Toast.LENGTH_SHORT).show();
+    }
+
+    public void cancle_return(View view){
+        Toast.makeText(this, "撤销回退", Toast.LENGTH_SHORT).show();
+    }
+
+    public void finishPage(View view){
+        finish();
+    }
+
+    //左边全选
+    public void toLeft(View view) {
+        storyViewer.setmStartPos(0);
+        storyViewer.updateWaveView();
+        //选中右边把手
+        mStartMarker.requestFocus();
+        storyViewer.markerFocus(mStartMarker);
+    }
+
+    //右边全选
+    public void toRight(View view) {
+        storyViewer.setmEndPos(storyViewer.getMaxPixels());
+        storyViewer.updateWaveView();
+        //选中左边把手
+        mEndMarker.requestFocus();
+        storyViewer.markerFocus(mEndMarker);
+    }
     /**
      * 开始录音
      *
@@ -196,6 +234,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
             mRecordingKeepGoing = true;
             lyricRecordView.startRc();
             recordAudio();
+
         }
 
     }
@@ -235,7 +274,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
             @Override
             protected void onPostExecute(Void aVoid) {
                 storyViewer.setmEndPos(0);
-                finishRecord();
+                finishRecord(0);
             }
         }.execute();
 
@@ -375,7 +414,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                 stoploading();
                 Toast.makeText(StoryMakeActivity.this, "混入音效成功", Toast.LENGTH_SHORT).show();
                // mEndPos=0;
-                finishRecord();
+                finishRecord(0);
             }
         }.execute();
 
@@ -434,13 +473,13 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
              stoploading();
              Toast.makeText(StoryMakeActivity.this, "混入背景成功", Toast.LENGTH_SHORT).show();
            //  mEndPos=0;
-             finishRecord();
+             finishRecord(0);
          }
      }.execute();
 
     }
-
-
+    //插入录音的像素值
+    int insertDurationPixels;
     private void recordAudio() {
         changeState(STATE_RECORDING);
         mRecordingLastUpdateTime = getCurrentTime();
@@ -449,8 +488,23 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         mRecordAudioThread = new Thread(new Runnable() {
             @Override
             public void run() {
+                insertDurationPixels=0;
                 if(mSoundFile!=null){
-                    mSoundFile.RestartRecord();
+                    //如果录音文件不为空，则从后一个把手所在位置录取，否则从新录取
+                   // mSoundFile.RestartRecord();
+                    int startFrame=storyViewer.mWaveformView.secondsToFrames(storyViewer.getEndTimeSecon());
+                    Log.e("----->" + "StoryMakeActivity", "run:" + startFrame);
+                    final SoundFile src=SoundFile.record(progressListener);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            WaveformView waveformViewnew =new WaveformView(StoryMakeActivity.this);
+                            waveformViewnew.setSoundFile(src);
+                            insertDurationPixels=waveformViewnew.maxPos();
+                            insertDurationPixels=storyViewer.mWaveformView.secondsToPixels(waveformViewnew.pixelsToSeconds(insertDurationPixels));
+                        }
+                    });
+                    mSoundFile.InsertRecord(src,startFrame);
                 }else {
                     mSoundFile = SoundFile.record(progressListener);
                 }
@@ -463,10 +517,11 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                     });
                     return;
                 }
+                final int finalInsertDurationPixels = insertDurationPixels;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        finishRecord();
+                        finishRecord(finalInsertDurationPixels);
                     }
                 });
             }
@@ -475,13 +530,13 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     }
 
     //完成录制，或停止了录制
-    private void finishRecord() {
+    private void finishRecord(int insertDurationPixels) {
 
         SoundFileManager.newInstance(this).addSoundFile("makedata",mSoundFile);
         SoundFileManager.newInstance(this).setLycTimes(lyricRecordView.getLycTimes());
 
         //更新声音文件
-        storyViewer.updateRecordAudio(mSoundFile);
+        storyViewer.updateRecordAudio(mSoundFile,insertDurationPixels);
     }
 
 

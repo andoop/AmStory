@@ -2,6 +2,7 @@ package andoop.android.amstory.customview;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.Dimension;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -108,6 +109,7 @@ public class LyricRecordView extends FrameLayout {
 
             if (childAt.getTop() >= (top - (childAt.getMeasuredHeight() / 2)) && childAt.getBottom() <= (bottom + (childAt.getMeasuredHeight() / 2))) {
                 childAt.setTextColor(Color.parseColor("#ff0000"));
+                childAt.setTextSize(Dimension.SP,15);
                 if (!mStop) {
                     //如果当前的view改变了
                     if (currentView != childAt) {
@@ -154,7 +156,8 @@ public class LyricRecordView extends FrameLayout {
                 }
 
             } else {
-                childAt.setTextColor(Color.parseColor("#55000000"));
+                childAt.setTextColor(Color.parseColor("#22000000"));
+                childAt.setTextSize(Dimension.SP,15);
             }
 
 
@@ -184,7 +187,7 @@ public class LyricRecordView extends FrameLayout {
             case MotionEvent.ACTION_MOVE:
                 disy = event.getRawY() - my;
                 changeDis((int) disy);
-                Log.e("----->" + "LyricRecordView", "onTouchEvent:移动了：" + mdis);
+             //   Log.e("----->" + "LyricRecordView", "onTouchEvent:移动了：" + mdis);
                 mx = event.getRawX();
                 my = event.getRawY();
                 break;
