@@ -70,11 +70,15 @@
             android:name=".StoryDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/NoTitile" />
+<<<<<<< HEAD
+        <activity android:name=".SearchActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+=======
         <activity
             android:name=".SearchActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".fragments.UserSettingActivity"></activity>
-
+>>>>>>> 0c5e8a8169041ea891cdbfeecc5b542fdd943d59
     </application>
 
 </manifest>
