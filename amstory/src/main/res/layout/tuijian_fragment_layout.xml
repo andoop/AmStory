@@ -9,18 +9,23 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         >
 
         <andoop.android.amstory.customview.jazzyviewpager.JazzyViewPager
             android:id="@+id/vp_tuijian"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
             >
 
         </andoop.android.amstory.customview.jazzyviewpager.JazzyViewPager>
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+    </RelativeLayout>
 </LinearLayout>
