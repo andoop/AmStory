@@ -2,22 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="#eeeeee"
+    android:background="@color/person_bgcolor"
     android:layout_height="match_parent">
 
-    <include layout="@layout/comment_title_01"/>
+    <!--<include layout="@layout/comment_title_01"/>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff">
 
-        <andoop.android.amstory.customview.XCRoundImageView
+        <ImageView
             android:id="@+id/iv_pf_head"
             android:layout_width="95dp"
             android:layout_height="95dp"
             android:layout_centerHorizontal="true"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/mycover"
             />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_alignTop="@id/tv_pf_name"
             android:layout_alignBottom="@id/tv_pf_name"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@drawable/darennv"/>
 
     </RelativeLayout>
 
@@ -154,11 +154,12 @@
         android:gravity="center_vertical"
         >
 
-        <andoop.android.amstory.customview.XCRoundImageView
+        <ImageView
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_margin="30dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:id="@+id/child_iv"
+            android:src="@drawable/header"/>
 
         <LinearLayout
             android:layout_width="match_parent"

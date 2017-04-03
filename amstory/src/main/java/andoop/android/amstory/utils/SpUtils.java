@@ -11,6 +11,8 @@ import andoop.android.amstory.ImApplication;
 
 public class SpUtils {
     public static final String NEW_INVITE = "new_invite";
+    public static final String HEAD_IMAGE = "head_image";
+    public static final String CHILD_IMAGE = "child_image";
     private static SpUtils instace = new SpUtils();
     private static SharedPreferences mSp = null;
 

@@ -1,28 +1,33 @@
 package andoop.android.amstory.fragments;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andoop.andooptabframe.AndoopPage;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import andoop.android.amstory.MainActivity;
 import andoop.android.amstory.R;
 import andoop.android.amstory.SearchActivity;
-import andoop.android.amstory.UserInfoActivity;
 import andoop.android.amstory.base.BasePager;
 import andoop.android.amstory.data.DataManager;
 import andoop.android.amstory.module.Story;
+import andoop.android.amstory.utils.SpUtils;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /* * * * * * * * * * * * * * * * * * *
 * author :andoop　　　　　　　　　　　
@@ -31,65 +36,97 @@ import butterknife.InjectView;
 * * * * * * * * * * * * * * * * * * */
 
 public class PersonalFragment extends BasePager {
-    @InjectView(R.id.iv_st_ct)
-    ImageView iv_st;
     @InjectView(R.id.rv_pf)
     RecyclerView recyclerView;
     List<Story> mData;
-    @InjectView(R.id.iv_title_search)
-    ImageView search;
+    @InjectView(R.id.iv_pf_head)
+    ImageView ivPfHead;
+    @InjectView(R.id.tv_pf_name)
+    TextView tvPfName;
+    @InjectView(R.id.child_iv)
+    ImageView childIv;
+    private ImageView ivStCt;
+
     @Override
     protected View initGui(LayoutInflater inflater) {
-        return inflater.inflate(R.layout.personal_fragment_layout,null);
+        return inflater.inflate(R.layout.personal_fragment_layout, null);
     }
 
     @Override
     protected void initView(View view) {
-        ButterKnife.inject(this,view);
-        iv_st.setVisibility(View.VISIBLE);
+        ButterKnife.inject(this, view);
+        String headImage = SpUtils.getInstace().getString(SpUtils.HEAD_IMAGE,"");
+        if (!headImage.equals("")){
+            Picasso.with(getContext()).load(new File(headImage))
+                    .transform(new CropCircleTransformation())
+                    .into(ivPfHead);
+        }else{
+            Picasso.with(getContext())
+                    .load(R.drawable.my_user_default)
+                    .transform(new CropCircleTransformation())
+                    .into(ivPfHead);
+        }
+        String childImage = SpUtils.getInstace().getString(SpUtils.HEAD_IMAGE,"");
+        if (!childImage.equals("")){
+            Picasso.with(getContext()).load(new File(childImage))
+                    .transform(new CropCircleTransformation())
+                    .into(childIv);
+        }else{
+            Picasso.with(getContext())
+                    .load(R.drawable.my_user_default)
+                    .transform(new CropCircleTransformation())
+                    .into(childIv);
+        }
+
+
+        MainActivity mainActivity = (MainActivity)getActivity();
+        ivStCt = mainActivity.getIvStCt();
+        ivStCt.setVisibility(View.VISIBLE);
+        ivStCt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), UserSettingActivity.class));
+            }
+        });
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ivStCt.setVisibility(View.GONE);
     }
 
     @Override
     protected void initData() {
-        mData=new ArrayList<>();
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        recyclerView.setAdapter(new PersonalFragment.MRVAdapter());
+        mData = new ArrayList<>();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(new MRVAdapter());
         DataManager.newInstance(getActivity()).getStories(new DataManager.StoryDataListener<List<Story>>() {
             @Override
             public void onSuccess(List<Story> data, int page) {
-                if(data!=null){
+                if (data != null) {
                     mData.clear();
                     mData.addAll(data);
                     recyclerView.getAdapter().notifyDataSetChanged();
 
-                }else {
+                } else {
                     Toast.makeText(PersonalFragment.this.getActivity(), "没有数据", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFail(String error) {
                 Toast.makeText(PersonalFragment.this.getActivity(), error, Toast.LENGTH_SHORT).show();
             }
-        },DataManager.TYPE_FAXIAN,0);
+        }, DataManager.TYPE_FAXIAN, 0);
 
         //设置监听
         initListener();
     }
 
     private void initListener() {
-        //设置点击事件
-        iv_st.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(),UserSettingActivity.class));
-            }
-        });
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(),SearchActivity.class));
-            }
-        });
+
     }
 
     @Override
@@ -98,17 +135,29 @@ public class PersonalFragment extends BasePager {
     }
 
 
-    private class MRVAdapter extends RecyclerView.Adapter<PersonalFragment.MViewHolder>{
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
+
+    private class MRVAdapter extends RecyclerView.Adapter<MViewHolder> {
         @Override
-        public PersonalFragment.MViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new PersonalFragment.MViewHolder(View.inflate(PersonalFragment.this.getActivity(),R.layout.item_rv_personal,null));
+        public MViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new MViewHolder(
+                    LayoutInflater.from(getContext()).inflate(R.layout.item_rv_personal,parent,false));
         }
 
         @Override
-        public void onBindViewHolder(PersonalFragment.MViewHolder holder, int position) {
+        public void onBindViewHolder(MViewHolder holder, int position) {
 
             Story story = mData.get(position);
-            Picasso.with(PersonalFragment.this.getActivity()).load(story.img).into(holder.iv_icon);
+            Picasso.with(PersonalFragment.this.getActivity())
+                    .load(story.img)
+                    .into(holder.iv_icon);
         }
 
         @Override
@@ -117,12 +166,13 @@ public class PersonalFragment extends BasePager {
         }
     }
 
-    public class MViewHolder extends RecyclerView.ViewHolder{
+    public class MViewHolder extends RecyclerView.ViewHolder {
         @InjectView(R.id.iv_item_pf)
         ImageView iv_icon;
+
         public MViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.inject(this,itemView);
+            ButterKnife.inject(this, itemView);
         }
     }
 
