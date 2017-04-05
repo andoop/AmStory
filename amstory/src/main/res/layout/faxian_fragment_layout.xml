@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/comment_title_01"/>
+    <!--<include layout="@layout/comment_title_01"/>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_faxian_fragment"

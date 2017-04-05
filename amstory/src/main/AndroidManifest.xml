@@ -74,7 +74,8 @@
         <activity
             android:name=".SearchActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".fragments.UserSettingActivity"></activity>
+        <activity android:name=".fragments.UserSettingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
 
     </application>
 

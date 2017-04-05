@@ -165,7 +165,7 @@ public class DataListPager extends Fragment {
     private class DataListRcvAdapter extends RecyclerView.Adapter<MViewHodler> {
         @Override
         public MViewHodler onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new MViewHodler(View.inflate(DataListPager.this.getActivity(), R.layout.item_list_story, null));
+            return new MViewHodler(LayoutInflater.from(getContext()).inflate(R.layout.item_list_story,parent,false));
         }
 
         @Override
