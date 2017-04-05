@@ -1,9 +1,12 @@
 package andoop.android.amstory;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -25,6 +28,8 @@ import butterknife.InjectView;
 public class BgListActivity extends BaseActivity<BgListPresenter> implements IBgListView{
     @InjectView(R.id.rv_choose_bg)
     RecyclerView recyclerView;
+    @InjectView(R.id.tv_title)
+    TextView title;
     private List<LocalMusicModule> mData;
     String mPath;
 
@@ -41,19 +46,19 @@ public class BgListActivity extends BaseActivity<BgListPresenter> implements IBg
             initMusic();
         }
         mData=new ArrayList();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,4));
         recyclerView.setAdapter(new MBgChooseAdapter());
         mPresenter.loadData(mPath);
     }
 
     private void initMusic() {
-        setTitle("选择音效");
+        title.setText("选择音效");
         mPath= Environment.getExternalStorageDirectory().getAbsolutePath() + "/addata/effect";
 
     }
 
     private void initBgMusic() {
-        setTitle("选择背景音乐");
+        title.setText("选择背景音乐");
         mPath= Environment.getExternalStorageDirectory().getAbsolutePath() + "/addata/backgroud";
     }
 
@@ -68,6 +73,21 @@ public class BgListActivity extends BaseActivity<BgListPresenter> implements IBg
         mData.clear();
         mData.addAll(data);
         recyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    public static void start(Activity context, Bundle bundle){
+        Intent intent = new Intent(context, BgListActivity.class);
+        if(bundle!=null){
+            intent.putExtras(bundle);
+        }
+        context.startActivity(intent);
+        context.overridePendingTransition(R.anim.bottom_in,R.anim.bottom_out);
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        //overridePendingTransition(R.anim.bottom_in,R.anim.bottom_out);
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     }
 
     private class MBgChooseAdapter extends RecyclerView.Adapter<BgListActivity.MBgChooseViewHolder>{

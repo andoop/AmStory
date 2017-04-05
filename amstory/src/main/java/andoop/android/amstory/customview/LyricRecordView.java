@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import andoop.android.amstory.manager.StoryViewer;
 import andoop.android.amstory.module.LycTime;
 
 
@@ -35,6 +36,7 @@ public class LyricRecordView extends FrameLayout {
     private long mDuration;
     //是否向上滚动
     private boolean isMoveToUp = true;
+    private StoryViewer storyViewer;
 
     public LyricRecordView(Context context) {
         super(context);
@@ -71,8 +73,16 @@ public class LyricRecordView extends FrameLayout {
     }
     //添加歌词数据
     public void setLyricData(List<String> lyrics) {
-       setLyricData(lyrics,null);
+        setLyricData(lyrics,null);
     }
+
+    //关联waveformview，主要用它来获取歌词对应的开始时间和结束时间
+    public void setWaveformView(StoryViewer storyViewer){
+        this.storyViewer=storyViewer;
+    }
+    //
+
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

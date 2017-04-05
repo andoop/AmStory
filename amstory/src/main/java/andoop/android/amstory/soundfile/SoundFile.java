@@ -569,7 +569,7 @@ public class SoundFile implements Serializable{
         mDecodedSamples.get(shortsMy);
 //        Log.e("----->" + "SoundFile", "InsertRecord1:" + shortsMy.length);
 
-        if (shortsMy.length <= 0 || src == null)
+        if (shortsMy.length < 0 || src == null)
             return;
 
         int startSamplePos = startFrame * getSamplesPerFrame();

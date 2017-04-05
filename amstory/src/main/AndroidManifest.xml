@@ -36,7 +36,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".BgListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDrawerView"/>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"

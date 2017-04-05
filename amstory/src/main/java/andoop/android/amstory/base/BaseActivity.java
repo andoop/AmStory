@@ -1,14 +1,12 @@
 package andoop.android.amstory.base;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import andoop.android.amstory.module.BaseModule;
 import andoop.android.amstory.presenter.BasePresenter;
-import andoop.android.amstory.presenter.view.IBaseView;
 import andoop.android.amstory.utils.DialogUtils;
 
 /* * * * * * * * * * * * * * * * * * *
@@ -17,7 +15,7 @@ import andoop.android.amstory.utils.DialogUtils;
 * explain：activity基类
 * * * * * * * * * * * * * * * * * * */
 
-public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity{
+public abstract class BaseActivity<P extends BasePresenter> extends Activity {
 
     private Dialog loadingView;
     protected P mPresenter;

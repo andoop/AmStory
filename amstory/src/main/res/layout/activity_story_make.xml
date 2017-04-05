@@ -92,7 +92,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/iv_return_next"
-            android:onClick="return_next"
+            android:onClick="cancle_return"
             android:src="@drawable/cacle_return_blue"/>
 
         <TextView
@@ -181,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:onClick="cungao"
+                android:onClick="deleteChoose"
                 android:orientation="vertical">
 
                 <ImageView

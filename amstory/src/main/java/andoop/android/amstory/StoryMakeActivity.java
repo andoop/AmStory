@@ -6,15 +6,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.text.Html;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +30,6 @@ import andoop.android.amstory.module.Story;
 import andoop.android.amstory.presenter.StoryMakeViewPresenter;
 import andoop.android.amstory.presenter.view.IStoryMakeView;
 import andoop.android.amstory.soundfile.SoundFile;
-import andoop.android.amstory.utils.SamplePlayer;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -91,11 +85,16 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
     private StoryViewer storyViewer;
 
+    private RcRecover rcRecover;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_make);
         ButterKnife.inject(this);
+
+        rcRecover=new RcRecover();
+
         //初始化
         storyViewer=new StoryViewer(this,mWaveformView,mStartMarker,mEndMarker);
         storyViewer.setPlayCallBack(new StoryViewer.PlayCallBack() {
@@ -188,11 +187,21 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     }
 
     public void return_next(View view){
-        Toast.makeText(this, "回退上一步", Toast.LENGTH_SHORT).show();
+        if(this.rcRecover.canUnDelete()) {
+            Toast.makeText(this, "撤销一部删除", Toast.LENGTH_SHORT).show();
+            this.rcRecover.unDelete();
+        }else {
+
+            Toast.makeText(this, "不可以撤销删除", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void cancle_return(View view){
-        Toast.makeText(this, "撤销回退", Toast.LENGTH_SHORT).show();
+        if(this.rcRecover.canRecoverDelete()){
+            Toast.makeText(this, "恢复删除", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "不可以恢复删除", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void finishPage(View view){
@@ -532,11 +541,13 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     //完成录制，或停止了录制
     private void finishRecord(int insertDurationPixels) {
 
-        SoundFileManager.newInstance(this).addSoundFile("makedata",mSoundFile);
-        SoundFileManager.newInstance(this).setLycTimes(lyricRecordView.getLycTimes());
-
         //更新声音文件
         storyViewer.updateRecordAudio(mSoundFile,insertDurationPixels);
+        //更新歌词管理view中对应的wavaformview
+        lyricRecordView.setWaveformView(storyViewer);
+        //保存最新的数据状态
+        SoundFileManager.newInstance(this).addSoundFile("makedata",mSoundFile);
+        SoundFileManager.newInstance(this).setLycTimes(lyricRecordView.getLycTimes());
     }
 
 
@@ -688,6 +699,27 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         super.onDestroy();
     }
 
+
+    //状态保存类，主要是用来保存撤销和恢复录音删除的数据
+    private class RcRecover{
+        //检查是否可以撤删除销
+        public boolean canUnDelete(){
+            return false;
+        }
+        //检查是否可以恢复删除
+        public boolean canRecoverDelete(){
+            return false;
+        }
+
+        //撤销删除
+        public void unDelete(){
+
+        }
+        //恢复撤销
+        public void recoverDelete(){
+
+        }
+    }
 
 
 }

@@ -46,16 +46,6 @@ public class StoryEidtActivity extends AppCompatActivity {
     MarkerView mStartMarker;
     @InjectView(R.id.endmarker)
     MarkerView mEndMarker;
-    @InjectView(R.id.tv_edit_bg)
-    TextView tv_bg;
-    @InjectView(R.id.tv_edit_yx)
-    TextView tv_yx;
-    @InjectView(R.id.ll_edit_yinxiao_rootview)
-    LinearLayout ll_yx_root;
-    @InjectView(R.id.rv_edit_bg_rootview)
-    RelativeLayout rl_bg_root;
-    @InjectView(R.id.rl_edit_backgroud_rootview)
-    RelativeLayout rl_bg_musicinfo;
     @InjectView(R.id.lrv_story_edit)
     LyricRecordView lyricRecordView;
     @InjectView(R.id.sv_story_edit)
@@ -64,12 +54,12 @@ public class StoryEidtActivity extends AppCompatActivity {
     ImageView iv_play;
     @InjectView(R.id.tv_edit_backgroud_name)
     TextView tv_bgmusicname;
-    @InjectView(R.id.iv_edit_add_backgroud)
-    ImageView iv_addbackmusic;
     @InjectView(R.id.iv_edit_delete_backgroud)
     ImageView iv_delete_bgmusic;
     @InjectView(R.id.lv_edit_yinxiao_list)
     ListView yxlist;
+    @InjectView(R.id.rv_edit_bg_rootview)
+    View bgView;
 
 
     private StoryViewer storyViewer;
@@ -105,24 +95,8 @@ public class StoryEidtActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        selectBgTab();
     }
 
-    //选中背景tab
-    private void selectBgTab() {
-        tv_bg.setTextColor(Color.parseColor("#FF4081"));
-        tv_yx.setTextColor(Color.parseColor("#000000"));
-        ll_yx_root.setVisibility(View.GONE);
-        rl_bg_root.setVisibility(View.VISIBLE);
-    }
-
-    //选中音效tab
-    private void selectYxTab() {
-        tv_bg.setTextColor(Color.parseColor("#000000"));
-        tv_yx.setTextColor(Color.parseColor("#FF4081"));
-        ll_yx_root.setVisibility(View.VISIBLE);
-        rl_bg_root.setVisibility(View.GONE);
-    }
 
     private void initdata() {
         lyricRecordView.setScrollerViewer(new LyricRecordView.OnScrollListener() {
@@ -343,16 +317,6 @@ public class StoryEidtActivity extends AppCompatActivity {
         Toast.makeText(this, "不好意思，功能正在快马加鞭开发中 ：)", Toast.LENGTH_SHORT).show();
     }
 
-    //显示背景
-    public void toBackgroud(View view) {
-        selectBgTab();
-    }
-
-    //显示音效
-    public void toYinxiao(View view) {
-
-        selectYxTab();
-    }
 
     //返回
     public void toBack(View view) {
@@ -364,6 +328,8 @@ public class StoryEidtActivity extends AppCompatActivity {
         Intent intent = new Intent(this, BgListActivity.class);
         intent.putExtra("type", 1);
         startActivityForResult(intent, CHOOSE_BG_REQUEST_CODE);
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+        //overridePendingTransition(R.anim.bottom_in,R.anim.bottom_out);
     }
 
     //添加音效
@@ -379,6 +345,8 @@ public class StoryEidtActivity extends AppCompatActivity {
                 Intent intent = new Intent(StoryEidtActivity.this, BgListActivity.class);
                 intent.putExtra("type", 2);
                 startActivityForResult(intent, CHOOSE_MUSIC_REQUEST_CODE);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+               // overridePendingTransition(R.anim.bottom_in,R.anim.bottom_out);
             }
         });
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -527,13 +495,11 @@ public class StoryEidtActivity extends AppCompatActivity {
     //更新背景音乐显示视图
     private void updateBgMusicView() {
         if (hasBackMusic()) {
-            iv_addbackmusic.setVisibility(View.GONE);
-            rl_bg_musicinfo.setVisibility(View.VISIBLE);
+            bgView.setVisibility(View.VISIBLE);
             tv_bgmusicname.setText(bgMusicInfo.name);
         } else {
-            iv_addbackmusic.setVisibility(View.VISIBLE);
-            rl_bg_musicinfo.setVisibility(View.GONE);
             tv_bgmusicname.setText("");
+            bgView.setVisibility(View.GONE);
         }
     }
 
