@@ -39,6 +39,8 @@ import java.nio.ByteOrder;
 import java.nio.ShortBuffer;
 import java.util.Arrays;
 
+import andoop.android.amstory.jni.AudioDataProcessor;
+
 public class SoundFile implements Serializable{
     private ProgressListener mProgressListener = null;
     private File mInputFile = null;
@@ -56,6 +58,11 @@ public class SoundFile implements Serializable{
      * 原生的数据
      */
     private ShortBuffer mDecodedSamples;  // shared buffer with mDecodedBytes.
+
+    /**
+     * 原生经过修改后的数据
+     */
+    private ShortBuffer mUpdateDecodedSamples;  // shared buffer with mDecodedBytes.
 
     // mDecodedSamples has the following format:
     // {s1c1, s1c2, ..., s1cM, s2c1, ..., s2cM, ..., sNc1, ..., sNcM}
@@ -549,6 +556,25 @@ public class SoundFile implements Serializable{
         restart = false;
         paused = false;
     }
+    private  short[] shortsMy;
+    private  short[] shortsBf;
+    //设置音频数据振值 0~100
+    public void SetByteSizePersent(int persent){
+        if(shortsMy==null&&shortsBf==null){
+            //存放原始数据
+            shortsMy = new short[mNumSamples];
+            //存放变化的数据
+            shortsBf=new short[mNumSamples];
+            mDecodedSamples.rewind();
+            mDecodedSamples.get(shortsMy);
+        }
+        Log.e("----->" + "SoundFile", "SetByteSizePersent:" + shortsMy[18301]);
+        AudioDataProcessor.reduceToPercent(shortsMy,shortsBf, persent);
+        Log.e("----->" + "SoundFile", "SetByteSizePersent:" + shortsBf.length);
+        Log.e("----->" + "SoundFile", "SetByteSizePersent:" + shortsBf[18301]);
+        mDecodedSamples.clear();
+        mDecodedSamples.put(shortsBf);
+    }
 
     private boolean restart = false;
 
@@ -600,6 +626,7 @@ public class SoundFile implements Serializable{
         mDecodedSamples=mDecodedBytes.asShortBuffer();
 
         for(int i = 0; i < shortsMy.length; i ++){
+          //  Log.e("----->" + "SoundFile", "InsertRecord:" + shortsMy[i]);
             if(i < startSamplePos)
                 shortsBgn[i] = shortsMy[i];
             else
@@ -696,33 +723,37 @@ public class SoundFile implements Serializable{
                         srcLength : myshorts.length - startSamplePos);
 
 
-        for (int i = startSamplePos, j = 0; i <remixesLength; i++, j++) {
+        //调用jni中方法
 
-            /**
-             * 这里就是网上的混合了
-             */
-
-            if (bLoop && j >= shorts.length) {
-                j = 0;
-            }
-
-            float samplefPoint1 = myshorts[i] / 32768.0f;
-            float samplefPoint2 = shorts[j] / 32768.0f;
-            float mixed = samplefPoint1 + samplefPoint2;
-
-            mixed *= 0.8;
-            if (mixed > 1.0f)
-                mixed = 1.0f;
-            if (mixed < -1.0f)
-                mixed = -1.0f;
-
-            short value = (short) (mixed * 32768.0f);
-
-            myshorts[i] = value;
-        }
+        short[] shortsnew = AudioDataProcessor.mixAudioData(myshorts, shorts, startSamplePos, remixesLength, bLoop);
+        //用c实现了下面逻辑
+//        for (int i = startSamplePos, j = 0; i <remixesLength; i++, j++) {
+//
+//            /**
+//             * 这里就是网上的混合了
+//             */
+//
+//            if (bLoop && j >= shorts.length) {
+//                j = 0;
+//            }
+//
+//            float samplefPoint1 = myshorts[i] / 32768.0f;
+//            float samplefPoint2 = shorts[j] / 32768.0f;
+//            float mixed = samplefPoint1 + samplefPoint2;
+//
+//            mixed *= 0.8;
+//            if (mixed > 1.0f)
+//                mixed = 1.0f;
+//            if (mixed < -1.0f)
+//                mixed = -1.0f;
+//
+//            short value = (short) (mixed * 32768.0f);
+//
+//            myshorts[i] = value;
+//        }
 
         mDecodedSamples.clear();
-        mDecodedSamples.put(myshorts);
+        mDecodedSamples.put(shortsnew);
         initData();
     }
 
@@ -1045,7 +1076,9 @@ public class SoundFile implements Serializable{
             Log.w("Ringdroid", "Failed to close sample TSV file.");
             Log.w("Ringdroid", getStackTrace(e));
         }
+
         mDecodedSamples.rewind();
+
     }
 
     // Helper method (samples will be dumped in media/audio/debug/samples.tsv).

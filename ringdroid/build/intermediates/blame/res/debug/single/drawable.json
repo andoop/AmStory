@@ -16,12 +16,12 @@
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\type_music.png"
     },
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_save.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\menu_save.png"
-    },
-    {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_show_all_audio.png",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\menu_show_all_audio.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_save.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\menu_save.png"
     },
     {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_reset.png",

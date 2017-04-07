@@ -23,6 +23,7 @@ import android.media.AudioTrack;
 
 import java.nio.ShortBuffer;
 
+import andoop.android.amstory.jni.AudioDataProcessor;
 import andoop.android.amstory.soundfile.SoundFile;
 
 public class SamplePlayer {
@@ -42,6 +43,10 @@ public class SamplePlayer {
     private OnCompletionListener mListener;
 
     public SamplePlayer(ShortBuffer samples, int sampleRate, int channels, int numSamples) {
+        setSoundFile(samples, sampleRate, channels, numSamples);
+    }
+
+    private void setSoundFile(ShortBuffer samples, int sampleRate, int channels, int numSamples) {
         mSamples = samples;
         mSampleRate = sampleRate;
         mChannels = channels;
@@ -87,6 +92,13 @@ public class SamplePlayer {
     public SamplePlayer(SoundFile sf) {
         this(sf.getSamples(), sf.getSampleRate(), sf.getChannels(), sf.getNumSamples());
     }
+
+    //设置音量大小
+    public void updateSoundFile(SoundFile sf){
+        setSoundFile(sf.getSamples(), sf.getSampleRate(), sf.getChannels(), sf.getNumSamples());
+
+    }
+
 
     public void setOnCompletionListener(OnCompletionListener listener) {
         mListener = listener;

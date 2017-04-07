@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,12 +55,16 @@ public class StoryEidtActivity extends AppCompatActivity {
     ImageView iv_play;
     @InjectView(R.id.tv_edit_backgroud_name)
     TextView tv_bgmusicname;
+    @InjectView(R.id.sb_edit_backgroud_voice)
+    SeekBar seekBarBg;
     @InjectView(R.id.iv_edit_delete_backgroud)
     ImageView iv_delete_bgmusic;
     @InjectView(R.id.lv_edit_yinxiao_list)
     ListView yxlist;
     @InjectView(R.id.rv_edit_bg_rootview)
     View bgView;
+    @InjectView(R.id.tv_changeBg)
+    TextView tvChangeBg;
 
 
     private StoryViewer storyViewer;
@@ -95,6 +100,26 @@ public class StoryEidtActivity extends AppCompatActivity {
     }
 
     private void initView() {
+
+        //为背景音量seekbar设置监听
+        seekBarBg.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Log.e("----->" + "StoryEidtActivity", "onProgressChanged:" + "调节背景音乐音量：大小：" + progress);
+                //调节背景音量大小
+                bgMusicInfo.soundFile.SetByteSizePersent(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
 
@@ -174,6 +199,28 @@ public class StoryEidtActivity extends AppCompatActivity {
                     convertView = View.inflate(StoryEidtActivity.this, R.layout.yx_list_item, null);
                 }
 
+                SeekBar seekBar= (SeekBar) convertView.findViewById(R.id.sb_yxlistitem);
+                //初始化seekbar
+                seekBar.setProgress(localMusicModule.audioSize);
+                Log.e("----->" + "StoryEidtActivity", "getView:" + localMusicModule.audioSize);
+                seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        localMusicModule.audioSize=progress;
+                        localMusicModule.soundFile.SetByteSizePersent(progress);
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                    }
+                });
+
                 TextView tvname = (TextView) convertView.findViewById(R.id.tv_yxlistitemname);
                 tvname.setText(localMusicModule.name);
                 convertView.findViewById(R.id.iv_yxlistitemdelete).setOnClickListener(new View.OnClickListener() {
@@ -241,12 +288,23 @@ public class StoryEidtActivity extends AppCompatActivity {
 
     //选中左边把手
     public void toLeft(View view) {
+        /*mStartMarker.requestFocus();
+        storyViewer.markerFocus(mStartMarker);*/
+        storyViewer.setmStartPos(0);
+        storyViewer.updateWaveView();
+        //选中右边把手
         mStartMarker.requestFocus();
         storyViewer.markerFocus(mStartMarker);
     }
 
     //去右边把手
     public void toRight(View view) {
+       /* mEndMarker.requestFocus();
+        storyViewer.markerFocus(mEndMarker);*/
+
+        storyViewer.setmEndPos(storyViewer.getMaxPixels());
+        storyViewer.updateWaveView();
+        //选中左边把手
         mEndMarker.requestFocus();
         storyViewer.markerFocus(mEndMarker);
     }
@@ -497,9 +555,13 @@ public class StoryEidtActivity extends AppCompatActivity {
         if (hasBackMusic()) {
             bgView.setVisibility(View.VISIBLE);
             tv_bgmusicname.setText(bgMusicInfo.name);
+            tvChangeBg.setText("更改");
+            seekBarBg.setProgress(100);
         } else {
             tv_bgmusicname.setText("");
             bgView.setVisibility(View.GONE);
+            tvChangeBg.setText("选择");
+            seekBarBg.setProgress(100);
         }
     }
 

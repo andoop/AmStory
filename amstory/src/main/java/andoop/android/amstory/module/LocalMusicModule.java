@@ -17,5 +17,6 @@ public class LocalMusicModule extends BaseModule {
     public SoundFile soundFile;
     public int start;
     public int end;
+    public int audioSize=100;
     public WaveformView waveformView;
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -18,6 +19,7 @@ import andoop.android.amstory.fragments.PersonalFragment;
 import andoop.android.amstory.fragments.TinggushiFragment;
 import andoop.android.amstory.fragments.TuijianFragment;
 import andoop.android.amstory.fragments.UserSettingActivity;
+import andoop.android.amstory.jni.AudioDataProcessor;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -35,6 +37,9 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+
+        Log.e("----->" + "MainActivity", "onCreate:" + new AudioDataProcessor().test());
+
         TabFrameConfig tabFrameConfig = new TabFrameConfig.Builder()
                 .tabColorString("#ffffff")
                 .canScroll(false)
