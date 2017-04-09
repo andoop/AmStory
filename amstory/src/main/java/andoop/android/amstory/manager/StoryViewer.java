@@ -7,20 +7,27 @@ package andoop.android.amstory.manager;
 * * * * * * * * * * * * * * * * * * */
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
 import android.widget.RelativeLayout;
 
+import andoop.android.amstory.customview.LyricRecordView;
 import andoop.android.amstory.customview.MarkerView;
 import andoop.android.amstory.customview.WaveformView;
+import andoop.android.amstory.module.LycTime;
 import andoop.android.amstory.soundfile.SoundFile;
 import andoop.android.amstory.utils.SamplePlayer;
 
-public class StoryViewer implements WaveformView.WaveformListener, MarkerView.MarkerListener{
+public class StoryViewer implements WaveformView.WaveformListener, MarkerView.MarkerListener {
 
     public final WaveformView mWaveformView;
     private final MarkerView mStartMarker;
     private final MarkerView mEndMarker;
+    private final Activity mContext;
     private SoundFile mCurrentSoundFile;
 
     private boolean mKeyDown;
@@ -52,25 +59,24 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
 
     private Handler mHandler;
     private PlayCallBack playcallBack;
+    private LyricRecordView lyricView;
 
     //把需要的视图传进来
-    public StoryViewer(Activity activity, WaveformView waveformView, MarkerView markerView_left, MarkerView markerView_right){
-        this.mWaveformView=waveformView;
-        this.mStartMarker=markerView_left;
-        this.mEndMarker=markerView_right;
+    public StoryViewer(Activity activity, WaveformView waveformView, MarkerView markerView_left, MarkerView markerView_right) {
+        this.mWaveformView = waveformView;
+        this.mStartMarker = markerView_left;
+        this.mEndMarker = markerView_right;
+        this.mContext = activity;
 
 
         DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         mDensity = metrics.density;
 
-        mMarkerLeftInset = (int)(46 * mDensity);
-        mMarkerRightInset = (int)(48 * mDensity);
-        mMarkerTopOffset = (int)(10 * mDensity);
-        mMarkerBottomOffset = (int)(10 * mDensity);
-
-
-
+        mMarkerLeftInset = (int) (46 * mDensity);
+        mMarkerRightInset = (int) (48 * mDensity);
+        mMarkerTopOffset = (int) (10 * mDensity);
+        mMarkerBottomOffset = (int) (10 * mDensity);
 
 
         mWaveformView.setListener(this);
@@ -86,28 +92,32 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         mEndMarker.setFocusable(true);
         mEndMarker.setFocusableInTouchMode(true);
 
-        mHandler=new Handler();
+        mHandler = new Handler();
 
+    }
+
+    public void setLyricView(LyricRecordView lyricView) {
+        this.lyricView = lyricView;
     }
 
     //设置录制声音源
-    public void setRecordAudio(SoundFile soundFile){
-      updateRecordAudio(soundFile,0);
+    public void setRecordAudio(SoundFile soundFile) {
+        updateRecordAudio(soundFile, 0);
     }
 
     //设置播放器
-    public void setSimplePlayer(SamplePlayer simplePlayer){
-        mPlayer=simplePlayer;
+    public void setSimplePlayer(SamplePlayer simplePlayer) {
+        mPlayer = simplePlayer;
     }
 
-    public void setPlayCallBack(PlayCallBack playCallBack){
-        this.playcallBack=playCallBack;
+    public void setPlayCallBack(PlayCallBack playCallBack) {
+        this.playcallBack = playCallBack;
     }
 
 
-    public void playVoice(){
-        if(mPlayer==null){
-            mPlayer=new SamplePlayer(getCurrentSoundFile());
+    public void playVoice() {
+        if (mPlayer == null) {
+            mPlayer = new SamplePlayer(getCurrentSoundFile());
         }
 
         playRecord();
@@ -136,31 +146,31 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         if (mPlayer != null && mPlayer.isPlaying()) {
             mPlayer.pause();
         }
-        if(playcallBack!=null){
+        if (playcallBack != null) {
             playcallBack.onStop();
         }
         mWaveformView.setPlayback(-1);
         mIsPlaying = false;
     }
 
-    public void stopVoice(){
+    public void stopVoice() {
         handlePause();
     }
 
     //更新录制生源
-    public void updateRecordAudio(SoundFile soundFile,int insertDurationPixels){
+    public void updateRecordAudio(SoundFile soundFile, int insertDurationPixels) {
         mWaveformView.setSoundFile(soundFile);
-        mCurrentSoundFile=soundFile;
+        mCurrentSoundFile = soundFile;
 
         realsePlayer();
-        mPlayer=new SamplePlayer(mCurrentSoundFile);
+        mPlayer = new SamplePlayer(mCurrentSoundFile);
         mMaxPos = mWaveformView.maxPos();
 
-        mStartPos=mEndPos;
-        if(insertDurationPixels>0){
-            mEndPos=mEndPos+insertDurationPixels;
-        }else {
-            mEndPos=mMaxPos;
+        mStartPos = mEndPos;
+        if (insertDurationPixels > 0) {
+            mEndPos = mEndPos + insertDurationPixels;
+        } else {
+            mEndPos = mMaxPos;
         }
         mLastDisplayedStartPos = -1;
         mLastDisplayedEndPos = -1;
@@ -174,17 +184,17 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
     }
 
     //更新视图
-    public synchronized void updateWaveView(){
+    public synchronized void updateWaveView() {
         if (mIsPlaying) {
             int now = mPlayer.getCurrentPosition();
             int frames = mWaveformView.millisecsToPixels(now);
             mWaveformView.setPlayback(frames);
             setOffsetGoalNoUpdate(frames - mWidth / 2);
-            if(playcallBack!=null){
+            if (playcallBack != null) {
                 playcallBack.onPos(mWaveformView.millisecsToPixels(now));
             }
             if (now >= mWaveformView.pixelsToMillisecs(mEndPos)) {
-               handlePause();
+                handlePause();
             }
         }
 
@@ -293,46 +303,54 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
     }
 
     //获取当前声源对象
-    public SoundFile getCurrentSoundFile(){
-      return mCurrentSoundFile;
+    public SoundFile getCurrentSoundFile() {
+        return mCurrentSoundFile;
     }
 
     //设置开始毫秒
-    public void setStartMillisecs(long startMillisecs){
+    public void setStartMillisecs(double startMillisecs) {
         mStartPos = mWaveformView.millisecsToPixels((int) startMillisecs);
         updateWaveView();
     }
+
     //设置结束毫秒
-    public void setEndMillisecs(long endMillisecs){
+    public void setEndMillisecs(double endMillisecs) {
         mEndPos = mWaveformView.millisecsToPixels((int) endMillisecs);
         updateWaveView();
     }
+
     //获取当前开始像素
-    public int getStartPixels(){
+    public int getStartPixels() {
         return mStartPos;
     }
+
     //获取当前结束像素
-    public int getEndPixels(){
+    public int getEndPixels() {
         return mEndPos;
     }
+
     //获取最大像素值
-    public int getMaxPixels(){
+    public int getMaxPixels() {
         return mMaxPos;
     }
+
     //获取当前开始帧
-    public int getStartFrame(){
+    public int getStartFrame() {
         return mWaveformView.secondsToFrames(getStartTimeSecon());
     }
-    public int getEndFrame(){
+
+    public int getEndFrame() {
         return mWaveformView.secondsToFrames(getEndTimeSecon());
     }
+
     //获取开始时间毫秒
-    public double getStartTimeSecon(){
+    public double getStartTimeSecon() {
         double startTime = mWaveformView.pixelsToSeconds(mStartPos);
         return startTime;
     }
+
     //获取结束时间毫秒
-    public double getEndTimeSecon(){
+    public double getEndTimeSecon() {
         double endTime = mWaveformView.pixelsToSeconds(mEndPos);
         return endTime;
     }
@@ -350,6 +368,7 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
     private long getCurrentTime() {
         return System.nanoTime() / 1000000;
     }
+
     private int trap(int pos) {
         if (pos < 0)
             return 0;
@@ -357,9 +376,11 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
             return mMaxPos;
         return pos;
     }
+
     private void setOffsetGoalStart() {
         setOffsetGoal(mStartPos - mWidth / 2);
     }
+
     private void setOffsetGoal(int offset) {
         setOffsetGoalNoUpdate(offset);
         updateWaveView();
@@ -391,8 +412,6 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
     }
 
 
-
-
     //////////////////////////////////////////////////////////
 
     /*************************************************************************************/
@@ -408,7 +427,7 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
 
     @Override
     public void waveformTouchMove(float x) {
-        mOffset = trap((int)(mTouchInitialOffset + (mTouchStart - x)));
+        mOffset = trap((int) (mTouchInitialOffset + (mTouchStart - x)));
         updateWaveView();
     }
 
@@ -423,7 +442,7 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
     public void waveformFling(float x) {
         mTouchDragging = false;
         mOffsetGoal = mOffset;
-        mFlingVelocity = (int)(-x);
+        mFlingVelocity = (int) (-x);
         updateWaveView();
     }
 
@@ -479,10 +498,10 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         float delta = pos - mTouchStart;
 
         if (marker == mStartMarker) {
-            mStartPos = trap((int)(mTouchInitialStartPos + delta));
-            mEndPos = trap((int)(mTouchInitialEndPos + delta));
+            mStartPos = trap((int) (mTouchInitialStartPos + delta));
+            mEndPos = trap((int) (mTouchInitialEndPos + delta));
         } else {
-            mEndPos = trap((int)(mTouchInitialEndPos + delta));
+            mEndPos = trap((int) (mTouchInitialEndPos + delta));
             if (mEndPos < mStartPos)
                 mEndPos = mStartPos;
         }
@@ -499,20 +518,21 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         }
     }
 
-    public void markerFocus(){
+    public void markerFocus() {
         this.markerFocus(null);
     }
+
     @Override
     public void markerFocus(MarkerView marker) {
         mKeyDown = false;
         if (marker == mStartMarker) {
             setOffsetGoalStartNoUpdate();
-        } else if(marker==marker){
+        } else if (marker == marker) {
             setOffsetGoalEndNoUpdate();
-        }else {
-            if(mStartMarker.isSelected()){
+        } else {
+            if (mStartMarker.isSelected()) {
                 setOffsetGoalStartNoUpdate();
-            }else {
+            } else {
                 setOffsetGoalEndNoUpdate();
             }
         }
@@ -596,10 +616,10 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
 
     /*************************************************************************************/
     public void realse() {
-       realsePlayer();
+        realsePlayer();
     }
 
-    private void realsePlayer(){
+    private void realsePlayer() {
         if (mPlayer != null) {
             if (mPlayer.isPlaying() || mPlayer.isPaused()) {
                 mPlayer.stop();
@@ -613,9 +633,127 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         return mIsPlaying;
     }
 
-    public interface PlayCallBack{
+    public void deleteRecord(final int startFrame, final int endFrame) {
+        //
+        Delete(startFrame, endFrame);
+
+    }
+
+    private void Delete(int startFrame, int endFrame) {
+        //遍历歌词视图子 textview，
+
+        // this.mWaveformView.pix
+        //删除开始时间
+        double deleteStart = this.getStartTimeSecon()*1000;
+        //删除结束时间
+        double deleteEnd = this.getEndTimeSecon()*1000;
+        double duration = deleteEnd - deleteStart;
+        int startpos=0;
+        int endpos=0;
+        for (int i = 0; i < this.lyricView.getChildCount(); i++) {
+            View childAt = this.lyricView.getChildAt(i);
+            LycTime lycTime = (LycTime) childAt.getTag();
+            //下面是两种情况
+            //1、如果删除开始和删除结束都在同一个lrctime中，此lrictime的start不变，end减去（deleteEnd-deleteStart）
+            //后面的lyctime的start和end都减去 （deleteEnd-deleteStart）
+            if (deleteStart >= lycTime.start && deleteEnd <= lycTime.end) {
+                deleteInOneLyctime(i, duration,deleteStart,deleteEnd);
+                break;
+            }
+
+            //2. 如果删除开始在lrctime中,删除结束在另一个lrctime2中，lrctime.end=deleteStart,lrctime2和lrctime
+            //之间的lrctime的start和end都置为deleteStart ，lrctime2的start=deleteEnd, 然后 lrctime以后的每一个lyctime
+            //的start和end都减去（deleteEnd-deleteStart）
+            if(deleteStart>=lycTime.start&&deleteStart<=lycTime.end){
+                startpos=i;
+            }
+            if(deleteEnd>=lycTime.start&&deleteEnd<=lycTime.end){
+                endpos=i;
+                deleteInMutiLycTime(startpos,endpos,duration,deleteStart,deleteEnd);
+                break;
+            }
+        }
+
+        this.mCurrentSoundFile.DeleteRecord(startFrame, endFrame);
+    }
+
+    private void deleteInMutiLycTime(int startpos, int endpos, double duration, double deleteStart, double deleteEnd) {
+        Log.e("----->" + "StoryViewer", "deleteInMutiLycTime:" + deleteStart + ":" + deleteEnd);
+        Log.e("----->" + "StoryViewer", "deleteInMutiLycTime:" + startpos + ":" + endpos);
+        View childAt = this.lyricView.getChildAt(startpos);
+        LycTime lycTime= (LycTime) childAt.getTag();
+        lycTime.end=deleteStart;
+        childAt.setTag(lycTime);
+        for (int i = startpos+1; i < (endpos); i++) {
+            View childAt1 = this.lyricView.getChildAt(i);
+            LycTime tag = (LycTime) childAt1.getTag();
+            tag.end=deleteStart;
+            tag.start=tag.end;
+            childAt1.setTag(tag);
+        }
+
+        View childAt1 = this.lyricView.getChildAt(endpos);
+        LycTime tag = (LycTime) childAt1.getTag();
+        tag.start=deleteEnd;
+        childAt1.setTag(tag);
+        for (int i = endpos; i < this.lyricView.getChildCount(); i++) {
+            View view = this.lyricView.getChildAt(i);
+            LycTime lycTime1 = (LycTime) view.getTag();
+            lycTime1.start=lycTime1.start-duration;
+            lycTime1.end=lycTime1.end-duration;
+
+            if(lycTime1.start<0){
+                lycTime1.start=0;
+            }
+            if(lycTime1.end<0){
+                lycTime1.end=0;
+            }
+            view.setTag(lycTime1);
+        }
+    }
+
+    /**
+     * @param pos
+     * @param duration
+     */
+    private void deleteInOneLyctime(int pos, double duration,double deleteStart,double deleteEnd) {
+        Log.e("----->" + "StoryViewer", "deleteInOneLyctime:" + deleteStart + ":" + deleteEnd);
+        View childAt = this.lyricView.getChildAt(pos);
+        LycTime tag = (LycTime) childAt.getTag();
+        tag.end=tag.end-duration;
+        if(tag.end<tag.start){
+            tag.end=tag.start;
+        }
+        childAt.setTag(tag);
+        for (int i = pos + 1; i < this.lyricView.getChildCount(); i++) {
+            View view = this.lyricView.getChildAt(i);
+            LycTime lycTime = (LycTime) view.getTag();
+            lycTime.start=lycTime.start-duration;
+            lycTime.end=lycTime.end-duration;
+            if(lycTime.start<0){
+                lycTime.start=0;
+            }
+            if(lycTime.end<0){
+                lycTime.end=0;
+            }
+
+            view.setTag(lycTime);
+        }
+    }
+
+    //插入音频，此处主要修改歌词时间，解决定位问题
+    public void insertRecord(SoundFile src, int startFrame) {
+        double insertStart=0;
+        double insertDuration=0;
+        //1、如果插入的位置在lyctime中时，lyctime.end 以及它后面的所有的lyctime的start和end都加上insertDuration
+
+        //
+    }
+
+    public interface PlayCallBack {
 
         void onStop();
+
         void onPos(int pos);
 
     }

@@ -2,6 +2,7 @@ package andoop.android.amstory;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -145,16 +146,22 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
         lyricRecordView.setScrollerViewer(new LyricRecordView.OnScrollListener() {
             @Override
-            public void onScroll(long stime, long etime, String text) {
+            public void onScroll(double stime, double etime, String text) {
                 Log.e("----->" + "StoryMakeActivity", "onScroll:" + stime + ":" + etime);
                 if(storyViewer.getCurrentSoundFile()==null)
                     return;
                 storyViewer.setStartMillisecs(stime);
+                if(etime<stime){
+                    //保证选中的结束时间不小于选中的开始时间
+                    etime=stime;
+                }
                 storyViewer.setEndMillisecs(etime);
                 storyViewer.markerFocus();
                 storyViewer.updateWaveView();
             }
         });
+
+        storyViewer.setLyricView(lyricRecordView);
 
     }
 
@@ -272,20 +279,39 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
             Toast.makeText(this, "还没有录制故事", Toast.LENGTH_SHORT).show();
             return;
         }
-        new AsyncTask<Void,Void,Void>(){
 
-            @Override
-            protected Void doInBackground(Void... params) {
-                storyViewer.getCurrentSoundFile().DeleteRecord(storyViewer.getStartFrame(),storyViewer.getEndFrame());
-                return null;
-            }
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new AsyncTask<Void,Void,Void>(){
 
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                storyViewer.setmEndPos(0);
-                finishRecord(0);
-            }
-        }.execute();
+                            @Override
+                            protected Void doInBackground(Void... params) {
+                                storyViewer.deleteRecord(storyViewer.getStartFrame(),storyViewer.getEndFrame());
+                                return null;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Void aVoid) {
+                                storyViewer.setmEndPos(0);
+                                finishRecord(0);
+                            }
+                        }.execute();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+
+        alertDialog.show();
+
+
+
 
 
     }
@@ -513,6 +539,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                             insertDurationPixels=storyViewer.mWaveformView.secondsToPixels(waveformViewnew.pixelsToSeconds(insertDurationPixels));
                         }
                     });
+                    storyViewer.insertRecord(src,startFrame);
                     mSoundFile.InsertRecord(src,startFrame);
                 }else {
                     mSoundFile = SoundFile.record(progressListener);

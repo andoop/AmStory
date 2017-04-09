@@ -33,7 +33,7 @@ public class LyricRecordView extends FrameLayout {
     //当前的textview
     private TextView currentView;
 
-    private long mDuration;
+    private double mDuration;
     //是否向上滚动
     private boolean isMoveToUp = true;
     private StoryViewer storyViewer;
@@ -125,7 +125,7 @@ public class LyricRecordView extends FrameLayout {
                     if (currentView != childAt) {
                         LycTime lycTime = (LycTime) currentView.getTag();
                         lycTime.dtime = System.currentTimeMillis();
-                        long dis=lycTime.dtime-lycTime.stime;
+                        double dis=lycTime.dtime-lycTime.stime;
                         mDuration = mDuration + dis;
                         lycTime.end = lycTime.start+dis;
 
@@ -279,7 +279,7 @@ public class LyricRecordView extends FrameLayout {
     }
 
     public interface OnScrollListener {
-        void onScroll(long stime, long etime, String text);
+        void onScroll(double stime, double etime, String text);
 
     }
 }

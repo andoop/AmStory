@@ -5,9 +5,9 @@ package andoop.android.amstory.module;
  */
 
 public class LycTime {
-    public long stime;
-    public long dtime;
-    public long start;
-    public long end;
+    public double stime;
+    public double dtime;
+    public double start;
+    public double end;
     public String text;
 }
