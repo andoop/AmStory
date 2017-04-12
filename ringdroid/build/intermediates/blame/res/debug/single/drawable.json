@@ -1,55 +1,75 @@
 [
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left_focused.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_left_focused.png"
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left_normal.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\marker_left_normal.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left.xml",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\marker_left.xml"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\bkgnd.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\bkgnd.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_show_all_audio.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\menu_show_all_audio.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_right_pressed.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\marker_right_pressed.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\button_options_bkgnd.xml",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\button_options_bkgnd.xml"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left_focused.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\marker_left_focused.png"
     },
     {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\star.png",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\star.png"
     },
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\ringdroidlogo.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\ringdroidlogo.png"
-    },
-    {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\type_music.png",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\type_music.png"
     },
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_show_all_audio.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\menu_show_all_audio.png"
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\ringdroidlogo.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\ringdroidlogo.png"
     },
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_save.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\menu_save.png"
-    },
-    {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_reset.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\menu_reset.png"
-    },
-    {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left_pressed.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_left_pressed.png"
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_right.xml",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\marker_right.xml"
     },
     {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\bkgnd.png",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\bkgnd.png"
     },
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\button_zoom_out.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\button_zoom_out.png"
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_reset.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\menu_reset.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_about.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\menu_about.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\bkgnd_normal.xml",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\bkgnd_normal.xml"
     },
     {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_right.xml",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_right.xml"
     },
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\type_notification.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\type_notification.png"
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left_pressed.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\marker_left_pressed.png"
     },
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left_normal.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_left_normal.png"
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\star.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\star.png"
     },
     {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\bkgnd_pressed.xml",
@@ -64,32 +84,32 @@
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\type_ringtone.png"
     },
     {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\type_alarm.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\type_alarm.png"
+    },
+    {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\button_options_bkgnd.xml",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\button_options_bkgnd.xml"
     },
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_right_pressed.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_right_pressed.png"
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_save.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\menu_save.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_right_normal.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\marker_right_normal.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\button_zoom_out.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\button_zoom_out.png"
     },
     {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_right_focused.png",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_right_focused.png"
     },
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\search.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\search.png"
-    },
-    {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\bkgnd_normal.xml",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\bkgnd_normal.xml"
-    },
-    {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\button_options.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\button_options.png"
-    },
-    {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_right_normal.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_right_normal.png"
     },
     {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\type_alarm.png",
@@ -100,7 +120,91 @@
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_left.xml"
     },
     {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\button_zoom_in.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\button_zoom_in.png"
+    },
+    {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_about.png",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\menu_about.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\type_notification.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\type_notification.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\type_music.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\type_music.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left_focused.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_left_focused.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_show_all_audio.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\menu_show_all_audio.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_save.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\menu_save.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\ringdroidlogo.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\ringdroidlogo.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left_pressed.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_left_pressed.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_reset.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\menu_reset.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\button_zoom_out.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\button_zoom_out.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\type_notification.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\type_notification.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left_normal.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_left_normal.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_right_pressed.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_right_pressed.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\button_options.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\button_options.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\search.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\search.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\search.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\search.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\button_options.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\button_options.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_right_focused.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\marker_right_focused.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_right_normal.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_right_normal.png"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\bkgnd_pressed.xml",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\bkgnd_pressed.xml"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\type_ringtone.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\type_ringtone.png"
     }
 ]

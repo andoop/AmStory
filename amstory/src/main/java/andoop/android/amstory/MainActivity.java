@@ -5,14 +5,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.andoop.andooptabframe.AndoopFrameListener;
 import com.andoop.andooptabframe.AndoopPage;
 import com.andoop.andooptabframe.AndoopTabFrame;
 import com.andoop.andooptabframe.core.AndoopFrame;
 import com.andoop.andooptabframe.core.TabFrameConfig;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import andoop.android.amstory.fragments.FaxianFragment;
 import andoop.android.amstory.fragments.PersonalFragment;
@@ -38,6 +43,7 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
+        initListener();
         Log.e("----->" + "MainActivity", "onCreate:" + new AudioDataProcessor().test());
 
         TabFrameConfig tabFrameConfig = new TabFrameConfig.Builder()
@@ -58,13 +64,24 @@ public class MainActivity extends FragmentActivity {
 
             @Override
             public void onSelect(AndoopPage andoopPage, int pos) {
-
+                if (pos==3){
+                    showIvSetting();
+                    //设置的点击事件
+                    ivStCt.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(MainActivity.this,
+                                    UserSettingActivity.class));
+                        }
+                    });
+                }else{
+                    hiddenIvSetting();
+                }
             }
         });
     }
 
-
-    public void init() {
+    private void initListener() {
         //设置点击事件
         ivTitleSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +91,32 @@ public class MainActivity extends FragmentActivity {
         });
     }
 
-    public ImageView getIvStCt(){
-        return ivStCt;
+    public void showIvSetting(){
+        //隐藏设置
+        ivStCt.setVisibility(View.VISIBLE);
+    }
+
+    public void hiddenIvSetting(){
+        ivStCt.setVisibility(View.GONE);
+    }
+
+    //双击退出
+    private boolean isExit = false;
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            isExit = true;
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Toast.makeText(MainActivity.this, "再点一次退出", Toast.LENGTH_SHORT).show();
+                    isExit = false;
+                }
+            },2000);
+            if (isExit){
+                finish();
+            }
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }

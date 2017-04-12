@@ -1,6 +1,9 @@
 package andoop.android.amstory.fragments;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,15 +40,52 @@ public class UserSettingActivity extends AppCompatActivity {
 
 
     private void initData() {
-        PhotoUtils.getInstance().init(this).showPhoto(ivPfHead, this, SpUtils.HEAD_IMAGE);
+        PhotoUtils.getInstance().init(this)
+                .showPhoto(ivPfHead, SpUtils.HEAD_IMAGE);
+
         ivBackCtTitle02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        PhotoUtils.getInstance().init(this).showPhoto(childIv,this,SpUtils.CHILD_IMAGE);
+        PhotoUtils.getInstance().init(this)
+                .showPhoto(childIv, SpUtils.CHILD_IMAGE);
+
+        initListener();
     }
 
+    private void initListener() {
+        ivPfHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog2(ivPfHead);
+            }
+        });
+
+        childIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog2(childIv);
+            }
+        });
+    }
+
+    private String names[] = {"相册","相机"};
+    private void showDialog2(final ImageView imageView) {
+        new AlertDialog.Builder(UserSettingActivity.this)
+                .setTitle("请选择方式")
+                .setItems(names, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0) {
+                           PhotoUtils.getInstance().getXiangce(imageView);
+                        } else {
+                            PhotoUtils.getInstance().getXiangJi(imageView);
+                        }
+                    }
+                })
+                .show();
+    }
 
 }
