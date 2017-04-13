@@ -46,6 +46,8 @@ public class FaxianFragment extends BasePager {
         ButterKnife.inject(this,view);
     }
 
+
+
     @Override
     protected void initData() {
         mData=new ArrayList<>();

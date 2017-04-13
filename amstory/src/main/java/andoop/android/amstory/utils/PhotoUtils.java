@@ -3,6 +3,7 @@ package andoop.android.amstory.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.media.Image;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,15 +38,13 @@ public class PhotoUtils {
         return photoUtils;
     }
 
-    private String names[] = {"相册","相机"};
+
     private ImageView imageView;
     private String spname;
 
-    public void showPhoto(ImageView imageView, final Activity activity,String spname){
-
+    public void showPhoto(ImageView imageView,String spname){
         this.imageView = imageView;
         this.spname = spname;
-        //设置默认头像
         //设置默认头像
         String headImage = SpUtils.getInstace().getString(spname, "");
         if (!headImage.equals("")){
@@ -59,34 +58,17 @@ public class PhotoUtils {
                     .transform(new CropCircleTransformation())
                     .into(imageView);
         }
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(activity)
-                        .setTitle("请选择方式")
-                        .setItems(names, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                if (which==0){
-                                    getXiangce();
-                                }else{
-                                    getXiangJi();
-                                }
-                            }
-                        })
-                        .show();
-
-            }
-        });
     }
 
+
     //相机
-    private void getXiangJi() {
+    public void getXiangJi(ImageView imageView) {
+        this.imageView = imageView;
         GalleryFinal.openCamera(1, mOnHanlderResultCallback);
     }
     //相册
-    private void getXiangce() {
+    public void getXiangce(ImageView imageView) {
+        this.imageView = imageView;
         GalleryFinal
                 .openGallerySingle(0, mOnHanlderResultCallback);
     }

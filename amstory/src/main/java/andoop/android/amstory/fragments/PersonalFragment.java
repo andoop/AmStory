@@ -79,22 +79,15 @@ public class PersonalFragment extends BasePager {
         }
 
 
-        MainActivity mainActivity = (MainActivity)getActivity();
-        ivStCt = mainActivity.getIvStCt();
-        ivStCt.setVisibility(View.VISIBLE);
-        ivStCt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), UserSettingActivity.class));
-            }
-        });
+
 
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        ivStCt.setVisibility(View.GONE);
+    public void onResume() {
+        super.onResume();
+        MainActivity mainActivity = (MainActivity)getActivity();
+        //mainActivity.showIvSetting();
     }
 
     @Override
