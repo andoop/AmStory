@@ -8,6 +8,6 @@ LOCAL_SRC_FILES := \
 	empty.c \
 	data-process-jni.c \
 
-LOCAL_C_INCLUDES += D:\company\lvyin\AmStory\amstory\src\main\jni
+LOCAL_C_INCLUDES += G:\sdk\project\XXX\amstory\src\main\jni
 
 include $(BUILD_SHARED_LIBRARY)
