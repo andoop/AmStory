@@ -10,4 +10,6 @@ public class LycTime {
     public double start;
     public double end;
     public String text;
+    //是否录制过
+    public boolean finished;
 }

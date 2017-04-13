@@ -32,8 +32,8 @@ public class LyricRecordView extends FrameLayout {
     private boolean mStop = true;
     //当前的textview
     private TextView currentView;
-
-    private double mDuration;
+    public int mPos;
+    public double mDuration;
     //是否向上滚动
     private boolean isMoveToUp = true;
     private StoryViewer storyViewer;
@@ -43,6 +43,12 @@ public class LyricRecordView extends FrameLayout {
         init(context);
     }
 
+    public TextView getCurrentView() {
+        return currentView;
+    }
+    public int getCurrentViewPos(){
+        return mPos;
+    }
 
     public LyricRecordView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -112,6 +118,7 @@ public class LyricRecordView extends FrameLayout {
             //初始化currentview，currentview==null肯定是初始状态，
             if (currentView == null) {//只有i=0 并且是初始化状态下
                 currentView = childAt;
+                mPos=i;
             }
 
             int top = shaderView.mTextView.getTop() + shaderView.getTop();
@@ -128,6 +135,8 @@ public class LyricRecordView extends FrameLayout {
                         double dis=lycTime.dtime-lycTime.stime;
                         mDuration = mDuration + dis;
                         lycTime.end = lycTime.start+dis;
+                        //标示录制过
+                        lycTime.finished=true;
 
                         Log.e("----->" + "record完成：", "行数：" + (i - 1) + "\n" +
                                 "文本：" + currentView.getText() + "\n" +
@@ -138,6 +147,7 @@ public class LyricRecordView extends FrameLayout {
 
                         currentView.setTag(lycTime);
                         currentView = childAt;
+                        mPos=i;
                     }
 
                     LycTime lt = (LycTime) childAt.getTag();
@@ -155,9 +165,10 @@ public class LyricRecordView extends FrameLayout {
                                 Object tag = childAt.getTag();
                                 if (tag != null) {
                                     LycTime lycTime = (LycTime) tag;
-                                    onScrollListener.onScroll(lycTime.start, lycTime.end, childAt.getText().toString());
+                                    onScrollListener.onScroll(lycTime.finished,lycTime.start, lycTime.end, childAt.getText().toString());
                                 }
                                 currentView = childAt;
+                                mPos=i;
                             }
 
                         }
@@ -243,8 +254,6 @@ public class LyricRecordView extends FrameLayout {
         } else {
             isMoveToUp = true;
         }
-
-
         for (int i = 0; i < getChildCount(); i++) {
             View childAt = getChildAt(i);
             if (isMoveToUp) {
@@ -253,15 +262,12 @@ public class LyricRecordView extends FrameLayout {
                     Log.e("----->", "onLayout:" + "到达最后一行");
                     return;
                 }
-
             } else {//如果向下滑，第一行到达中线后不能向下滑
                 if (i == 0 && (childAt.getTop() + dis) > (getTop() + (getBottom() - childAt.getMeasuredHeight()) / 2)) {
                     return;
                 }
             }
         }
-
-
         mdis = mdis + dis;
         requestLayout();
     }
@@ -279,7 +285,7 @@ public class LyricRecordView extends FrameLayout {
     }
 
     public interface OnScrollListener {
-        void onScroll(double stime, double etime, String text);
+        void onScroll(boolean finished,double stime, double etime, String text);
 
     }
 }

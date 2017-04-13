@@ -126,7 +126,7 @@ public class StoryEidtActivity extends AppCompatActivity {
     private void initdata() {
         lyricRecordView.setScrollerViewer(new LyricRecordView.OnScrollListener() {
             @Override
-            public void onScroll(double stime, double etime, String text) {
+            public void onScroll(boolean finished,double stime, double etime, String text) {
                 if (storyViewer.getCurrentSoundFile() == null)
                     return;
                 storyViewer.setStartMillisecs(stime);

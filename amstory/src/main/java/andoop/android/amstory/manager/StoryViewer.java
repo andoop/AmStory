@@ -157,7 +157,7 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         handlePause();
     }
 
-    //更新录制生源
+    //更新录制生源 insertDurationPixels 插入的音效的像素  -1代表 删除
     public void updateRecordAudio(SoundFile soundFile, int insertDurationPixels) {
         mWaveformView.setSoundFile(soundFile);
         mCurrentSoundFile = soundFile;
@@ -166,10 +166,12 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         mPlayer = new SamplePlayer(mCurrentSoundFile);
         mMaxPos = mWaveformView.maxPos();
 
-        mStartPos = mEndPos;
         if (insertDurationPixels > 0) {
+            mStartPos = mEndPos;
             mEndPos = mEndPos + insertDurationPixels;
-        } else {
+        } else if(insertDurationPixels<0){
+            mEndPos=mStartPos;
+        }else {
             mEndPos = mMaxPos;
         }
         mLastDisplayedStartPos = -1;
@@ -665,8 +667,10 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
             //之间的lrctime的start和end都置为deleteStart ，lrctime2的start=deleteEnd, 然后 lrctime以后的每一个lyctime
             //的start和end都减去（deleteEnd-deleteStart）
             if(deleteStart>=lycTime.start&&deleteStart<=lycTime.end){
+                Log.e("----->" + "StoryViewer", "Delete:startpos=" + i);
                 startpos=i;
             }
+            Log.e("----->" + "StoryViewer", "Delete:startpos=" + i);
             if(deleteEnd>=lycTime.start&&deleteEnd<=lycTime.end){
                 endpos=i;
                 deleteInMutiLycTime(startpos,endpos,duration,deleteStart,deleteEnd);
@@ -708,6 +712,9 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
             if(lycTime1.end<0){
                 lycTime1.end=0;
             }
+            if(lycTime1.start>lycTime1.end){
+                lycTime1.start=lycTime1.end;
+            }
             view.setTag(lycTime1);
         }
     }
@@ -724,6 +731,7 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         if(tag.end<tag.start){
             tag.end=tag.start;
         }
+        Log.e("----->" + "StoryViewer", "deleteInOneLyctime:" + tag.start + ":" + tag.end);
         childAt.setTag(tag);
         for (int i = pos + 1; i < this.lyricView.getChildCount(); i++) {
             View view = this.lyricView.getChildAt(i);
@@ -743,10 +751,54 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
 
     //插入音频，此处主要修改歌词时间，解决定位问题
     public void insertRecord(SoundFile src, int startFrame) {
-        double insertStart=0;
-        double insertDuration=0;
-        //1、如果插入的位置在lyctime中时，lyctime.end 以及它后面的所有的lyctime的start和end都加上insertDuration
+        WaveformView waveformView = new WaveformView(mContext);
+        waveformView.setSoundFile(src);
+        double insertStart=getEndTimeSecon()*1000;
+        double insertDuration=waveformView.pixelsToMillisecs(waveformView.maxPos());
+        //1、如果插入的位置在lyctime中时，
+        // lyctime.end 以及它后面的所有的lyctime的start和end都加上insertDuration
+        int insertPos=this.lyricView.getCurrentViewPos();
 
+        LycTime tag = (LycTime) this.lyricView.getCurrentView().getTag();
+        tag.end=tag.end+insertDuration;
+        lyricView.getCurrentView().setTag(tag);
+
+//        Log.e("----->" + "StoryViewer", "insertRecord:insertStart=" + insertStart + "  duration=" + insertDuration);
+//        for (int i = 0; i < this.lyricView.getChildCount(); i++) {
+//            View childAt = this.lyricView.getChildAt(i);
+//            LycTime lycTime= (LycTime) childAt.getTag();
+//            Log.e("----->" + "StoryViewer", "insertRecord-----:" + lycTime.start+" : "+lycTime.end);
+//            if(insertStart==lycTime.start&&insertStart==lycTime.end){
+//                Log.e("----->" + "StoryViewer", "insertRecord-----:" + lycTime.start+" : "+lycTime.end);
+//                lycTime.end=lycTime.end+insertDuration;
+//                insertPos=i;
+//                Log.e("----->" + "StoryViewer", "insertRecord:insertPos=" + insertPos);
+//
+//                childAt.setTag(lycTime);
+//                break;
+//            }
+//
+//            if(insertStart>=lycTime.start&&(insertStart)<=lycTime.end){
+//                Log.e("----->" + "StoryViewer", "insertRecord-----:" + lycTime.start+" : "+lycTime.end);
+//                lycTime.end=lycTime.end+insertDuration;
+//                insertPos=i;
+//                Log.e("----->" + "StoryViewer", "insertRecord:insertPos=" + insertPos);
+//
+//                childAt.setTag(lycTime);
+//                break;
+//            }
+//
+//        }
+
+        for (int i =insertPos+1; i < this.lyricView.getChildCount(); i++) {
+            View childAt = this.lyricView.getChildAt(i);
+            LycTime lycTime= (LycTime) childAt.getTag();
+            Log.e("----->" + "StoryViewer", "insertRecord:调整前"+i + ":"+lycTime.start+":"+lycTime.end);
+            lycTime.start=lycTime.start+insertDuration;
+            lycTime.end=lycTime.end+insertDuration;
+            Log.e("----->" + "StoryViewer", "insertRecord:从新调整"+i + ":"+lycTime.start+":"+lycTime.end);
+            childAt.setTag(lycTime);
+        }
         //
     }
 

@@ -27,6 +27,7 @@ import andoop.android.amstory.customview.ShaderView;
 import andoop.android.amstory.customview.WaveformView;
 import andoop.android.amstory.manager.SoundFileManager;
 import andoop.android.amstory.manager.StoryViewer;
+import andoop.android.amstory.module.LycTime;
 import andoop.android.amstory.module.Story;
 import andoop.android.amstory.presenter.StoryMakeViewPresenter;
 import andoop.android.amstory.presenter.view.IStoryMakeView;
@@ -146,10 +147,16 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
 
         lyricRecordView.setScrollerViewer(new LyricRecordView.OnScrollListener() {
             @Override
-            public void onScroll(double stime, double etime, String text) {
+            public void onScroll(boolean finished,double stime, double etime, String text) {
                 Log.e("----->" + "StoryMakeActivity", "onScroll:" + stime + ":" + etime);
                 if(storyViewer.getCurrentSoundFile()==null)
                     return;
+                if(!finished){
+                    //歌词还没有录制完，那么滚动到此歌词时，应该让指针一直在音频的最尾部
+                    stime=storyViewer.mWaveformView.pixelsToMillisecs(storyViewer.mWaveformView.maxPos());
+                    etime=stime;
+                }
+
                 storyViewer.setStartMillisecs(stime);
                 if(etime<stime){
                     //保证选中的结束时间不小于选中的开始时间
@@ -245,10 +252,27 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
             mRecordingKeepGoing = false;
             lyricRecordView.stopRc();
             bt_takevoice.setImageResource(R.drawable.ic_record_bt);
+            TextView currentView=lyricRecordView.getCurrentView();
+            Object tag = currentView.getTag();
+//            if(tag!=null&&recordPos==2){
+//                LycTime lycTime= (LycTime) tag;
+//                lycTime.dtime=System.currentTimeMillis();
+//                currentView.setTag(lycTime);
+//                lyricRecordView.mDuration=lyricRecordView.mDuration+(lycTime.dtime-lycTime.stime);
+//            }
+
         }else {
             bt_takevoice.setImageResource(R.drawable.ic_recording_bt);
             mRecordingKeepGoing = true;
-            lyricRecordView.startRc();
+            //如果开始录制的位置不是在末尾，不通知歌词视图开始录音，防止插入录音时，给选中的歌词重新赋值开始时间问题
+            if(storyViewer.getCurrentSoundFile()==null){
+
+                lyricRecordView.startRc();
+            }else {
+                if(storyViewer.getEndPixels()==storyViewer.mWaveformView.maxPos()){
+                    lyricRecordView.startRc();
+                }
+            }
             recordAudio();
 
         }
@@ -295,7 +319,8 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                             @Override
                             protected void onPostExecute(Void aVoid) {
                                 storyViewer.setmEndPos(0);
-                                finishRecord(0);
+                                recordPos=-1;
+                                finishRecord(-1);
                             }
                         }.execute();
                     }
@@ -515,6 +540,7 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
     }
     //插入录音的像素值
     int insertDurationPixels;
+    int recordPos=2; //1 故事内部插入录制   2 故事尾部开始继续录制
     private void recordAudio() {
         changeState(STATE_RECORDING);
         mRecordingLastUpdateTime = getCurrentTime();
@@ -527,7 +553,12 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                 if(mSoundFile!=null){
                     //如果录音文件不为空，则从后一个把手所在位置录取，否则从新录取
                    // mSoundFile.RestartRecord();
-                    int startFrame=storyViewer.mWaveformView.secondsToFrames(storyViewer.getEndTimeSecon());
+                    final int startFrame=storyViewer.mWaveformView.secondsToFrames(storyViewer.getEndTimeSecon());
+                    if(storyViewer.getEndPixels()>=storyViewer.mWaveformView.maxPos()){
+                        recordPos=2;
+                    }else {
+                        recordPos=1;
+                    }
                     Log.e("----->" + "StoryMakeActivity", "run:" + startFrame);
                     final SoundFile src=SoundFile.record(progressListener);
                     runOnUiThread(new Runnable() {
@@ -539,10 +570,17 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
                             insertDurationPixels=storyViewer.mWaveformView.secondsToPixels(waveformViewnew.pixelsToSeconds(insertDurationPixels));
                         }
                     });
-                    storyViewer.insertRecord(src,startFrame);
+                    StoryMakeActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            storyViewer.insertRecord(src,startFrame);
+
+                        }
+                    });
                     mSoundFile.InsertRecord(src,startFrame);
                 }else {
                     mSoundFile = SoundFile.record(progressListener);
+                    recordPos=2;
                 }
                 if (mSoundFile == null) {
                     runOnUiThread(new Runnable() {
@@ -572,6 +610,28 @@ public class StoryMakeActivity extends BaseActivity<StoryMakeViewPresenter> impl
         storyViewer.updateRecordAudio(mSoundFile,insertDurationPixels);
         //更新歌词管理view中对应的wavaformview
         lyricRecordView.setWaveformView(storyViewer);
+        //如果歌词开始录制的地方是歌词数据的最后一帧，更新歌词结束时间为整个故事的长度，比如暂停时
+        if(recordPos==2){
+            TextView currentView = lyricRecordView.getCurrentView();
+            Object tag = currentView.getTag();
+            if(tag!=null){
+                LycTime lycTime= (LycTime) tag;
+                lycTime.end=storyViewer.mWaveformView.pixelsToMillisecs(storyViewer.mWaveformView.maxPos());
+                lycTime.finished=true;
+                currentView.setTag(lycTime);
+                lyricRecordView.mDuration=lycTime.end;
+
+                View childAt = lyricRecordView.getChildAt(lyricRecordView.mPos+1);
+                Log.e("----->" + "StoryMakeActivity", "finishRecord:" + lyricRecordView.mPos);
+                LycTime tag1 = (LycTime) childAt.getTag();
+                tag1.start=lycTime.end;
+                childAt.setTag(tag1);
+
+
+            }
+        }
+
+
         //保存最新的数据状态
         SoundFileManager.newInstance(this).addSoundFile("makedata",mSoundFile);
         SoundFileManager.newInstance(this).setLycTimes(lyricRecordView.getLycTimes());
