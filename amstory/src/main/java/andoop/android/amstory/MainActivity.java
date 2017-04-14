@@ -100,22 +100,22 @@ public class MainActivity extends FragmentActivity {
         ivStCt.setVisibility(View.GONE);
     }
 
-    //双击退出
-    private boolean isExit = false;
+    //记录用户首次点击返回键的时间
+    private long firstTime=0;
+
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK){
-            isExit = true;
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    Toast.makeText(MainActivity.this, "再点一次退出", Toast.LENGTH_SHORT).show();
-                    isExit = false;
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                long secondTime=System.currentTimeMillis();
+                if(secondTime-firstTime>2000){
+                    Toast.makeText(MainActivity.this,"再按一次退出程序",Toast.LENGTH_SHORT).show();
+                    firstTime=secondTime;
+                    return true;
+                }else{
+                    System.exit(0);
                 }
-            },2000);
-            if (isExit){
-                finish();
-            }
+                break;
         }
         return super.onKeyUp(keyCode, event);
     }

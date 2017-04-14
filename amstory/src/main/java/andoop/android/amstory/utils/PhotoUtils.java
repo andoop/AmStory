@@ -40,11 +40,9 @@ public class PhotoUtils {
 
 
     private ImageView imageView;
-    private String spname;
 
     public void showPhoto(ImageView imageView,String spname){
         this.imageView = imageView;
-        this.spname = spname;
         //设置默认头像
         String headImage = SpUtils.getInstace().getString(spname, "");
         if (!headImage.equals("")){
@@ -59,37 +57,4 @@ public class PhotoUtils {
                     .into(imageView);
         }
     }
-
-
-    //相机
-    public void getXiangJi(ImageView imageView) {
-        this.imageView = imageView;
-        GalleryFinal.openCamera(1, mOnHanlderResultCallback);
-    }
-    //相册
-    public void getXiangce(ImageView imageView) {
-        this.imageView = imageView;
-        GalleryFinal
-                .openGallerySingle(0, mOnHanlderResultCallback);
-    }
-
-    GalleryFinal.OnHanlderResultCallback mOnHanlderResultCallback = new GalleryFinal.OnHanlderResultCallback() {
-        @Override
-        public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
-            if (reqeustCode == 0 || reqeustCode == 1){
-                Picasso.with(context)
-                        .load(new File(resultList.get(0).getPhotoPath()))
-                        .transform(new CropCircleTransformation())
-                        .into(imageView);
-                SpUtils.getInstace().save(spname,resultList.get(0).getPhotoPath());
-            }
-        }
-        @Override
-        public void onHanlderFailure(int requestCode, String errorMsg) {
-            Picasso.with(context)
-                    .load(R.drawable.my_user_default)
-                    .transform(new CropCircleTransformation())
-                    .into(imageView);
-        }
-    };
 }

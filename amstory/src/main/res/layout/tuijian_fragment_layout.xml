@@ -27,6 +27,53 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
-        
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/fenlei"
+            android:src="@drawable/fenlei3"/>
+        <View
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:background="#DDDDDD"
+            android:layout_toRightOf="@id/fenlei"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"></View>
+        <View
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:background="#DDDDDD"
+            android:layout_toRightOf="@id/fenlei"
+            android:layout_marginLeft="40dp"
+            android:layout_centerVertical="true"></View>
+        <View
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:background="#DDDDDD"
+            android:layout_toRightOf="@id/fenlei"
+            android:layout_marginLeft="60dp"
+            android:layout_centerVertical="true"></View>
+        <View
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:background="#DDDDDD"
+            android:layout_toLeftOf="@id/fenlei"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"></View>
+        <View
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:background="#DDDDDD"
+            android:layout_toLeftOf="@id/fenlei"
+            android:layout_marginRight="40dp"
+            android:layout_centerVertical="true"></View>
+        <View
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:background="#DDDDDD"
+            android:layout_toLeftOf="@id/fenlei"
+            android:layout_marginRight="60dp"
+            android:layout_centerVertical="true"></View>
     </RelativeLayout>
 </LinearLayout>
