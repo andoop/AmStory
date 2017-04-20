@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -65,7 +66,7 @@ public class StoryEidtActivity extends AppCompatActivity {
     View bgView;
     @InjectView(R.id.tv_changeBg)
     TextView tvChangeBg;
-
+    private String mPath;
 
     private StoryViewer storyViewer;
     private SoundFile mSoundFile;
@@ -78,6 +79,7 @@ public class StoryEidtActivity extends AppCompatActivity {
     private List<LocalMusicModule> effectsMusics;
     //音效播放器集合
     private List<SamplePlayer> effectPlayers;
+
 
     public static final int CHOOSE_BG_REQUEST_CODE = 101;
     public static final int CHOOSE_MUSIC_REQUEST_CODE = 102;
@@ -107,7 +109,8 @@ public class StoryEidtActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 Log.e("----->" + "StoryEidtActivity", "onProgressChanged:" + "调节背景音乐音量：大小：" + progress);
                 //调节背景音量大小
-                bgMusicInfo.soundFile.SetByteSizePersent(progress);
+                if(bgMusicInfo!=null)
+                    bgMusicInfo.soundFile.SetByteSizePersent(progress);
             }
 
             @Override
@@ -372,7 +375,142 @@ public class StoryEidtActivity extends AppCompatActivity {
 
     //编辑完成
     public void toOk(View view) {
-        Toast.makeText(this, "不好意思，功能正在快马加鞭开发中 ：)", Toast.LENGTH_SHORT).show();
+
+        //混入背景音乐
+        mixBgMusic();
+
+
+    }
+
+    private void mixEffectMusic() {
+        new AsyncTask<Void,Void,SoundFile>(){
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                showloading();
+            }
+            @Override
+            protected SoundFile doInBackground(Void... params) {
+                if(effectsMusics!=null&&effectsMusics.size()>0){
+                    //如果有音效音乐才进行混合
+                    for (int i = 0; i < effectsMusics.size(); i++) {
+                        Log.e("----->" + "StoryEidtActivity", "doInBackground:" + "混入音效：" + effectsMusics.get(i).startFrame);
+                        mSoundFile.MixMusic(effectsMusics.get(i).soundFile
+                                ,effectsMusics.get(i).startFrame
+                                ,false);
+                    }
+
+                }
+                return mSoundFile;
+            }
+
+            @Override
+            protected void onPostExecute(SoundFile aVoid) {
+                super.onPostExecute(aVoid);
+                stoploading();
+                Toast.makeText(StoryEidtActivity.this, "混音成功", Toast.LENGTH_SHORT).show();
+                //保存录音文件
+                saveRecord();
+            }
+        }.execute();
+    }
+
+    private void saveRecord() {
+        String savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "amstory/amstory_audios";
+        String fileName = getTitle().toString() + "_" + System.currentTimeMillis() + ".wav";
+        File outFile = new File(savePath, fileName);
+        mPath=outFile.getAbsolutePath();
+        if (!new File(savePath).exists()) {
+            new File(savePath).mkdirs();
+        }
+        try {
+            mSoundFile.WriteWAVFile(outFile, storyViewer.getStartFrame(),storyViewer.getEndFrame()-storyViewer.getStartFrame());
+        } catch (IOException e) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(StoryEidtActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
+                }
+            });
+            if (outFile.exists()) {
+                outFile.delete();
+            }
+        }
+
+        // Try to load the new file to make sure it worked
+        try {
+            final SoundFile.ProgressListener listener =
+                    new SoundFile.ProgressListener() {
+                        public boolean reportProgress(double frac) {
+                            // Do nothing - we're not going to try to
+                            // estimate when reloading a saved sound
+                            // since it's usually fast, but hard to
+                            // estimate anyway.
+                            return true;  // Keep going
+                        }
+                    };
+            SoundFile soundFile = SoundFile.create(outFile.getAbsolutePath(), listener);
+            if(soundFile!=null){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(StoryEidtActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(StoryEidtActivity.this, FinishRecordActivity.class);
+                        Bundle extra=new Bundle();
+                        extra.putString("path",mPath);
+                        intent.putExtras(extra);
+                        StoryEidtActivity.this.startActivity(intent);
+                    }
+                });
+            }else {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(StoryEidtActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+        } catch (final Exception e) {
+            e.printStackTrace();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(StoryEidtActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    private void mixBgMusic(){
+        new AsyncTask<Void,Void,SoundFile>(){
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                showloading();
+            }
+
+
+            @Override
+            protected SoundFile doInBackground(Void... params) {
+                if(hasBackMusic()){
+                    //如果有背景音乐才进行混合
+                    mSoundFile.MixBgMusic(bgMusicInfo.soundFile);
+                }
+
+                return mSoundFile;
+            }
+
+            @Override
+            protected void onPostExecute(SoundFile aVoid) {
+                super.onPostExecute(aVoid);
+                stoploading();
+                if(hasBackMusic())
+                    Toast.makeText(StoryEidtActivity.this, "混入背景成功", Toast.LENGTH_SHORT).show();
+                //混入音效
+                mixEffectMusic();
+            }
+        }.execute();
     }
 
 
@@ -534,6 +672,7 @@ public class StoryEidtActivity extends AppCompatActivity {
 
                     localMusicModule.end=localMusicModule.start+waveformView.maxPos();
                 }
+                localMusicModule.startFrame=mWaveformView.secondsToFrames(mWaveformView.pixelsToSeconds(localMusicModule.start));
                 localMusicModule.waveformView=waveformView;
                 //   localMusicModule.soundFile.ge
                 addEffect(localMusicModule);

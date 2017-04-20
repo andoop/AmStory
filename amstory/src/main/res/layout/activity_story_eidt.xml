@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimary"
+        android:background="#fff"
         >
 
         <ImageView
@@ -23,17 +23,6 @@
             android:onClick="toBack"
             android:src="@drawable/ic_back"/>
 
-        <TextView
-            android:id="@+id/tv_edit_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="上一步"
-            android:textColor="#fff"
-            android:textSize="16sp"
-            android:layout_toRightOf="@id/iv_edit_back"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            />
 
         <TextView
             android:id="@+id/iv_edit_ok"
@@ -43,22 +32,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="完成"
-            android:textColor="#fff"
-            android:textSize="16sp"
+            android:textColor="@color/appblue"
+            android:textSize="14sp"
             android:onClick="toOk" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:textColor="#dd000000"
+            android:text="添加音效"/>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="1dp"
         android:layout_width="wrap_content"
         android:background="#fff"
-        android:layout_height="150dp">
+        android:layout_height="140dp">
 
         <andoop.android.amstory.customview.LyricRecordView
             android:id="@+id/lrv_story_edit"
             android:layout_width="match_parent"
-            android:layout_height="150dp" />
+            android:layout_height="140dp" />
 
         <andoop.android.amstory.customview.ShaderView
             android:id="@+id/sv_story_edit"
@@ -72,7 +70,7 @@
     <FrameLayout
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="110dp">
+        android:layout_height="90dp">
         <include layout="@layout/wavaview_layout"/>
     </FrameLayout>
 

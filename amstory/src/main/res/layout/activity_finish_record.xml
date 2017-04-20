@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_finish_record"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
+    tools:context="andoop.android.amstory.FinishRecordActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:onClick="finishPage"
+            android:src="@drawable/back_blue"/>
+        <TextView
+            android:id="@+id/tv_sc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:onClick="toUpLoad"
+            android:textColor="@color/appblue"
+            android:text="上传"/>
+
+        <TextView
+            android:id="@+id/tv_fr_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tv_sc"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/appblue"
+            android:onClick="play"
+            android:text="播放"/>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_fr_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="6dp"
+        android:textColor="@color/appblue"
+        android:hint="编辑标题"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#eeeeee"
+        />
+
+    <EditText
+        android:id="@+id/et_fr_content"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:textSize="12sp"
+        android:textColor="@color/appgray"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="top"
+        android:hint="我在暖音录制了一个故事,快来听听吧。"/>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       android:orientation="horizontal">
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textColor="@color/appgray"
+           android:textSize="11sp"
+           android:layout_marginLeft="20dp"
+
+           android:text="同步到 "/>
+       <ImageView
+           android:layout_width="16dp"
+           android:layout_height="16dp"
+           android:src="@drawable/wechaticon"
+           />
+
+       <TextView
+           android:id="@+id/tv_fr_num"
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:gravity="right"
+           android:layout_height="wrap_content"
+           android:layout_gravity="right"
+           android:layout_marginRight="18dp"
+           android:textSize="11sp"
+           android:textColor="@color/appgray"
+           android:text="0/140"/>
+
+   </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="#eeeeee"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_fr_cat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/appblue"
+        android:onClick="chooseCats"
+        android:text="选择分类"/>
+</LinearLayout>

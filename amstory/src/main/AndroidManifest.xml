@@ -25,8 +25,8 @@
         </activity>
         <activity
             android:name=".StoryMakeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".MRecordListActivity"
             android:screenOrientation="portrait" />
@@ -37,7 +37,7 @@
         <activity
             android:name=".BgListActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/MyDrawerView"/>
+            android:theme="@style/MyDrawerView" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -74,9 +74,11 @@
         <activity
             android:name=".SearchActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".fragments.UserSettingActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-
+        <activity
+            android:name=".fragments.UserSettingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".FinishRecordActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

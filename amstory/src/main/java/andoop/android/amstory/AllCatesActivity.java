@@ -1,5 +1,6 @@
 package andoop.android.amstory;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -96,6 +97,12 @@ public class AllCatesActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Toast.makeText(AllCatesActivity.this, "选择分类："+text, Toast.LENGTH_SHORT).show();
+                            Intent data = new Intent();
+                            Bundle extra = new Bundle();
+                            extra.putString("cat",text);
+                            data.putExtras(extra);
+                            AllCatesActivity.this.setResult(100,data);
+                            AllCatesActivity.this.finish();
                         }
                     });
                 }

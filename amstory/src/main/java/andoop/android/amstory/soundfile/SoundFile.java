@@ -568,12 +568,13 @@ public class SoundFile implements Serializable{
             mDecodedSamples.rewind();
             mDecodedSamples.get(shortsMy);
         }
-        Log.e("----->" + "SoundFile", "SetByteSizePersent:" + shortsMy[18301]);
+     //   Log.e("----->" + "SoundFile", "SetByteSizePersent:" + shortsMy[18301]);
         AudioDataProcessor.reduceToPercent(shortsMy,shortsBf, persent);
-        Log.e("----->" + "SoundFile", "SetByteSizePersent:" + shortsBf.length);
-        Log.e("----->" + "SoundFile", "SetByteSizePersent:" + shortsBf[18301]);
+       // Log.e("----->" + "SoundFile", "SetByteSizePersent:" + shortsBf.length);
+        //Log.e("----->" + "SoundFile", "SetByteSizePersent:" + shortsBf[18301]);
         mDecodedSamples.clear();
         mDecodedSamples.put(shortsBf);
+        mDecodedSamples.rewind();
     }
 
     private boolean restart = false;
@@ -695,9 +696,9 @@ public class SoundFile implements Serializable{
     public void MixMusic(SoundFile src, int startFrame, boolean bLoop) {
         //TODO:实现方法
         // 背景音乐
-
         short[] shorts = new short[src.mNumSamples];
         src.getSamples().rewind();
+        Log.e("----->" + "SoundFile", "MixMusic:" + src.mNumSamples+":"+src.getSamples().position()+":"+src.getSamples().remaining());
         src.getSamples().get(shorts);
         short[] myshorts = new short[mNumSamples];
         mDecodedSamples.get(myshorts);
@@ -727,7 +728,7 @@ public class SoundFile implements Serializable{
 
         short[] shortsnew = AudioDataProcessor.mixAudioData(myshorts, shorts, startSamplePos, remixesLength, bLoop);
         //用c实现了下面逻辑
-//        for (int i = startSamplePos, j = 0; i <remixesLength; i++, j++) {
+//        for (int i = startSamplePos, j = 0; j <remixesLength; i++, j++) {
 //
 //            /**
 //             * 这里就是网上的混合了

@@ -20,6 +20,7 @@ import andoop.android.amstory.customview.MarkerView;
 import andoop.android.amstory.customview.WaveformView;
 import andoop.android.amstory.module.LycTime;
 import andoop.android.amstory.soundfile.SoundFile;
+import andoop.android.amstory.utils.DensityUtil;
 import andoop.android.amstory.utils.SamplePlayer;
 
 public class StoryViewer implements WaveformView.WaveformListener, MarkerView.MarkerListener {
@@ -73,10 +74,13 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         mDensity = metrics.density;
 
-        mMarkerLeftInset = (int) (46 * mDensity);
-        mMarkerRightInset = (int) (48 * mDensity);
-        mMarkerTopOffset = (int) (10 * mDensity);
-        mMarkerBottomOffset = (int) (10 * mDensity);
+//        mMarkerLeftInset = (int) (46 * mDensity);
+//        mMarkerRightInset = (int) (48 * mDensity);
+        mMarkerLeftInset = (int) (25 * mDensity);
+        mMarkerRightInset = (int) (25 * mDensity);
+
+        mMarkerTopOffset = (int) (2 * mDensity);
+        mMarkerBottomOffset = (int) (2 * mDensity);
 
 
         mWaveformView.setListener(this);
@@ -284,8 +288,8 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         }
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
+                DensityUtil.dip2px(mContext,50),
+                DensityUtil.dip2px(mContext,40));
         params.setMargins(
                 startX,
                 mMarkerTopOffset,
@@ -294,8 +298,8 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         mStartMarker.setLayoutParams(params);
 
         params = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
+                DensityUtil.dip2px(mContext,50),
+                DensityUtil.dip2px(mContext,40));
         params.setMargins(
                 endX,
                 mWaveformView.getMeasuredHeight() - mEndMarker.getHeight() - mMarkerBottomOffset,

@@ -19,4 +19,6 @@ public class LocalMusicModule extends BaseModule {
     public int end;
     public int audioSize=100;
     public WaveformView waveformView;
+    public int startFrame;
+    public boolean selected=false;
 }

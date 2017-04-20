@@ -107,13 +107,13 @@ public class WaveformView extends View {
         mGridPaint.setColor(res.getColor(R.color.grid_line));
         mSelectedLinePaint = new Paint();
         mSelectedLinePaint.setAntiAlias(false);
-        mSelectedLinePaint.setColor(res.getColor(R.color.waveform_selected));
+        mSelectedLinePaint.setColor(res.getColor(R.color.appblue));
         mUnselectedLinePaint = new Paint();
         mUnselectedLinePaint.setAntiAlias(false);
         mUnselectedLinePaint.setColor(res.getColor(R.color.waveform_unselected));
         mUnselectedBkgndLinePaint = new Paint();
         mUnselectedBkgndLinePaint.setAntiAlias(false);
-        mUnselectedBkgndLinePaint.setColor(res.getColor(R.color.waveform_unselected_bkgnd_overlay));
+        mUnselectedBkgndLinePaint.setColor(res.getColor(R.color.waveform_unselected_bkgnd_overlay2));
         mBorderLinePaint = new Paint();
         mBorderLinePaint.setAntiAlias(true);
         mBorderLinePaint.setStrokeWidth(1.5f);
@@ -126,7 +126,7 @@ public class WaveformView extends View {
         mTimecodePaint.setTextSize(12);
         mTimecodePaint.setAntiAlias(true);
         mTimecodePaint.setColor(res.getColor(R.color.timecode));
-        mTimecodePaint.setShadowLayer(2, 1, 1, res.getColor(R.color.timecode_shadow));
+        mTimecodePaint.setShadowLayer(2, 1, 1, res.getColor(R.color.timecode_shadow2));
 
         mGestureDetector = new GestureDetector(
                 context,

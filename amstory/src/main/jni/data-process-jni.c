@@ -83,7 +83,7 @@ Java_andoop_android_amstory_jni_AudioDataProcessor_mixAudioData(JNIEnv *env, jcl
      int i;
      int j;
 
-     for(i=startSamplePos,j=0;i <remixesLength; i++, j++){
+     for(i=startSamplePos,j=0;j <remixesLength; i++, j++){
           if (bLoop && j >= len_aim) {
                j = 0;
           }

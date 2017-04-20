@@ -17,6 +17,7 @@ import java.util.List;
 
 import andoop.android.amstory.manager.StoryViewer;
 import andoop.android.amstory.module.LycTime;
+import andoop.android.amstory.utils.DensityUtil;
 
 
 /* * * * * * * * * * * * * * * * * * *
@@ -37,6 +38,7 @@ public class LyricRecordView extends FrameLayout {
     //是否向上滚动
     private boolean isMoveToUp = true;
     private StoryViewer storyViewer;
+    private int childHeight;
 
     public LyricRecordView(Context context) {
         super(context);
@@ -58,6 +60,7 @@ public class LyricRecordView extends FrameLayout {
     private void init(Context context) {
         mContext = context;
         //  setOrientation(VERTICAL);
+        childHeight = DensityUtil.dip2px(mContext, 40);
     }
 
     public void setLyricData(List<String> lyrics,List<LycTime> lycTimes) {
@@ -68,7 +71,7 @@ public class LyricRecordView extends FrameLayout {
         for (int i = 0; i < lyrics.size(); i++) {
             TextView textView = new TextView(mContext);
             textView.setText(lyrics.get(i));
-            LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, childHeight);
             textView.setGravity(Gravity.CENTER);
             if(lycTimes!=null&&lycTimes.size()>i){
                 textView.setTag(lycTimes.get(i));
@@ -125,8 +128,8 @@ public class LyricRecordView extends FrameLayout {
             int bottom = shaderView.mTextView.getBottom() + shaderView.getTop();
 
             if (childAt.getTop() >= (top - (childAt.getMeasuredHeight() / 2)) && childAt.getBottom() <= (bottom + (childAt.getMeasuredHeight() / 2))) {
-                childAt.setTextColor(Color.parseColor("#ff0000"));
-                childAt.setTextSize(Dimension.SP,15);
+                childAt.setTextColor(Color.parseColor("#3a69f7"));
+                childAt.setTextSize(Dimension.SP,17);
                 if (!mStop) {
                     //如果当前的view改变了
                     if (currentView != childAt) {
@@ -178,7 +181,7 @@ public class LyricRecordView extends FrameLayout {
 
             } else {
                 childAt.setTextColor(Color.parseColor("#22000000"));
-                childAt.setTextSize(Dimension.SP,15);
+                childAt.setTextSize(Dimension.SP,17);
             }
 
 
@@ -240,7 +243,7 @@ public class LyricRecordView extends FrameLayout {
 
     public void moveToNext() {
         try {
-            changeDis(-getChildAt(0).getMeasuredHeight());
+            changeDis(-childHeight);
 
         } catch (Exception e) {
             Log.e("----->" + "LyricRecordView", "moveToNext:" + e.toString());
