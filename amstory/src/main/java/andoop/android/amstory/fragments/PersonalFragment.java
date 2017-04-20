@@ -66,7 +66,7 @@ public class PersonalFragment extends BasePager {
                     .transform(new CropCircleTransformation())
                     .into(ivPfHead);
         }
-        String childImage = SpUtils.getInstace().getString(SpUtils.HEAD_IMAGE,"");
+        String childImage = SpUtils.getInstace().getString(SpUtils.CHILD_IMAGE,"");
         if (!childImage.equals("")){
             Picasso.with(getContext()).load(new File(childImage))
                     .transform(new CropCircleTransformation())
@@ -78,15 +78,12 @@ public class PersonalFragment extends BasePager {
                     .into(childIv);
         }
 
-
-
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        MainActivity mainActivity = (MainActivity)getActivity();
+        //MainActivity mainActivity = (MainActivity)getActivity();
         //mainActivity.showIvSetting();
     }
 
