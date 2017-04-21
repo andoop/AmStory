@@ -18,6 +18,9 @@ public class Cates {
     public String cat;
     public String[] list;
 
+
+
+
     public static List<Cates> parse(JSONArray cates) {
         List<Cates> data=new ArrayList<>();
         for (int i = 0; i < cates.length(); i++) {

@@ -44,12 +44,12 @@
         "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\marker_right.xml"
     },
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_reset.png",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\menu_reset.png"
-    },
-    {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\bkgnd.png",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\bkgnd.png"
+    },
+    {
+        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_reset.png",
+        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\menu_reset.png"
     },
     {
         "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\menu_about.png",
@@ -60,12 +60,12 @@
         "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\bkgnd_normal.xml"
     },
     {
-        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left_pressed.png",
-        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\marker_left_pressed.png"
-    },
-    {
         "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_right.xml",
         "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\drawable\\marker_right.xml"
+    },
+    {
+        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\marker_left_pressed.png",
+        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\drawable\\marker_left_pressed.png"
     },
     {
         "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\drawable\\star.png",
