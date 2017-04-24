@@ -77,6 +77,12 @@ public class UserSettingActivity extends AppCompatActivity {
                 showDialog2(childIv);
             }
         });
+        ivPlayCtTitle02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private String names[] = {"相册","相机"};

@@ -11,11 +11,13 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import andoop.android.amstory.customview.FlowLayout;
@@ -38,6 +40,8 @@ public class AllCatesActivity extends AppCompatActivity {
     @InjectView(R.id.tv_ct_title03)
     TextView tv_title;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,15 @@ public class AllCatesActivity extends AppCompatActivity {
         initData();
     }
 
+
+    private String names1[] = {"0-3个月","3-6个月","6-12个月","12-18个月"
+            ,"18-24个月","2-3岁","3-4岁","4-5岁","5-6岁"};
+    private String names2[] = {"奇幻冒险","科普故事","诗歌辞赋","神话传说","可爱卡通","儿歌歌谣"
+            ,"童话经典","古诗文言","国学经典"};
+    private String names3[] = {"温馨伴眠","玩乐助兴","亲子时光","欢乐出行"
+            ,"吃饭喝水","运动练习","宝宝早安","洗澡戏水"};
+    private String names4[]={"文明礼仪学习","爱的教育","社交能力培养","情绪管理学习","自我认知训练",
+            "想象力培养","表达能力培养","生活常识普及","生活习惯养成","健康知识教育","入园前教育","文学素养熏陶","亲近自然"};
     private void initData() {
         mData=new ArrayList<>();
         recyclerView.setAdapter(new BaseAdapter() {
@@ -77,12 +90,34 @@ public class AllCatesActivity extends AppCompatActivity {
                 View inflate = View.inflate(AllCatesActivity.this, R.layout.item_allcates, null);
                 final Cates cates = mData.get(position);
                 TextView tvcate= (TextView) inflate.findViewById(R.id.tv_item_allcates);
+                ImageView fenlei = (ImageView) inflate.findViewById(R.id.fenlei);
                 FlowLayout flowLayout= (FlowLayout) inflate.findViewById(R.id.fl_item_allcates);
                 tvcate.setText(cates.cat);
-                for (int i = 0; i <cates.list.length ; i++) {
+                List<String> names= new ArrayList<>();
+                if (position==0){
+                    names.clear();
+                    names.addAll(Arrays.asList(names1));
+                    fenlei.setImageResource(R.drawable.feileinianling);
+                }
+                if (position==1){
+                    names.clear();
+                    names.addAll(Arrays.asList(names2));
+                    fenlei.setImageResource(R.drawable.fenleileixing);
+                }
+                if (position==2){
+                    names.clear();
+                    names.addAll(Arrays.asList(names3));
+                    fenlei.setImageResource(R.drawable.fenleisucai);
+                }
+                if (position==3){
+                    names.clear();
+                    names.addAll(Arrays.asList(names4));
+                    fenlei.setImageResource(R.drawable.fenleign);
+                }
+                for (int i = 0; i <names.size() ; i++) {
                     TextView textView = new TextView(AllCatesActivity.this);
                     textView.setBackgroundResource(R.drawable.cate_bg_selector);
-                    final String text=cates.list[i];
+                    final String text=names.get(i);
                     textView.setText(text);
                     textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,12);
                     textView.setGravity(Gravity.CENTER);

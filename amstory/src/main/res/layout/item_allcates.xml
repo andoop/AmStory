@@ -25,6 +25,7 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:id="@+id/fenlei"
                 android:src="@mipmap/ic_launcher"/>
             <TextView
                 android:id="@+id/tv_item_allcates"
@@ -43,7 +44,5 @@
             app:vertical_spacing="10dp"
             android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"/>
-
-
     </LinearLayout>
 </LinearLayout>

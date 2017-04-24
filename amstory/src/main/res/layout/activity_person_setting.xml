@@ -7,7 +7,27 @@
     android:background="#ffffff"
     android:layout_height="match_parent">
 
-    <include layout="@layout/comment_title_02"></include>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:background="#fff"
+        android:layout_height="@dimen/title_height">
+        <ImageView
+            android:id="@+id/iv_back_ct_title02"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/return_icon"/>
+
+        <ImageView
+            android:id="@+id/iv_play_ct_title02"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="18dp"
+            android:src="@drawable/success"/>
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -51,15 +71,21 @@
             style="@style/ET_UserInfo"
             />
 
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/right"/>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#C2C2C2"
-        />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:background="#C2C2C2"-->
+        <!--/>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -74,14 +100,20 @@
             android:gravity="center_vertical"
             style="@style/ET_UserInfo"
             />
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/right"/>
     </LinearLayout>
-    <View
+   <!-- <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="#C2C2C2"
-        />
+        />-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -97,14 +129,20 @@
             style="@style/ET_UserInfo"
             />
 
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/right"/>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#C2C2C2"
-        />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:background="#C2C2C2"-->
+        <!--/>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -119,6 +157,12 @@
             android:gravity="center_vertical"
             style="@style/ET_UserInfo"
             />
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/right"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -167,7 +211,12 @@
                     android:gravity="center_vertical"
                     style="@style/ET_UserInfo"
                     />
-
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/right"/>
             </LinearLayout>
 
             <LinearLayout
@@ -183,7 +232,12 @@
                     android:gravity="center_vertical"
                     style="@style/ET_UserInfo"
                     />
-
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/right"/>
             </LinearLayout>
 
             <LinearLayout
@@ -198,6 +252,12 @@
                     android:gravity="center_vertical"
                     style="@style/ET_UserInfo"
                     />
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/right"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
