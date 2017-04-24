@@ -606,19 +606,12 @@ public class SoundFile implements Serializable{
             startSamplePos = mNumSamples;
 
         //TODO:实现方法
-
         short[] shortsInsert = new short[src.mNumSamples];
         src.getSamples().rewind();
         src.getSamples().get(shortsInsert);
-
-        Log.e("----->" + "SoundFile", "InsertRecord2:" + shortsInsert.length);
-
         short[] shortsEnd = new short[shortsMy.length - startSamplePos];
-
         short[] shortsBgn = new short[startSamplePos];
-
-
-        ByteBuffer newByteBuffer = ByteBuffer.allocate(src.getSamples().capacity() +mDecodedBytes.capacity()+10 * mSampleRate * 2);
+        ByteBuffer newByteBuffer = ByteBuffer.allocate((src.mDecodedSamples.capacity() +mDecodedBytes.capacity()+10 * mSampleRate * 2)*2);
         mDecodedBytes.rewind();
         newByteBuffer.put(mDecodedBytes);
         mDecodedBytes=newByteBuffer;
@@ -633,19 +626,14 @@ public class SoundFile implements Serializable{
             else
                 shortsEnd[i - startSamplePos] = shortsMy[i];
         }
-
         mDecodedSamples.clear();
         mDecodedSamples.put(shortsBgn);
         mDecodedSamples.put(shortsInsert);
         mDecodedSamples.put(shortsEnd);
-        Log.e("----->" + "SoundFile", "InsertRecord2:" +mNumSamples+":"+mDecodedSamples.position() );
         if (!mProgressListener.reportProgress(
                 (float) (mDecodedSamples.position()) / mSampleRate)) {
         }
-
         initData();
-
-        Log.e("----->" + "SoundFile", "InsertRecord3:" +mNumSamples+":"+mDecodedSamples.position() );
     }
 
     //删除指定区间的录音

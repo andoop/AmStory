@@ -797,10 +797,10 @@ public class StoryViewer implements WaveformView.WaveformListener, MarkerView.Ma
         for (int i =insertPos+1; i < this.lyricView.getChildCount(); i++) {
             View childAt = this.lyricView.getChildAt(i);
             LycTime lycTime= (LycTime) childAt.getTag();
-            Log.e("----->" + "StoryViewer", "insertRecord:调整前"+i + ":"+lycTime.start+":"+lycTime.end);
+           // Log.e("----->" + "StoryViewer", "insertRecord:调整前"+i + ":"+lycTime.start+":"+lycTime.end);
             lycTime.start=lycTime.start+insertDuration;
             lycTime.end=lycTime.end+insertDuration;
-            Log.e("----->" + "StoryViewer", "insertRecord:从新调整"+i + ":"+lycTime.start+":"+lycTime.end);
+            //Log.e("----->" + "StoryViewer", "insertRecord:从新调整"+i + ":"+lycTime.start+":"+lycTime.end);
             childAt.setTag(lycTime);
         }
         //
