@@ -2,6 +2,9 @@ package andoop.android.amstory;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
+
+import com.umeng.analytics.MobclickAgent;
 
 import andoop.android.amstory.utils.UILImageLoader;
 import cn.finalteam.galleryfinal.CoreConfig;
@@ -21,7 +24,13 @@ public class ImApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
+        MultiDex.install(this);
         initGallery();
+        initUmeng();
+    }
+
+    private void initUmeng() {
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
     }
 
     private void initGallery() {

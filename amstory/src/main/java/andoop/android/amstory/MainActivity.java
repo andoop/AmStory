@@ -15,6 +15,7 @@ import com.andoop.andooptabframe.AndoopPage;
 import com.andoop.andooptabframe.AndoopTabFrame;
 import com.andoop.andooptabframe.core.AndoopFrame;
 import com.andoop.andooptabframe.core.TabFrameConfig;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -118,5 +119,16 @@ public class MainActivity extends FragmentActivity {
                 break;
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

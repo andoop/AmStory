@@ -2,7 +2,6 @@ package andoop.android.amstory.wxapi;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.provider.Settings;
 
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
