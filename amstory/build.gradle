@@ -8,6 +8,8 @@ repositories {
 android {
     compileSdkVersion 24
     buildToolsVersion '25.0.0'
+    /**兼容Android6.0系统所需，如果这句话报错，可在dependencies标签下使用compile 'cn.bmob.android:http-legacy:1.0'**/
+    useLibrary 'org.apache.http.legacy'
 
     lintOptions {
         checkReleaseBuilds true
@@ -93,4 +95,7 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.8'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'com.google.android:multidex:0.1'
+    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
+    compile 'cn.bmob.android:http-legacy:1.0'
 }
