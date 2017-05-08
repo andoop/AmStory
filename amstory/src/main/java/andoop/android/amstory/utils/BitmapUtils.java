@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 
+import java.io.ByteArrayOutputStream;
+
 /**
  * Created by shkstart on 2016/12/7 0007.
  */
@@ -43,14 +45,19 @@ public class BitmapUtils {
 
     //实现图片的压缩处理
     //设置宽高必须使用浮点型，否则导致压缩的比例：0
-    public static Bitmap zoom(Bitmap source, float width , float height){
+    public static Bitmap zoom(Bitmap source, float width, float height) {
 
         Matrix matrix = new Matrix();
         //图片的压缩处理
-        matrix.postScale(width / source.getWidth(),height / source.getHeight());
+        matrix.postScale(width / source.getWidth(), height / source.getHeight());
 
         Bitmap bitmap = Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, false);
         return bitmap;
     }
 
+    public static byte[] Bitmap2Bytes(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
 }
