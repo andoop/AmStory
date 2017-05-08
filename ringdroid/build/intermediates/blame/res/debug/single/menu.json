@@ -1,18 +1,26 @@
 [
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\menu\\select_options.xml",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\menu\\select_options.xml"
+        "merged": "/Users/wsy/Desktop/projects/android/AmStory/G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\menu\\select_options.xml",
+        "source": "/Users/wsy/Desktop/projects/android/AmStory/G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\menu\\select_options.xml"
     },
     {
-        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\menu\\select_options.xml",
-        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\menu\\select_options.xml"
+        "merged": "/Users/wsy/Desktop/projects/android/AmStory/ringdroid/build/intermediates/res/merged/debug/menu/select_options.xml",
+        "source": "/Users/wsy/Desktop/projects/android/AmStory/ringdroid/src/main/res/menu/select_options.xml"
     },
     {
-        "merged": "G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\menu\\edit_options.xml",
-        "source": "G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\menu\\edit_options.xml"
+        "merged": "/Users/wsy/Desktop/projects/android/AmStory/D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\menu\\select_options.xml",
+        "source": "/Users/wsy/Desktop/projects/android/AmStory/D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\menu\\select_options.xml"
     },
     {
-        "merged": "D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\menu\\edit_options.xml",
-        "source": "D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\menu\\edit_options.xml"
+        "merged": "/Users/wsy/Desktop/projects/android/AmStory/G:\\sdk\\project\\XXX\\ringdroid\\build\\intermediates\\res\\merged\\debug\\menu\\edit_options.xml",
+        "source": "/Users/wsy/Desktop/projects/android/AmStory/G:\\sdk\\project\\XXX\\ringdroid\\src\\main\\res\\menu\\edit_options.xml"
+    },
+    {
+        "merged": "/Users/wsy/Desktop/projects/android/AmStory/ringdroid/build/intermediates/res/merged/debug/menu/edit_options.xml",
+        "source": "/Users/wsy/Desktop/projects/android/AmStory/ringdroid/src/main/res/menu/edit_options.xml"
+    },
+    {
+        "merged": "/Users/wsy/Desktop/projects/android/AmStory/D:\\company\\lvyin\\AmStory\\ringdroid\\build\\intermediates\\res\\merged\\debug\\menu\\edit_options.xml",
+        "source": "/Users/wsy/Desktop/projects/android/AmStory/D:\\company\\lvyin\\AmStory\\ringdroid\\src\\main\\res\\menu\\edit_options.xml"
     }
 ]
