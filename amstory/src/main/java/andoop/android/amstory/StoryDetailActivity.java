@@ -2,8 +2,8 @@ package andoop.android.amstory;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,8 +12,10 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import andoop.android.amstory.module.Story;
+import andoop.android.amstory.utils.ToastUtils;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class StoryDetailActivity extends AppCompatActivity {
     @InjectView(R.id.tv_asd_title)
@@ -24,6 +26,10 @@ public class StoryDetailActivity extends AppCompatActivity {
     ImageView iv_icon;
     @InjectView(R.id.tv_sd_content)
     TextView tv_content;
+    @InjectView(R.id.iv_share)
+    ImageView mShare;
+    @InjectView(R.id.iv_like)
+    ImageView mLike;
 
     private Story mStory;
 
@@ -52,6 +58,22 @@ public class StoryDetailActivity extends AppCompatActivity {
 
     }
 
+    //绑定事件
+    @OnClick({R.id.iv_share,R.id.iv_like})
+    public void onClick(View view){
+        switch (view.getId()) {
+            //发分享
+            case  R.id.iv_share:
+
+                ToastUtils.showToast(StoryDetailActivity.this,"分享");
+
+            case  R.id.iv_like:
+
+                ToastUtils.showToast(StoryDetailActivity.this,"喜欢");
+                break;
+        }
+    }
+
     //解析intent数据
     private Story resoveDataFromIntent() {
 
@@ -62,6 +84,7 @@ public class StoryDetailActivity extends AppCompatActivity {
             return (Story) extras.getSerializable("story_data");
         }
     }
+
 
 
     private void bindData() {

@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,14 +20,15 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import andoop.android.amstory.MPlayerActivity;
 import andoop.android.amstory.R;
 import andoop.android.amstory.StoryDetailActivity;
 import andoop.android.amstory.StoryMakeActivity;
 import andoop.android.amstory.data.DataManager;
 import andoop.android.amstory.module.Story;
+import andoop.android.amstory.utils.ToastUtils;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /* * * * * * * * * * * * * * * * * * *
 * author :andoop　　　　　　　　　　　
@@ -195,6 +195,12 @@ public class DataListPager extends Fragment {
         TextView textView;
         @InjectView(R.id.iv_list_listen)
         ImageView type;
+        @InjectView(R.id.iv_share)
+        ImageView share;
+        @InjectView(R.id.iv_like)
+        ImageView like;
+        @InjectView(R.id.iv_praise)
+        ImageView praise;
 
         public MViewHodler(View itemView) {
             super(itemView);
@@ -218,6 +224,22 @@ public class DataListPager extends Fragment {
                     }
                 }
             });
+        }
+
+        @OnClick({R.id.iv_share,R.id.iv_like,R.id.iv_praise})
+        public void onClick(View view){
+            switch (view.getId()) {
+                case R.id.iv_share :
+
+                    ToastUtils.showToast(getActivity(),"分享");
+                case R.id.iv_like :
+
+                    ToastUtils.showToast(getActivity(),"喜欢");
+                case R.id.iv_praise :
+
+                    ToastUtils.showToast(getActivity(),"点赞");
+                    break;
+            }
         }
     }
 
