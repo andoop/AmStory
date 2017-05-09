@@ -66,7 +66,7 @@ public class StoryDetailActivity extends AppCompatActivity {
             case  R.id.iv_share:
 
                 ToastUtils.showToast(StoryDetailActivity.this,"分享");
-
+                break;
             case  R.id.iv_like:
 
                 ToastUtils.showToast(StoryDetailActivity.this,"喜欢");

@@ -28,15 +28,15 @@ public class ImApplication extends Application {
         MultiDex.install(this);
         initGallery();
         initUmeng();
-        initBmob();
+        initBomb();
     }
 
     //初始化
-    private void initBmob() {
+    private void initBomb() {
         //提供以下两种方式进行初始化操作：
 
         //第一：默认初始化
-        Bmob.initialize(this, "bdf96571ec27fd2fa5b24a562ee1fd15");
+        Bmob.initialize(this, "Your Application ID");
 
         //第二：自v3.4.7版本开始,设置BmobConfig,允许设置请求超时时间、文件分片上传时每片的大小、文件的过期时间(单位为秒)，
         //BmobConfig config =new BmobConfig.Builder(this)

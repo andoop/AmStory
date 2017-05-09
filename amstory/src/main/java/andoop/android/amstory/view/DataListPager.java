@@ -232,9 +232,11 @@ public class DataListPager extends Fragment {
                 case R.id.iv_share :
 
                     ToastUtils.showToast(getActivity(),"分享");
+                    break;
                 case R.id.iv_like :
 
                     ToastUtils.showToast(getActivity(),"喜欢");
+                    break;
                 case R.id.iv_praise :
 
                     ToastUtils.showToast(getActivity(),"点赞");
