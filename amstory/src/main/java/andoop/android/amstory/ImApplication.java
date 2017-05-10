@@ -29,6 +29,7 @@ public class ImApplication extends Application {
         initUmeng();
     }
 
+
     private void initUmeng() {
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
     }

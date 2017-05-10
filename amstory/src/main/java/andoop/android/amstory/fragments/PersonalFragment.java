@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.andoop.andooptabframe.AndoopPage;
 import com.squareup.picasso.Picasso;
@@ -18,15 +17,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import andoop.android.amstory.MainActivity;
 import andoop.android.amstory.R;
-import andoop.android.amstory.SearchActivity;
+import andoop.android.amstory.StoryDetailActivity;
 import andoop.android.amstory.base.BasePager;
-import andoop.android.amstory.data.DataManager;
+import andoop.android.amstory.db.PlayRecordDB;
 import andoop.android.amstory.module.Story;
 import andoop.android.amstory.utils.SpUtils;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /* * * * * * * * * * * * * * * * * * *
@@ -38,6 +37,8 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 public class PersonalFragment extends BasePager {
     @InjectView(R.id.rv_pf)
     RecyclerView recyclerView;
+    @InjectView(R.id.tv_no_data)
+    TextView tv_no_data;
     List<Story> mData;
     @InjectView(R.id.iv_pf_head)
     ImageView ivPfHead;
@@ -45,7 +46,10 @@ public class PersonalFragment extends BasePager {
     TextView tvPfName;
     @InjectView(R.id.child_iv)
     ImageView childIv;
+    @InjectView(R.id.tv_del)
+    TextView mTvDel;
     private ImageView ivStCt;
+    private PlayRecordDB playRecordDB;
 
     @Override
     protected View initGui(LayoutInflater inflater) {
@@ -90,41 +94,76 @@ public class PersonalFragment extends BasePager {
     @Override
     protected void initData() {
         mData = new ArrayList<>();
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        linearLayoutManager.setStackFromEnd(true);//列表再底部开始展示，反转后由上面开始展示
+        linearLayoutManager.setReverseLayout(true);//列表翻转
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(new MRVAdapter());
-        DataManager.newInstance(getActivity()).getStories(new DataManager.StoryDataListener<List<Story>>() {
-            @Override
-            public void onSuccess(List<Story> data, int page) {
-                if (data != null) {
-                    mData.clear();
-                    mData.addAll(data);
-                    recyclerView.getAdapter().notifyDataSetChanged();
 
-                } else {
-                    Toast.makeText(PersonalFragment.this.getActivity(), "没有数据", Toast.LENGTH_SHORT).show();
-                }
-            }
+        playRecordDB = new PlayRecordDB(getActivity());
 
-            @Override
-            public void onFail(String error) {
-                Toast.makeText(PersonalFragment.this.getActivity(), error, Toast.LENGTH_SHORT).show();
-            }
-        }, DataManager.TYPE_FAXIAN, 0);
+        getPlayRecord();
 
-        //设置监听
-        initListener();
+//        DataManager.newInstance(getActivity()).getStories(new DataManager.StoryDataListener<List<Story>>() {
+//            @Override
+//            public void onSuccess(List<Story> data, int page) {
+//                if (data != null) {
+//                    mData.clear();
+//                    mData.addAll(data);
+//                    recyclerView.getAdapter().notifyDataSetChanged();
+//
+//                } else {
+//                    Toast.makeText(PersonalFragment.this.getActivity(), "没有数据", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFail(String error) {
+//                Toast.makeText(PersonalFragment.this.getActivity(), error, Toast.LENGTH_SHORT).show();
+//            }
+//        }, DataManager.TYPE_FAXIAN, 0);
     }
 
-    private void initListener() {
 
+    //获取听过的记录
+    private void getPlayRecord() {
+        ArrayList<Story> playRecord = playRecordDB.getPlayRecord();
+//        ToastUtils.showToast(getActivity(),playRecord.size()+"");
+        if(playRecord.size()>0) {
+            recyclerView.setVisibility(View.VISIBLE);
+            tv_no_data.setVisibility(View.GONE);
+            mData.clear();
+            mData.addAll(playRecord);
+            recyclerView.getAdapter().notifyDataSetChanged();
+
+        }else {
+            recyclerView.setVisibility(View.GONE);
+            tv_no_data.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @OnClick({R.id.tv_del})
+    public void OnClick(View v){
+        switch (v.getId()) {
+            case R.id.tv_del :
+
+                if(playRecordDB != null && null != getActivity() ) {
+                    playRecordDB.delAlerts();
+                    getPlayRecord();
+                }
+                break;
+        }
     }
 
     @Override
     public void onSelect(AndoopPage andoopPage, int pos) {
 
+        if(pos == 3 && playRecordDB != null) {
+
+            getPlayRecord();
+        }
     }
-
-
 
 
     @Override
@@ -144,10 +183,20 @@ public class PersonalFragment extends BasePager {
         @Override
         public void onBindViewHolder(MViewHolder holder, int position) {
 
-            Story story = mData.get(position);
+            final Story story = mData.get(position);
             Picasso.with(PersonalFragment.this.getActivity())
                     .load(story.img)
                     .into(holder.iv_icon);
+            holder.iv_icon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), StoryDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("story_data", story);
+                    intent.putExtras(bundle);
+                    getActivity().startActivity(intent);
+                }
+            });
         }
 
         @Override

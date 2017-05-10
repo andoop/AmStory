@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import andoop.android.amstory.db.PlayRecordDB;
 import andoop.android.amstory.module.Story;
 import andoop.android.amstory.utils.ToastUtils;
 import butterknife.ButterKnife;
@@ -56,6 +57,9 @@ public class StoryDetailActivity extends AppCompatActivity {
         //绑定数据
         bindData();
 
+        PlayRecordDB playRecordHelp = new PlayRecordDB(this);
+        boolean b = playRecordHelp.addPlayRecord(mStory);//插入数据库
+        ToastUtils.showToast(this,b+"");
     }
 
     //绑定事件
