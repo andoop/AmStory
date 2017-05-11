@@ -2,7 +2,6 @@ package andoop.android.amstory;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
 
 import com.umeng.analytics.MobclickAgent;
 
@@ -24,7 +23,7 @@ public class ImApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
-        MultiDex.install(this);
+//        MultiDex.install(this);
         initGallery();
         initUmeng();
     }

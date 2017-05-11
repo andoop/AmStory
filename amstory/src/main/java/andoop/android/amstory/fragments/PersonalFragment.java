@@ -20,7 +20,7 @@ import java.util.List;
 import andoop.android.amstory.R;
 import andoop.android.amstory.StoryDetailActivity;
 import andoop.android.amstory.base.BasePager;
-import andoop.android.amstory.db.PlayRecordDB;
+import andoop.android.amstory.db.PlayRecordDao;
 import andoop.android.amstory.module.Story;
 import andoop.android.amstory.utils.SpUtils;
 import butterknife.ButterKnife;
@@ -49,7 +49,7 @@ public class PersonalFragment extends BasePager {
     @InjectView(R.id.tv_del)
     TextView mTvDel;
     private ImageView ivStCt;
-    private PlayRecordDB playRecordDB;
+    private PlayRecordDao playRecordDao;
 
     @Override
     protected View initGui(LayoutInflater inflater) {
@@ -101,7 +101,8 @@ public class PersonalFragment extends BasePager {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(new MRVAdapter());
 
-        playRecordDB = new PlayRecordDB(getActivity());
+        //获取历史记录数据
+        playRecordDao = new PlayRecordDao(getActivity());
 
         getPlayRecord();
 
@@ -128,7 +129,7 @@ public class PersonalFragment extends BasePager {
 
     //获取听过的记录
     private void getPlayRecord() {
-        ArrayList<Story> playRecord = playRecordDB.getPlayRecord();
+        ArrayList<Story> playRecord = playRecordDao.getPlayRecord();
 //        ToastUtils.showToast(getActivity(),playRecord.size()+"");
         if(playRecord.size()>0) {
             recyclerView.setVisibility(View.VISIBLE);
@@ -148,8 +149,8 @@ public class PersonalFragment extends BasePager {
         switch (v.getId()) {
             case R.id.tv_del :
 
-                if(playRecordDB != null && null != getActivity() ) {
-                    playRecordDB.delAlerts();
+                if(playRecordDao != null && null != getActivity() ) {
+                    playRecordDao.delAlerts();
                     getPlayRecord();
                 }
                 break;
@@ -159,7 +160,7 @@ public class PersonalFragment extends BasePager {
     @Override
     public void onSelect(AndoopPage andoopPage, int pos) {
 
-        if(pos == 3 && playRecordDB != null) {
+        if(pos == 3 && playRecordDao != null) {
 
             getPlayRecord();
         }

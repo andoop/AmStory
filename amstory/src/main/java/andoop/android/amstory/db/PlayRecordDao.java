@@ -4,21 +4,18 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
 import andoop.android.amstory.module.Story;
 
 /**
- * Created by Administrator on 2017/5/10/010.
+ * Created by Administrator on 2017/5/11/011.
  */
 
-public class PlayRecordDB extends SQLiteOpenHelper {
+public class PlayRecordDao {
 
-    private static final String DATABASE_NAME = "amStory.db";
-    private static final int DATABASE_VERSION = 1;
-    private static final String TABLE_NAME = "playrecord";
+    private static final String TABLE_NAME = DBHelper.TABLE_PLLAYRECORD;
     private static final String TITLE = "title";
     private static final String VID = "id";
     private static final String AUTHOR = "author";
@@ -26,35 +23,18 @@ public class PlayRecordDB extends SQLiteOpenHelper {
     private static final String IMG = "img";
     private static final String VOICE = "voice";
     private static final String[] FROM = { VID, TITLE, AUTHOR, CONTENT, IMG, VOICE};
+    private DBHelper dbHelper;
 
-    public PlayRecordDB(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
+    public PlayRecordDao(Context context){
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " ("
-                + VID + " TEXT PRIMARY KEY, "
-                + TITLE + " TEXT, "
-                + AUTHOR + " TEXT, "
-                + CONTENT + " TEXT, "
-                + IMG + " TEXT, "
-                + VOICE + " TEXT);");
-    }
-
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
+        dbHelper = new DBHelper(context);
     }
 
     //添加播放记录数据
     public boolean addPlayRecord(Story playrecord) {
 
         boolean result = false;
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(VID, playrecord.id);
         values.put(TITLE, playrecord.title);
@@ -118,7 +98,7 @@ public class PlayRecordDB extends SQLiteOpenHelper {
 
         Story playrecord = null;
         ArrayList<Story> arrayList = new ArrayList<Story>();
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_NAME, FROM, null, null, null, null, null);
         cursor.moveToFirst();
@@ -149,7 +129,7 @@ public class PlayRecordDB extends SQLiteOpenHelper {
 
     public void delAlerts() {
 
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
         db.delete(TABLE_NAME,null,null);
         db.close();
     }

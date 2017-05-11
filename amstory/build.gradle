@@ -94,5 +94,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.alibaba:fastjson:1.2.8'
     compile 'com.umeng.analytics:analytics:latest.integration'
-    compile 'com.google.android:multidex:0.1'
+//    compile 'com.google.android:multidex:0.1'
 }
