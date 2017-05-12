@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.andoop.andooptabframe.AndoopPage;
@@ -23,6 +24,7 @@ import andoop.android.amstory.base.BasePager;
 import andoop.android.amstory.db.PlayRecordDao;
 import andoop.android.amstory.module.Story;
 import andoop.android.amstory.utils.SpUtils;
+import andoop.android.amstory.utils.ToastUtils;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -44,12 +46,40 @@ public class PersonalFragment extends BasePager {
     ImageView ivPfHead;
     @InjectView(R.id.tv_pf_name)
     TextView tvPfName;
-    @InjectView(R.id.child_iv)
-    ImageView childIv;
+    @InjectView(R.id.person_works) //作品
+    LinearLayout mPersonWorks;
+    @InjectView(R.id.person_link) //喜欢
+    LinearLayout mPersonLinks;
+    @InjectView(R.id.person_follow) //关注
+    LinearLayout mPersonFollow;
+    @InjectView(R.id.person_fans) //粉丝
+    LinearLayout mPersonFans;
+//    @InjectView(R.id.child_iv) //宝宝头像
+//    ImageView childIv;
     @InjectView(R.id.tv_del)
     TextView mTvDel;
     private ImageView ivStCt;
     private PlayRecordDao playRecordDao;
+
+    @OnClick({R.id.person_works,R.id.person_link,R.id.person_follow,R.id.person_fans})
+    public void onClick(View view){
+
+        switch (view.getId()) {
+            case R.id.person_works :
+
+                ToastUtils.showToast(getActivity(),"作品");
+                break;
+            case R.id.person_link :
+                ToastUtils.showToast(getActivity(),"喜欢");
+                break;
+            case R.id.person_follow :
+                ToastUtils.showToast(getActivity(),"关注");
+                break;
+            case R.id.person_fans :
+                ToastUtils.showToast(getActivity(),"粉丝");
+                break;
+        }
+    }
 
     @Override
     protected View initGui(LayoutInflater inflater) {
@@ -70,17 +100,18 @@ public class PersonalFragment extends BasePager {
                     .transform(new CropCircleTransformation())
                     .into(ivPfHead);
         }
-        String childImage = SpUtils.getInstace().getString(SpUtils.CHILD_IMAGE,"");
-        if (!childImage.equals("")){
-            Picasso.with(getContext()).load(new File(childImage))
-                    .transform(new CropCircleTransformation())
-                    .into(childIv);
-        }else{
-            Picasso.with(getContext())
-                    .load(R.drawable.my_user_default)
-                    .transform(new CropCircleTransformation())
-                    .into(childIv);
-        }
+        //先取消了宝宝的头像显示
+//        String childImage = SpUtils.getInstace().getString(SpUtils.CHILD_IMAGE,"");
+//        if (!childImage.equals("")){
+//            Picasso.with(getContext()).load(new File(childImage))
+//                    .transform(new CropCircleTransformation())
+//                    .into(childIv);
+//        }else{
+//            Picasso.with(getContext())
+//                    .load(R.drawable.my_user_default)
+//                    .transform(new CropCircleTransformation())
+//                    .into(childIv);
+//        }
 
     }
 

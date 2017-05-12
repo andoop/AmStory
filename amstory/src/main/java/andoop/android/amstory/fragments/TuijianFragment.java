@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -110,6 +111,7 @@ public class TuijianFragment extends BasePager {
                 showError(error);
             }
         }, DataManager.TYPE_TUIJIAN, 0);
+
     }
 
     //初始化itme视图
@@ -117,22 +119,23 @@ public class TuijianFragment extends BasePager {
         final Story story = mData.get(position);
         View view = View.inflate(getActivity(), R.layout.tuijian_fragment_vp_item, null);
         ImageView icon = (ImageView) view.findViewById(R.id.iv_icon_tuijian_vp_item);
+        CardView itme = (CardView) view.findViewById(R.id.itme_card);
         TextView name = (TextView) view.findViewById(R.id.tv_name_tuijian_item);
         TextView author = (TextView) view.findViewById(R.id.tv_author_tuijian_item);
         TextView con = (TextView) view.findViewById(R.id.tv_content_tuijian_item);
-        view.findViewById(R.id.iv_play_tuijian_vp_item).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //打开详情页面
-                openDetail(getActivity(), story);
-            }
-        });
 
         icon.setScaleType(ImageView.ScaleType.FIT_XY);
         Picasso.with(getActivity()).load(story.img).into(icon);
         name.setText(story.title);
         author.setText(story.author);
         con.setText(story.content.replace("&&&", ""));
+        itme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //打开详情页面
+                openDetail(getActivity(), story);
+            }
+        });
 
         return view;
     }

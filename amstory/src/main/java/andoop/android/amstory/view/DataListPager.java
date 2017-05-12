@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -173,13 +174,19 @@ public class DataListPager extends Fragment {
 
             Story story = mData.get(position);
             holder.textView.setText(story.title);
-            Picasso.with(DataListPager.this.getActivity()).load(story.img).into(holder.icon);
-            if(page==1){
-                holder.type.setImageResource(R.drawable.ic_listen_icon);
-            }else {
-                holder.type.setImageResource(R.drawable.ic_icon_speak);
+            if(TextUtils.isEmpty(story.author)) {
+
+                story.author = "未知";
             }
+            holder.author.setText(story.author);
+            Picasso.with(DataListPager.this.getActivity())
+                    .load(story.img)
+                    .into(holder.icon);
             holder.icon.setTag(story);
+
+            holder.content.setText(story.content.replace("&&&", ""));
+            holder.title.setText(story.title+" — "+story.author);
+
         }
 
         @Override
@@ -193,14 +200,18 @@ public class DataListPager extends Fragment {
         ImageView icon;
         @InjectView(R.id.list_name)
         TextView textView;
-        @InjectView(R.id.iv_list_listen)
-        ImageView type;
         @InjectView(R.id.iv_share)
         ImageView share;
         @InjectView(R.id.iv_like)
         ImageView like;
         @InjectView(R.id.iv_praise)
         ImageView praise;
+        @InjectView(R.id.tv_content)
+        TextView content;
+        @InjectView(R.id.tv_title)
+        TextView title;
+        @InjectView(R.id.list_author)
+        TextView author;
 
         public MViewHodler(View itemView) {
             super(itemView);

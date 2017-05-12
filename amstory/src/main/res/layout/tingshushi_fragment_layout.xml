@@ -21,8 +21,8 @@
             android:layout_weight="1"
             android:layout_height="30dp"
             android:background="#fff"
-            app:tabIndicatorColor="@color/colorPrimaryDark"
-            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabIndicatorColor="@color/blue"
+            app:tabSelectedTextColor="@color/blue"
             app:tabTextColor="@color/appgray"/>
 
         <View

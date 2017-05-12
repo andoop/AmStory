@@ -34,6 +34,7 @@
     <color name="appblue">#7babfd</color>
     <color name="holo_blue">#3a69f7</color>
     <color name="appgray">#444444</color>
+    <color name="blue">#7FABFD</color>
 
     <color name="person_bgcolor">#f0ffff</color>
     <color name="base_text_color">#7babfd</color>
