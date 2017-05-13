@@ -10,13 +10,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-
     private static final String DATABASE_NAME = "amStory.db";
     private static final int DATABASE_VERSION = 2;
     //创建表,历史记录表
-    public static final  String TABLE_PLLAYRECORD="playrecord";
+    public static final String TABLE_PLLAYRECORD = "playrecord";
 
-    private static final String CREATE_PLLAYRECORD_SQL="CREATE TABLE " + TABLE_PLLAYRECORD + " ("
+    private static final String CREATE_PLLAYRECORD_SQL = "CREATE TABLE " + TABLE_PLLAYRECORD + " ("
             + "id TEXT PRIMARY KEY, "
             + "title TEXT, "
             + "author TEXT, "
@@ -35,11 +34,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(newVersion > oldVersion)
-        {
-            db.execSQL("DROP TABLE IF EXISTS "+ TABLE_PLLAYRECORD);
+        if (newVersion > oldVersion) {
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLLAYRECORD);
             onCreate(db);
-
         }
     }
 }
