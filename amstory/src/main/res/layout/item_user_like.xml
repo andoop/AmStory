@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dimens_5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dimens_25dp"
+        android:paddingLeft="@dimen/dimens_15dp"
+        android:paddingRight="@dimen/dimens_15dp"
+        android:paddingTop="@dimen/dimens_8dp">
+
+
+        <TextView
+            android:id="@+id/user_like_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="录制者"
+            android:textColor="@color/BFBFBF"
+            android:textSize="@dimen/dimens_12sp" />
+
+        <TextView
+            android:id="@+id/user_like_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="上传时间"
+            android:textColor="@color/BFBFBF"
+            android:textSize="@dimen/dimens_12sp" />
+
+        <ImageView
+            android:id="@+id/user_like_icon"
+            android:layout_width="@dimen/dimens_80dp"
+            android:layout_height="@dimen/dimens_80dp"
+            android:layout_below="@id/user_like_name"
+            android:layout_marginTop="@dimen/dimens_8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/header" />
+
+        <TextView
+            android:id="@+id/user_like_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/user_like_icon"
+            android:layout_marginLeft="@dimen/dimens_15dp"
+            android:layout_toEndOf="@id/user_like_icon"
+            android:text="作品名"
+            android:textColor="@color/appgray"
+            android:textSize="@dimen/dimens_15sp" />
+
+        <TextView
+            android:id="@+id/user_author_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/user_like_icon"
+            android:layout_marginLeft="@dimen/dimens_20dp"
+            android:layout_marginTop="@dimen/dimens_1dp"
+            android:layout_toRightOf="@id/user_like_author"
+            android:text="时长"
+            android:textSize="@dimen/dimens_13sp" />
+
+        <TextView
+            android:id="@+id/user_like_listenin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_15dp"
+            android:layout_below="@id/user_like_author"
+            android:layout_marginLeft="@dimen/dimens_15dp"
+            android:layout_toEndOf="@+id/user_like_icon"
+            android:drawableLeft="@drawable/like_paint"
+            android:drawablePadding="@dimen/dimens_5dp"
+            android:text="收听数"
+            android:textSize="@dimen/dimens_13sp" />
+
+        <TextView
+            android:id="@+id/user_like_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_15dp"
+            android:layout_marginLeft="@dimen/dimens_10dp"
+            android:layout_below="@id/user_like_author"
+            android:layout_toRightOf="@id/user_like_listenin"
+            android:drawableLeft="@drawable/like_paint"
+            android:drawablePadding="@dimen/dimens_5dp"
+            android:text="喜欢数"
+            android:textSize="@dimen/dimens_13sp" />
+
+        <ImageView
+            android:layout_width="@dimen/dimens_25dp"
+            android:layout_height="@dimen/dimens_25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/play_icon" />
+
+        <TextView
+            android:id="@+id/user_like_tag1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_13dp"
+            android:layout_marginLeft="@dimen/dimens_15dp"
+            android:layout_below="@id/user_like_listenin"
+            android:layout_toRightOf="@id/user_like_icon"
+            android:background="@drawable/tag_grey_bg"
+            android:padding="2dp"
+            android:text="分类标签"
+            android:textSize="@dimen/dimens_12sp" />
+
+        <TextView
+            android:id="@+id/user_like_tag2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_13dp"
+            android:layout_marginLeft="@dimen/dimens_15dp"
+            android:layout_below="@id/user_like_listenin"
+            android:layout_toRightOf="@id/user_like_tag1"
+            android:background="@drawable/tag_grey_bg"
+            android:padding="2dp"
+            android:text="分类标签"
+            android:textSize="@dimen/dimens_12sp" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

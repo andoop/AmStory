@@ -1,6 +1,5 @@
-package andoop.android.amstory.fragments;
+package andoop.android.amstory;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -14,7 +13,6 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.util.List;
 
-import andoop.android.amstory.R;
 import andoop.android.amstory.utils.PhotoUtils;
 import andoop.android.amstory.utils.SpUtils;
 import butterknife.ButterKnife;
@@ -33,8 +31,8 @@ public class UserSettingActivity extends AppCompatActivity {
     ImageView ivPfHead;
     @InjectView(R.id.activity_person_setting)
     LinearLayout activityPersonSetting;
-    @InjectView(R.id.child_iv)
-    ImageView childIv;
+//    @InjectView(R.id.child_iv)
+//    ImageView childIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +54,9 @@ public class UserSettingActivity extends AppCompatActivity {
                 finish();
             }
         });
-        PhotoUtils.getInstance().init(this)
-                .showPhoto(childIv, SpUtils.CHILD_IMAGE);
-        initListener();
+//        PhotoUtils.getInstance().init(this)
+//                .showPhoto(childIv, SpUtils.CHILD_IMAGE);
+//        initListener();
     }
 
     private void initListener() {
@@ -70,13 +68,13 @@ public class UserSettingActivity extends AppCompatActivity {
             }
         });
 
-        childIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pname = SpUtils.CHILD_IMAGE;
-                showDialog2(childIv);
-            }
-        });
+//        childIv.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                pname = SpUtils.CHILD_IMAGE;
+//                showDialog2(childIv);
+//            }
+//        });
         ivPlayCtTitle02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

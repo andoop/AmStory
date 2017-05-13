@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andoop.andooptabframe.AndoopPage;
@@ -97,6 +99,12 @@ public class FaxianFragment extends BasePager {
                 }
             });
 
+            holder.mTitle.setText(story.title);
+            if(TextUtils.isEmpty(story.author)) {
+
+                story.author = "未知";
+            }
+            holder.mAuthor.setText(story.author);
         }
 
         @Override
@@ -108,6 +116,10 @@ public class FaxianFragment extends BasePager {
     public class MViewHolder extends RecyclerView.ViewHolder{
         @InjectView(R.id.iv_item_rv_faxian_icon)
         ImageView iv_icon;
+        @InjectView(R.id.tv_title)
+        TextView mTitle;
+        @InjectView(R.id.tv_author)
+        TextView mAuthor;
         View mview;
         public MViewHolder(View itemView) {
             super(itemView);

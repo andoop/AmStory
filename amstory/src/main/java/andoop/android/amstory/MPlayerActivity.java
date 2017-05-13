@@ -1,26 +1,29 @@
 package andoop.android.amstory;
 
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 
 import andoop.android.amstory.customview.playerview.MusicPlayerView;
 import andoop.android.amstory.module.Story;
-import andoop.android.amstory.module.StoryModule;
 import andoop.android.amstory.soundfile.SoundFile;
 import andoop.android.amstory.utils.SamplePlayer;
+import andoop.android.amstory.utils.ToastUtils;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class MPlayerActivity extends AppCompatActivity {
     @InjectView(R.id.mpv)
@@ -29,6 +32,12 @@ public class MPlayerActivity extends AppCompatActivity {
     TextView tvname;
     @InjectView(R.id.textViewSinger)
     TextView tvsinger;
+    @InjectView(R.id.rootView) //背景图片
+    ImageView mRootView;
+    @InjectView(R.id.back) //返回
+    ImageView mBack;
+    @InjectView(R.id.playlist) //播放列表
+    ImageView mPlayList;
     private Story storyModule;
     private SoundFile soundFile;
     private SamplePlayer samplePlayer;
@@ -49,21 +58,40 @@ public class MPlayerActivity extends AppCompatActivity {
                 storyModule = (Story) story_data;
             }
         }
-        mpv.setCoverURL("http://img2.imgtn.bdimg.com/it/u=1049512083,2271296344&fm=214&gp=0.jpg");
+        //获取图片的方法
+//        mpv.setCoverURL("http://img2.imgtn.bdimg.com/it/u=1049512083,2271296344&fm=214&gp=0.jpg");
         mpv.start();
         mpv.stop();
-        mpv.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                if (mpv.isRotating()) {
-                  pauseplay();
-                } else {
-                   startplay();
-                }
-            }
-        });
 
         loadData();
+
+        Picasso.with(this).load(storyModule.img).into(mRootView);
     }
+
+
+    @OnClick({R.id.back,R.id.playlist,R.id.mpv})
+    public void onClick(View view){
+
+        switch (view.getId()) {
+            case R.id.back :
+
+                finish();
+                break;
+            case R.id.playlist :
+
+                ToastUtils.showToast(MPlayerActivity.this,"播放列表");
+                break;
+            case R.id.mpv :
+
+                if (mpv.isRotating()) {
+                    pauseplay();
+                } else {
+                    startplay();
+                }
+                break;
+        }
+    }
+
     //加载歌曲信息
     private void loadData() {
         Log.e("----->" + "MPlayerActivity", "loadData:" + storyModule);

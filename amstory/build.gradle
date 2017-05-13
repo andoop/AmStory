@@ -76,6 +76,7 @@ dependencies {
     })
     compile project(':andooptabframe')
     // If you want to use the GPU Filters
+    //    compile 'com.google.android:multidex:0.1'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support:recyclerview-v7:25.0.0'
@@ -91,8 +92,7 @@ dependencies {
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
     compile 'com.alibaba:fastjson:1.2.8'
     compile 'com.umeng.analytics:analytics:latest.integration'
-//    compile 'com.google.android:multidex:0.1'
+    testCompile 'junit:junit:4.12'
 }

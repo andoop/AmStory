@@ -1,22 +1,13 @@
 package andoop.android.amstory.utils;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.media.Image;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.util.List;
 
 import andoop.android.amstory.R;
-import andoop.android.amstory.fragments.UserSettingActivity;
-import cn.finalteam.galleryfinal.GalleryFinal;
-import cn.finalteam.galleryfinal.model.PhotoInfo;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
