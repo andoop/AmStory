@@ -95,4 +95,5 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.8'
     compile 'com.umeng.analytics:analytics:latest.integration'
 //    compile 'com.google.android:multidex:0.1'
+    provided "org.projectlombok:lombok:1.12.6"
 }
