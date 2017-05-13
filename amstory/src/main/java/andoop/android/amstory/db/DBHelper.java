@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "amStory.db";
     private static final int DATABASE_VERSION = 2;
     //创建表,历史记录表
-    public static final String TABLE_PLLAYRECORD = "userInfo";
+    public static final String TABLE_PLLAYRECORD = "playrecord";
 
     private static final String CREATE_PLLAYRECORD_SQL = "CREATE TABLE " + TABLE_PLLAYRECORD + " ("
             + "id TEXT PRIMARY KEY, "

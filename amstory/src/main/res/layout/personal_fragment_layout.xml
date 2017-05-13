@@ -50,6 +50,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/person_works"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -73,6 +74,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/person_link"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -96,6 +98,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/person_follow"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -119,6 +122,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/person_fans"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -154,14 +158,9 @@
         android:gravity="center_vertical"
         >
 
-        <ImageView
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_margin="30dp"
-            android:id="@+id/child_iv"
-            android:src="@drawable/header"/>
 
         <LinearLayout
+            android:layout_margin="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
