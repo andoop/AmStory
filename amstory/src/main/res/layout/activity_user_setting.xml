@@ -4,6 +4,6 @@
     android:id="@+id/activity_user_setting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="andoop.android.amstory.fragments.UserSettingActivity">
+    tools:context="andoop.android.amstory.UserSettingActivity">
 
 </RelativeLayout>

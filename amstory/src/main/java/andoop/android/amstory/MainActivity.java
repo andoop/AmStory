@@ -17,14 +17,10 @@ import com.andoop.andooptabframe.core.AndoopFrame;
 import com.andoop.andooptabframe.core.TabFrameConfig;
 import com.umeng.analytics.MobclickAgent;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import andoop.android.amstory.fragments.FaxianFragment;
 import andoop.android.amstory.fragments.PersonalFragment;
 import andoop.android.amstory.fragments.TinggushiFragment;
 import andoop.android.amstory.fragments.TuijianFragment;
-import andoop.android.amstory.fragments.UserSettingActivity;
 import andoop.android.amstory.jni.AudioDataProcessor;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -80,6 +76,10 @@ public class MainActivity extends FragmentActivity {
                 }
             }
         });
+
+        //模拟登录
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     private void initListener() {

@@ -94,7 +94,7 @@ public class StoryDetailActivity extends AppCompatActivity {
 
     private void bindData() {
         tv_title.setText(mStory.title);
-        tv_author.setText("/"+mStory.author);
+        tv_author.setText(mStory.author);
         Picasso.with(this).load(mStory.img).into(iv_icon);
         tv_content.setText("        "+mStory.content.replace("&&&",""));
     }

@@ -18,8 +18,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import andoop.android.amstory.InteractActivity;
 import andoop.android.amstory.R;
 import andoop.android.amstory.StoryDetailActivity;
+import andoop.android.amstory.UserLikeStoryActivity;
 import andoop.android.amstory.base.BasePager;
 import andoop.android.amstory.db.PlayRecordDao;
 import andoop.android.amstory.module.Story;
@@ -64,18 +66,28 @@ public class PersonalFragment extends BasePager {
     @OnClick({R.id.person_works,R.id.person_link,R.id.person_follow,R.id.person_fans})
     public void onClick(View view){
 
+        Intent intent;
         switch (view.getId()) {
             case R.id.person_works :
-
+                intent = new Intent(getActivity(),UserStoryActivity.class);
+                startActivity(intent);
                 ToastUtils.showToast(getActivity(),"作品");
                 break;
             case R.id.person_link :
+                intent = new Intent(getActivity(),UserLikeStoryActivity.class);
+                startActivity(intent);
                 ToastUtils.showToast(getActivity(),"喜欢");
                 break;
             case R.id.person_follow :
+                intent = new Intent(getActivity(),InteractActivity.class);
+                intent.putExtra("type","1"); //type 1.关注；2.粉丝
+                startActivity(intent);
                 ToastUtils.showToast(getActivity(),"关注");
                 break;
             case R.id.person_fans :
+                intent = new Intent(getActivity(),InteractActivity.class);
+                intent.putExtra("type","2"); //type 1.关注；2.粉丝
+                startActivity(intent);
                 ToastUtils.showToast(getActivity(),"粉丝");
                 break;
         }

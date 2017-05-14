@@ -16,7 +16,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--todo-->
+
+        <!-- todo -->
         <meta-data
             android:name="5917cb7a310c9342de00249d"
             android:value="YOUR_APP_KEY" />
@@ -24,6 +25,10 @@
             android:name="${UMENG_CHANNEL_VALUE}"
             android:value="Channel ID" />
 
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
@@ -85,14 +90,22 @@
             android:name=".SearchActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".fragments.UserSettingActivity"
+            android:name=".UserSettingActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".FinishRecordActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
+        <activity
+            android:name=".InteractActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".UserLikeStoryActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".fragments.UserStoryActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>
