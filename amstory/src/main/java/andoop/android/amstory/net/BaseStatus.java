@@ -9,4 +9,5 @@ public interface BaseStatus {
     int UNAUTHORIZED = 401;
     int FORBIDDEN = 403;
     int NOT_FOUND = 404;
+    int ERROR = -1;
 }

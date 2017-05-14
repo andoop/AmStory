@@ -5,5 +5,5 @@ package andoop.android.amstory.net;
  */
 
 public interface NetConfig {
-    String IP="";
+    String IP = "http://120.27.219.173:8080";
 }
