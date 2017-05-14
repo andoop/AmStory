@@ -19,10 +19,10 @@
 
         <!-- todo -->
         <meta-data
-            android:name="UMENG_APPKEY"
+            android:name="5917cb7a310c9342de00249d"
             android:value="YOUR_APP_KEY" />
         <meta-data
-            android:name="UMENG_CHANNEL"
+            android:name="${UMENG_CHANNEL_VALUE}"
             android:value="Channel ID" />
 
         <activity

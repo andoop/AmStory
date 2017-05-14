@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 
 repositories {
     mavenCentral()
@@ -21,9 +22,9 @@ android {
     signingConfigs {
         release {
             keyAlias 'amStory'
-            keyPassword '123456'
-            storeFile file('../KEYSTORE/keystore.jks')
-            storePassword '123456'
+            keyPassword 'Qiyu1234'
+            storeFile file('../KEYSTORE/amStory.jks')
+            storePassword 'Qiyu1234'
         }
     }
 
@@ -47,13 +48,44 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+    }
+
+    productFlavors {
+        nuanYin {} // our test flavor
+        tx {}
+        baidu {}//2
+        baidusem {}
+        c360 {}
+        ali {}//3
+        xiaomi {}
+        huawei {}
+        vivo {}
+        oppo {}
+        meizu {}
+        jifeng {}
+        chuizi {}
+        leshi {}
+        sougou {}
+        anzhi {}
+        taptap {}
+        kuAn {}
+        douyu {}
+        jinli {}//1
+        lenovo {}
+        youyi {}
+        yingyong {}
+        woodant {}
+    }
+
+    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
     }
 
     dexOptions {
@@ -67,6 +99,14 @@ android {
             path file("src/main/jni/Android.mk")
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+retrolambda {
+    javaVersion JavaVersion.VERSION_1_7
 }
 
 dependencies {
@@ -94,6 +134,15 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.alibaba:fastjson:1.2.8'
     compile 'com.umeng.analytics:analytics:latest.integration'
-    testCompile 'junit:junit:4.12'
+    //    compile 'com.google.android:multidex:0.1'
     provided 'org.projectlombok:lombok:1.12.6'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.0.0'
+    compile 'io.reactivex:rxjava:1.1.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'
+    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.5.0'
+    testCompile 'junit:junit:4.12'
 }
