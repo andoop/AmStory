@@ -22,6 +22,7 @@ import andoop.android.amstory.InteractActivity;
 import andoop.android.amstory.R;
 import andoop.android.amstory.StoryDetailActivity;
 import andoop.android.amstory.UserLikeStoryActivity;
+import andoop.android.amstory.UserStoryActivity;
 import andoop.android.amstory.base.BasePager;
 import andoop.android.amstory.db.PlayRecordDao;
 import andoop.android.amstory.module.Story;

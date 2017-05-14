@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import andoop.android.amstory.BgListActivity;
 import andoop.android.amstory.R;
 import andoop.android.amstory.module.LocalMusicModule;
 import butterknife.ButterKnife;
@@ -101,9 +102,16 @@ public class MusicPage extends Fragment {
         mData.clear();
         mData.addAll(datas);
 
-        recylerview.setLayoutManager(new GridLayoutManager(getActivity(),4));
-        recylerview.setAdapter(new MBgChooseAdapter());
-        recylerview.getAdapter().notifyDataSetChanged();
+        if(BgListActivity.type == 2) {
+            recylerview.setLayoutManager(new GridLayoutManager(getActivity(),4));
+            recylerview.setAdapter(new SoundAdapter());
+            recylerview.getAdapter().notifyDataSetChanged();
+        }else if(BgListActivity.type == 1) {
+            recylerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recylerview.setAdapter(new MBgChooseAdapter());
+            recylerview.getAdapter().notifyDataSetChanged();
+        }
+
         //recylerview.scrollToPosition();
 
     }
@@ -182,14 +190,14 @@ public class MusicPage extends Fragment {
         tv_title.setText("没有数据");
     }
 
-        private class MBgChooseAdapter extends RecyclerView.Adapter<MusicPage.MBgChooseViewHolder>{
+        private class SoundAdapter extends RecyclerView.Adapter<MusicPage.SoundViewHolder>{
         @Override
-        public MusicPage.MBgChooseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new MusicPage.MBgChooseViewHolder(View.inflate(MusicPage.this.getActivity(),R.layout.item_list_choosebg,null));
+        public MusicPage.SoundViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new MusicPage.SoundViewHolder(View.inflate(MusicPage.this.getActivity(),R.layout.item_list_choosebg,null));
         }
 
         @Override
-        public void onBindViewHolder(MusicPage.MBgChooseViewHolder holder, int position) {
+        public void onBindViewHolder(MusicPage.SoundViewHolder holder, int position) {
             LocalMusicModule localMusicModule = mData.get(position);
             holder.play.setTag(localMusicModule.path);
             holder.rootView.setTag(position);
@@ -202,17 +210,17 @@ public class MusicPage extends Fragment {
                 holder.play.setVisibility(View.GONE);
             }
 
-            holder.play.setImageResource(R.drawable.ic_play);
-
-
+            holder.play.setImageResource(R.drawable.play);
         }
 
         @Override
         public int getItemCount() {
+
             return mData.size();
         }
     }
-    public class MBgChooseViewHolder extends RecyclerView.ViewHolder{
+
+    public class SoundViewHolder extends RecyclerView.ViewHolder{
         @InjectView(R.id.cv_listchoose_mr)
         RelativeLayout rootView;
         @InjectView(R.id.iv_mc_play)
@@ -221,7 +229,7 @@ public class MusicPage extends Fragment {
         RelativeLayout rl;
         @InjectView(R.id.tv_list_choose_name)
         TextView name;
-        public MBgChooseViewHolder(View itemView) {
+        public SoundViewHolder(View itemView) {
             super(itemView);
             ButterKnife.inject(this,itemView);
             rootView.setOnClickListener(new View.OnClickListener() {
@@ -249,20 +257,115 @@ public class MusicPage extends Fragment {
                     if(isPlaying){
                         //暂停播放
                         pause();
-                        play.setImageResource(R.drawable.ic_play);
+                        play.setImageResource(R.drawable.play);
                     }else {
                         //播放
                         try {
                             play(v.getTag().toString());
-                            play.setImageResource(R.drawable.ic_pause);
+                            play.setImageResource(R.drawable.pause);
                         } catch (IOException e) {
                             e.printStackTrace();
                             isPlaying=false;
-                            play.setImageResource(R.drawable.ic_play);
+                            play.setImageResource(R.drawable.play);
                         }
                     }
                 }
             });
         }
     }
+
+
+    private class MBgChooseAdapter extends RecyclerView.Adapter<MusicPage.MBgChooseViewHolder>{
+
+
+        @Override
+        public MBgChooseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new MusicPage.MBgChooseViewHolder(View.inflate(MusicPage.this.getActivity(),R.layout.item_list_sound,null));
+        }
+
+        @Override
+        public void onBindViewHolder(MusicPage.MBgChooseViewHolder holder, int position) {
+
+            LocalMusicModule localMusicModule = mData.get(position);
+            holder.play.setTag(localMusicModule.path);
+            holder.rootView.setTag(position);
+            holder.name.setText(localMusicModule.name.replace(".wav",""));
+            if(localMusicModule.selected){
+//                holder.rl.setBackgroundColor(Color.parseColor("#ff0000"));
+                holder.play.setVisibility(View.VISIBLE);
+            }else {
+//                holder.rl.setBackgroundColor(Color.parseColor("#00ff0000"));
+                holder.play.setVisibility(View.GONE);
+            }
+
+            holder.play.setImageResource(R.drawable.sound_pause);
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return mData.size();
+        }
+    }
+
+    public class MBgChooseViewHolder extends RecyclerView.ViewHolder{
+
+        @InjectView(R.id.cv_listchoose_mr)
+        RelativeLayout rootView;
+        @InjectView(R.id.iv_mc_play)
+        ImageView play;
+        @InjectView(R.id.tv_list_choose_name)
+        TextView name;
+        @InjectView(R.id.sound_play)
+        ImageView mSoundPlay;
+
+        public MBgChooseViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.inject(this,itemView);
+
+            rootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Intent intent = new Intent(MusicPage.this.getActivity(), StoryMakeActivity.class);
+//                    intent.putExtra("path",v.getTag().toString());
+//                    MusicPage.this.getActivity().setResult(100,intent);
+//                    MusicPage.this.getActivity().finish();
+                    //显示播放按钮
+                    //play.setVisibility(View.VISIBLE);
+                    //发送广播,由父activity接收
+                    Intent intent=new Intent("music_choose_data");
+                    Bundle extras=new Bundle();
+                    extras.putString("path",mData.get(Integer.parseInt(v.getTag().toString())).path);
+                    intent.putExtras(extras);
+                    LocalBroadcastManager.getInstance(MusicPage.this.getActivity()).sendBroadcast(intent);
+                    select(Integer.parseInt(v.getTag().toString()));
+
+                }
+            });
+
+            play.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(isPlaying){
+                        //暂停播放
+                        pause();
+                        mSoundPlay.setVisibility(View.GONE);
+                        play.setImageResource(R.drawable.sound_play);
+                    }else {
+                        //播放
+                        try {
+                            play(v.getTag().toString());
+                            mSoundPlay.setVisibility(View.VISIBLE);
+                            play.setImageResource(R.drawable.sound_pause);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            isPlaying=false;
+                            play.setImageResource(R.drawable.sound_play);
+                        }
+                    }
+                }
+            });
+        }
+    }
+
 }

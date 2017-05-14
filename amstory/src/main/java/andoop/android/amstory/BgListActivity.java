@@ -12,15 +12,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +25,6 @@ import andoop.android.amstory.base.BaseActivity;
 import andoop.android.amstory.fragments.music.MusicPage;
 import andoop.android.amstory.module.LocalMusicModule;
 import andoop.android.amstory.module.MusicCat;
-import andoop.android.amstory.presenter.BasePresenter;
 import andoop.android.amstory.presenter.BgListPresenter;
 import andoop.android.amstory.presenter.view.IBgListView;
 import butterknife.ButterKnife;
@@ -61,6 +54,8 @@ public class BgListActivity extends BaseActivity<BgListPresenter> implements IBg
             }
         }
     };
+    public static int type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,10 +64,10 @@ public class BgListActivity extends BaseActivity<BgListPresenter> implements IBg
         //注册广播
         IntentFilter filter=new IntentFilter("music_choose_data");
         LocalBroadcastManager.getInstance(this).registerReceiver(dataReceiver,filter);
-        int type = getIntent().getIntExtra("type", 1);
-        if(type==1){
+        type = getIntent().getIntExtra("type", 1);
+        if(type ==1){
             initBgMusic();
-        }else if(type==2){
+        }else if(type ==2){
             initMusic();
         }
         //mData=new ArrayList();
@@ -183,5 +178,10 @@ public class BgListActivity extends BaseActivity<BgListPresenter> implements IBg
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     }
 
+    //点击半透明的View的时候finish
+    public void onFinish(View v) {
+
+        finish();
+    }
 
 }

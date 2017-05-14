@@ -56,7 +56,7 @@ public class UserSettingActivity extends AppCompatActivity {
         });
 //        PhotoUtils.getInstance().init(this)
 //                .showPhoto(childIv, SpUtils.CHILD_IMAGE);
-//        initListener();
+        initListener();
     }
 
     private void initListener() {

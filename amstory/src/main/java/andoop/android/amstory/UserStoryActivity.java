@@ -1,4 +1,4 @@
-package andoop.android.amstory.fragments;
+package andoop.android.amstory;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
-import andoop.android.amstory.R;
 import andoop.android.amstory.adapter.UserLikeStoryAdapter;
 import andoop.android.amstory.utils.ToastUtils;
 import butterknife.ButterKnife;

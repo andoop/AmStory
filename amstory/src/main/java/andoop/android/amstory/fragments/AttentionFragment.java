@@ -1,5 +1,6 @@
 package andoop.android.amstory.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import andoop.android.amstory.OthersActivity;
 import andoop.android.amstory.R;
 import andoop.android.amstory.adapter.InteractAdapter;
 import andoop.android.amstory.utils.ToastUtils;
@@ -49,6 +51,10 @@ public class AttentionFragment extends Fragment {
         adapter.setItemClickListener(new InteractAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+
+                Intent intent = new Intent(getActivity(), OthersActivity.class);
+                startActivity(intent);
+
                 ToastUtils.showToast(getActivity(),"点击了 item"+position);
             }
         });

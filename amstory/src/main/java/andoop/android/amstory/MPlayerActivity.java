@@ -3,11 +3,15 @@ package andoop.android.amstory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,6 +83,7 @@ public class MPlayerActivity extends AppCompatActivity {
                 break;
             case R.id.playlist :
 
+                showPopWindow();
                 ToastUtils.showToast(MPlayerActivity.this,"播放列表");
                 break;
             case R.id.mpv :
@@ -90,6 +95,23 @@ public class MPlayerActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    //弹出播放列表
+    private void showPopWindow() {
+
+        final View vPopWindow=LayoutInflater.from(this).inflate(R.layout.mypopwindow, null, false);
+        //宽300 高300
+        final PopupWindow popWindow = new PopupWindow(vPopWindow, ActionBar.LayoutParams.MATCH_PARENT,ActionBar.LayoutParams.MATCH_PARENT,true);
+        TextView viewById = (TextView) vPopWindow.findViewById(R.id.text);
+        viewById.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popWindow.dismiss();
+            }
+        });
+
+        popWindow.showAtLocation(mBack, Gravity.CENTER, 0, 0);
     }
 
     //加载歌曲信息

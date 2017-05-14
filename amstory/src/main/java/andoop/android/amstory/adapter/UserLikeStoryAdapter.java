@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import andoop.android.amstory.R;
+import andoop.android.amstory.utils.DisplayUtils;
 
 /**
  * Created by Administrator on 2017/5/14/014.
@@ -43,6 +44,10 @@ public class UserLikeStoryAdapter extends RecyclerView.Adapter <UserLikeStoryAda
                 }
             }
         });
+        
+        if(position == 0) {
+            holder.rootView.setPadding(0, DisplayUtils.dip2px(context,8),0,0);
+        }
     }
 
     @Override

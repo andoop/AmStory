@@ -76,6 +76,7 @@ dependencies {
     })
     compile project(':andooptabframe')
     // If you want to use the GPU Filters
+    //    compile 'com.google.android:multidex:0.1'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support:recyclerview-v7:25.0.0'
@@ -94,6 +95,5 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.8'
     compile 'com.umeng.analytics:analytics:latest.integration'
     testCompile 'junit:junit:4.12'
-//    compile 'com.google.android:multidex:0.1'
-    provided "org.projectlombok:lombok:1.12.6"
+    provided 'org.projectlombok:lombok:1.12.6'
 }

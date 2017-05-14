@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f4f7ff"
+    tools:context="andoop.android.amstory.OthersActivity">
+
+<!--标题-->
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/others_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/dimens_10dp"
+            android:paddingRight="@dimen/dimens_10dp"
+            android:src="@drawable/ic_back" />
+
+        <ImageView
+            android:id="@+id/others_more"
+            android:layout_width="@dimen/dimens_40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/dimens_10dp"
+            android:src="@drawable/more" />
+
+    </RelativeLayout>
+
+<!--头部-->
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:background="@color/white"
+        android:layout_below="@id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimens_8dp">
+
+        <ImageView
+            android:id="@+id/others_head_icon"
+            android:src="@drawable/header"
+            android:layout_marginTop="@dimen/dimens_10dp"
+            android:layout_marginBottom="@dimen/dimens_10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/dimens_80dp"
+            android:layout_height="@dimen/dimens_80dp" />
+        
+        <TextView
+            android:id="@+id/others_nameAndSex"
+            android:layout_marginBottom="@dimen/dimens_10dp"
+            android:drawablePadding="@dimen/dimens_5dp"
+            android:drawableRight="@drawable/usergirl"
+            android:layout_below="@id/others_head_icon"
+            android:text="乖乖的小宝宝"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_sex_age_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/others_nameAndSex"
+            android:layout_marginBottom="@dimen/dimens_10dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/babyboy" />
+
+            <View
+                android:layout_width="@dimen/dimens_1dp"
+                android:layout_height="@dimen/dimens_10dp"
+                android:layout_marginLeft="@dimen/dimens_5dp"
+                android:layout_marginRight="@dimen/dimens_5dp"
+                android:background="@color/timecode_shadow2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="宝宝年龄"
+                android:textSize="10sp" />
+
+            <View
+                android:layout_width="@dimen/dimens_1dp"
+                android:layout_height="@dimen/dimens_10dp"
+                android:layout_marginLeft="@dimen/dimens_5dp"
+                android:layout_marginRight="@dimen/dimens_5dp"
+                android:background="@color/timecode_shadow2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10作品"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/others_interact"
+            android:layout_width="@dimen/dimens_60dp"
+            android:layout_marginRight="@dimen/dimens_10dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:gravity="center"
+            android:padding="@dimen/dimens_5dp"
+            android:text="已关注"
+            android:textColor="@color/appblue"
+            android:textSize="@dimen/dimens_12sp"
+            android:layout_alignBottom="@id/ll_sex_age_story"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+
+<!--tag资料部分-->
+    <LinearLayout
+        android:id="@+id/ll_tag"
+        android:layout_below="@id/rl_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimens_8dp"
+        android:background="#fff"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/person_works"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="作品"
+            android:layout_marginTop="3dp"
+            android:textSize="15sp"
+            android:textColor="@color/appblue"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/person_link"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="喜欢"
+            android:layout_marginTop="3dp"
+            android:textSize="15sp"
+            android:textColor="@color/appblue"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/person_follow"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关注"
+            android:layout_marginTop="3dp"
+            android:textSize="15sp"
+            android:textColor="@color/appblue"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/person_fans"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="粉丝"
+            android:layout_marginTop="3dp"
+            android:textSize="15sp"
+            android:textColor="@color/appblue"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+<!--他的作品-->
+    <TextView
+        android:id="@+id/others_story"
+        android:layout_below="@id/ll_tag"
+        android:text="TA的作品"
+        android:background="@color/white"
+        android:textColor="@color/appblue"
+        android:paddingLeft="@dimen/dimens_15dp"
+        android:paddingTop="@dimen/dimens_10dp"
+        android:paddingBottom="@dimen/dimens_15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:background="#f4f7ff"
+        android:layout_below="@id/others_story"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

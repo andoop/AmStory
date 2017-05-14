@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_listchoose_mr"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_list_choose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dimens_1dp"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:padding="@dimen/dimens_15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_list_choose_name"
+                android:text="背景音乐名称—作者名"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/sound_play"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimens_10dp"
+                android:layout_toRightOf="@id/tv_list_choose_name"
+                android:src="@drawable/soundplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/iv_mc_play"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/sound_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+</RelativeLayout>

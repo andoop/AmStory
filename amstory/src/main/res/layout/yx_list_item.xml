@@ -29,19 +29,19 @@
         android:progress="100"/>
 
     <ImageView
-        android:id="@+id/iv_yxlistitemdelete"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/ic_delate_bt"/>
-
-    <ImageView
         android:id="@+id/iv_yxlistitemlocate"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:src="@drawable/ic_location"/>
+
+    <ImageView
+        android:id="@+id/iv_yxlistitemdelete"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_delate_bt"/>
 
 </LinearLayout>

@@ -2,8 +2,8 @@ package andoop.android.amstory;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -21,12 +21,13 @@ public class FinishRecordActivity extends AppCompatActivity {
     EditText et_title;
     @InjectView(R.id.et_fr_content)
     EditText et_content;
-    @InjectView(R.id.tv_fr_num)
-    TextView tv_num;
+//    @InjectView(R.id.tv_fr_num)
+//    TextView tv_num;
     @InjectView(R.id.tv_fr_play)
     TextView tv_play;
-    @InjectView(R.id.tv_fr_cat)
-    TextView tv_cat;    private String mPath;
+//    @InjectView(R.id.tv_fr_cat)
+//    TextView tv_cat;
+    private String mPath;
     MediaPlayer mediaPlayer;
     private boolean isPlay=false;
     @Override
@@ -82,25 +83,28 @@ public class FinishRecordActivity extends AppCompatActivity {
     public void finishPage(View view){
         finish();
     }
-    //选择分类
-    public void chooseCats(View view){
-        Toast.makeText(this, "选择分类", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, AllCatesActivity.class);
-        startActivityForResult(intent,110);
-    }
+//    //选择分类
+//    public void chooseCats(View view){
+//        Toast.makeText(this, "选择分类", Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(this, AllCatesActivity.class);
+//        startActivityForResult(intent,110);
+//    }
     //上传
     public void toUpLoad(View view){
+
+        Intent intent = new Intent(this, UploadOKActivity.class);
+        startActivity(intent);
         Toast.makeText(this, "上传", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==110&&resultCode==100){
-            String cat = data.getExtras().getString("cat");
-            tv_cat.setText(cat);
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode==110&&resultCode==100){
+//            String cat = data.getExtras().getString("cat");
+//            tv_cat.setText(cat);
+//        }
+//    }
 
     @Override
     protected void onDestroy() {

@@ -15,14 +15,40 @@
             android:layout_marginLeft="15dp"
             android:onClick="finishPage"
             android:src="@drawable/back_blue"/>
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_return_next"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:onClick="return_next"
+                android:src="@drawable/return_blue"/>
+
+            <ImageView
+                android:id="@+id/iv_cancle_return_next"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/iv_return_next"
+                android:onClick="cancle_return"
+                android:src="@drawable/cacle_return_blue"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:textColor="@color/appblue"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
             android:onClick="toEdit"
-            android:src="@drawable/ok_blue"/>
+            android:text="下一步"/>
     </RelativeLayout>
 
     <TextView
@@ -53,7 +79,7 @@
         <andoop.android.amstory.customview.ShaderView
             android:id="@+id/sv_story_make"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/dimens_100dp"
             android:layout_centerInParent="true"
             android:background="#447babfd" />
 
@@ -77,23 +103,14 @@
         android:layout_height="55dp">
 
         <ImageView
-            android:id="@+id/iv_return_next"
+            android:id="@+id/iv_toleft"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginLeft="@dimen/dimens_30dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
-            android:onClick="return_next"
-            android:src="@drawable/return_blue"/>
-
-        <ImageView
-            android:id="@+id/iv_cancle_return_next"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/iv_return_next"
-            android:onClick="cancle_return"
-            android:src="@drawable/cacle_return_blue"/>
+            android:layout_marginRight="20dp"
+            android:onClick="toLeft"
+            android:src="@drawable/ic_left"/>
 
         <TextView
             android:id="@+id/tv_timer"
@@ -105,16 +122,6 @@
             android:textSize="15sp"
             android:visibility="visible" />
 
-
-        <ImageView
-            android:id="@+id/iv_toleft"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:layout_toLeftOf="@+id/iv_toright"
-            android:onClick="toLeft"
-            android:src="@drawable/ic_left"/>
 
         <ImageView
             android:id="@+id/iv_toright"
