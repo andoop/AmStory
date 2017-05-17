@@ -48,7 +48,7 @@ public class FansFragment extends Fragment {
         adapter.setItemClickListener(new InteractAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtils.showToast(getActivity(),"点击了 item"+position);
+                ToastUtils.showToast("点击了 item"+position);
             }
         });
     }

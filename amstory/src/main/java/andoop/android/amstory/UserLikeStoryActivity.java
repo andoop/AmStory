@@ -43,7 +43,7 @@ public class UserLikeStoryActivity extends AppCompatActivity {
                 break;
             case R.id.like_story_back_more :
 
-                ToastUtils.showToast(UserLikeStoryActivity.this,"更多");
+                ToastUtils.showToast("更多");
                 break;
         }
     }
@@ -60,7 +60,7 @@ public class UserLikeStoryActivity extends AppCompatActivity {
         mAdapter.setItemClickListener(new UserLikeStoryAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtils.showToast(UserLikeStoryActivity.this,"点击了 item"+position);
+                ToastUtils.showToast("点击了 item"+position);
             }
         });
 

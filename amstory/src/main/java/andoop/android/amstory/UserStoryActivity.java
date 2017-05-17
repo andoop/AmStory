@@ -44,7 +44,7 @@ public class UserStoryActivity extends AppCompatActivity {
                 break;
             case R.id.story_more :
 
-                ToastUtils.showToast(UserStoryActivity.this,"更多");
+                ToastUtils.showToast("更多");
                 break;
         }
     }
@@ -60,7 +60,7 @@ public class UserStoryActivity extends AppCompatActivity {
         mAdapter.setItemClickListener(new UserLikeStoryAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtils.showToast(UserStoryActivity.this,"点击了 item"+position);
+                ToastUtils.showToast("点击了 item"+position);
             }
         });
 

@@ -60,7 +60,7 @@ public class StoryDetailActivity extends AppCompatActivity {
         //保存记录
         PlayRecordDao playRecordDao = new PlayRecordDao(this);
         boolean b1 = playRecordDao.addPlayRecord(mStory);
-        ToastUtils.showToast(this,"and"+b1);
+        ToastUtils.showToast("and"+b1);
     }
 
     //绑定事件
@@ -70,11 +70,11 @@ public class StoryDetailActivity extends AppCompatActivity {
             //发分享
             case  R.id.iv_share:
 
-                ToastUtils.showToast(StoryDetailActivity.this,"分享");
+                ToastUtils.showToast("分享");
                 break;
             case  R.id.iv_like:
 
-                ToastUtils.showToast(StoryDetailActivity.this,"喜欢");
+                ToastUtils.showToast("喜欢");
                 break;
         }
     }

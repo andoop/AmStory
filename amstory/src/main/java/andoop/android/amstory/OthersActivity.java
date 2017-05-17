@@ -64,7 +64,7 @@ public class OthersActivity extends AppCompatActivity {
         mAdapter.setItemClickListener(new UserLikeStoryAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtils.showToast(OthersActivity.this,"点击了 item"+position);
+                ToastUtils.showToast("点击了 item"+position);
             }
         });
     }
@@ -89,33 +89,33 @@ public class OthersActivity extends AppCompatActivity {
                 break;
             case R.id.others_more :
 
-                ToastUtils.showToast(OthersActivity.this,"更多");
+                ToastUtils.showToast("更多");
                 break;
             case R.id.others_interact :
 
-                ToastUtils.showToast(OthersActivity.this,"关注");
+                ToastUtils.showToast("关注");
                 break;
             case R.id.person_works :
                 intent = new Intent(OthersActivity.this,UserStoryActivity.class);
                 startActivity(intent);
-                ToastUtils.showToast(OthersActivity.this,"作品");
+                ToastUtils.showToast("作品");
                 break;
             case R.id.person_link :
                 intent = new Intent(OthersActivity.this,UserLikeStoryActivity.class);
                 startActivity(intent);
-                ToastUtils.showToast(OthersActivity.this,"喜欢");
+                ToastUtils.showToast("喜欢");
                 break;
             case R.id.person_follow :
                 intent = new Intent(OthersActivity.this,InteractActivity.class);
                 intent.putExtra("type","1"); //type 1.关注；2.粉丝
                 startActivity(intent);
-                ToastUtils.showToast(OthersActivity.this,"关注");
+                ToastUtils.showToast("关注");
                 break;
             case R.id.person_fans :
                 intent = new Intent(OthersActivity.this,InteractActivity.class);
                 intent.putExtra("type","2"); //type 1.关注；2.粉丝
                 startActivity(intent);
-                ToastUtils.showToast(OthersActivity.this,"粉丝");
+                ToastUtils.showToast("粉丝");
                 break;
         }
     }

@@ -242,15 +242,15 @@ public class DataListPager extends Fragment {
             switch (view.getId()) {
                 case R.id.iv_share :
 
-                    ToastUtils.showToast(getActivity(),"分享");
+                    ToastUtils.showToast("分享");
                     break;
                 case R.id.iv_like :
 
-                    ToastUtils.showToast(getActivity(),"喜欢");
+                    ToastUtils.showToast("喜欢");
                     break;
                 case R.id.iv_praise :
 
-                    ToastUtils.showToast(getActivity(),"点赞");
+                    ToastUtils.showToast("点赞");
                     break;
             }
         }

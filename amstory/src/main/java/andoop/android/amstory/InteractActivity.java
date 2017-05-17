@@ -108,7 +108,7 @@ public class InteractActivity extends AppCompatActivity {
                 break;
             case R.id.interact_add :
 
-                ToastUtils.showToast(InteractActivity.this,"添加");
+                ToastUtils.showToast("添加");
                 break;
         }
     }

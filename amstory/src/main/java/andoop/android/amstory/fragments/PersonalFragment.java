@@ -72,24 +72,24 @@ public class PersonalFragment extends BasePager {
             case R.id.person_works :
                 intent = new Intent(getActivity(),UserStoryActivity.class);
                 startActivity(intent);
-                ToastUtils.showToast(getActivity(),"作品");
+                ToastUtils.showToast("作品");
                 break;
             case R.id.person_link :
                 intent = new Intent(getActivity(),UserLikeStoryActivity.class);
                 startActivity(intent);
-                ToastUtils.showToast(getActivity(),"喜欢");
+                ToastUtils.showToast("喜欢");
                 break;
             case R.id.person_follow :
                 intent = new Intent(getActivity(),InteractActivity.class);
                 intent.putExtra("type","1"); //type 1.关注；2.粉丝
                 startActivity(intent);
-                ToastUtils.showToast(getActivity(),"关注");
+                ToastUtils.showToast("关注");
                 break;
             case R.id.person_fans :
                 intent = new Intent(getActivity(),InteractActivity.class);
                 intent.putExtra("type","2"); //type 1.关注；2.粉丝
                 startActivity(intent);
-                ToastUtils.showToast(getActivity(),"粉丝");
+                ToastUtils.showToast("粉丝");
                 break;
         }
     }

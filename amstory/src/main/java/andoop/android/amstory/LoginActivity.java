@@ -31,14 +31,14 @@ public class LoginActivity extends AppCompatActivity {
         switch (v.getId()) {
             case R.id.login_wx :
 
-                ToastUtils.showToast(LoginActivity.this,"微信登录");
+                ToastUtils.showToast("微信登录");
                 finish();
 
                 break;
 
             case R.id.login_yk :
 
-                ToastUtils.showToast(LoginActivity.this,"游客登录");
+                ToastUtils.showToast("游客登录");
                 finish();
 
                 break;

@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.umeng.analytics.MobclickAgent;
 
+import andoop.android.amstory.utils.ToastUtils;
 import andoop.android.amstory.utils.UILImageLoader;
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
@@ -26,6 +27,7 @@ public class ImApplication extends Application {
 //        MultiDex.install(this);
         initGallery();
         initUmeng();
+        ToastUtils.context = this;
     }
 
 

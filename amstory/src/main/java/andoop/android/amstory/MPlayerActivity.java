@@ -84,7 +84,7 @@ public class MPlayerActivity extends AppCompatActivity {
             case R.id.playlist :
 
                 showPopWindow();
-                ToastUtils.showToast(MPlayerActivity.this,"播放列表");
+                ToastUtils.showToast("播放列表");
                 break;
             case R.id.mpv :
 

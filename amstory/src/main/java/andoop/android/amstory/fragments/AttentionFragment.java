@@ -55,7 +55,7 @@ public class AttentionFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), OthersActivity.class);
                 startActivity(intent);
 
-                ToastUtils.showToast(getActivity(),"点击了 item"+position);
+                ToastUtils.showToast(""+position);
             }
         });
     }

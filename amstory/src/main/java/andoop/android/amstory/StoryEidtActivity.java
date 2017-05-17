@@ -125,7 +125,7 @@ public class StoryEidtActivity extends AppCompatActivity {
         beautify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showToast(StoryEidtActivity.this,"一键美化");
+                ToastUtils.showToast("一键美化");
             }
         });
     }
@@ -413,7 +413,7 @@ public class StoryEidtActivity extends AppCompatActivity {
             protected void onPostExecute(SoundFile aVoid) {
                 super.onPostExecute(aVoid);
                 stoploading();
-                ToastUtils.showToast(StoryEidtActivity.this, "混音成功");
+                ToastUtils.showToast( "混音成功");
                 //保存录音文件
                 saveRecord();
             }
@@ -434,7 +434,7 @@ public class StoryEidtActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ToastUtils.showToast(StoryEidtActivity.this, "保存失败");
+                    ToastUtils.showToast( "保存失败");
                 }
             });
             if (outFile.exists()) {
@@ -459,7 +459,7 @@ public class StoryEidtActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtils.showToast(StoryEidtActivity.this, "保存成功");
+                        ToastUtils.showToast("保存成功");
                         Intent intent = new Intent(StoryEidtActivity.this, FinishRecordActivity.class);
                         Bundle extra=new Bundle();
                         extra.putString("path",mPath);
@@ -471,7 +471,7 @@ public class StoryEidtActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtils.showToast(StoryEidtActivity.this, "保存失败");
+                        ToastUtils.showToast("保存失败");
                     }
                 });
             }
@@ -481,7 +481,7 @@ public class StoryEidtActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ToastUtils.showToast(StoryEidtActivity.this, "保存失败");
+                    ToastUtils.showToast("保存失败");
                 }
             });
         }
@@ -511,7 +511,7 @@ public class StoryEidtActivity extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 stoploading();
                 if(hasBackMusic())
-                    ToastUtils.showToast(StoryEidtActivity.this, "混入背景成功");
+                    ToastUtils.showToast( "混入背景成功");
                 //混入音效
                 mixEffectMusic();
             }
@@ -566,7 +566,7 @@ public class StoryEidtActivity extends AppCompatActivity {
 
         final File file = new File(path);
         if (!file.exists()) {
-            ToastUtils.showToast(this, "file is not exist");
+            ToastUtils.showToast("file is not exist");
             return;
         }
 
@@ -603,7 +603,7 @@ public class StoryEidtActivity extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 stoploading();
                 if (aVoid == null) {
-                    ToastUtils.showToast(StoryEidtActivity.this, "添加背景音乐失败");
+                    ToastUtils.showToast( "添加背景音乐失败");
                     return;
                 }
                 //  mEndPos=0;
@@ -621,7 +621,7 @@ public class StoryEidtActivity extends AppCompatActivity {
 
         final File file = new File(path);
         if (!file.exists()) {
-            ToastUtils.showToast(this, "file is not exist");
+            ToastUtils.showToast( "file is not exist");
             return;
         }
 
@@ -662,7 +662,7 @@ public class StoryEidtActivity extends AppCompatActivity {
                 super.onPostExecute(aVoid);
                 stoploading();
                 if (aVoid == null) {
-                    ToastUtils.showToast(StoryEidtActivity.this, "添加音效失败");
+                    ToastUtils.showToast("添加音效失败");
                     return;
                 }
                 //  mEndPos=0;
@@ -732,7 +732,7 @@ public class StoryEidtActivity extends AppCompatActivity {
         if (requestCode == CHOOSE_BG_REQUEST_CODE && resultCode == 100) {
             String path = data.getStringExtra("path");
             if (TextUtils.isEmpty(path)) {
-                ToastUtils.showToast(this, "path invalid");
+                ToastUtils.showToast("path invalid");
                 return;
             }
 
@@ -743,7 +743,7 @@ public class StoryEidtActivity extends AppCompatActivity {
         } else if (requestCode == CHOOSE_MUSIC_REQUEST_CODE && resultCode == 100) {
             String path = data.getStringExtra("path");
             if (TextUtils.isEmpty(path)) {
-                ToastUtils.showToast(this, "path invalid");
+                ToastUtils.showToast("path invalid");
                 return;
             }
             readYxFile(path);

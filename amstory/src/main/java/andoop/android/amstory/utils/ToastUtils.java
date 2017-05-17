@@ -11,8 +11,9 @@ public class ToastUtils {
 
     private static Toast toast;
 
-    public static void showToast(Context context,
-                                 String content) {
+    public static Context context;
+
+    public static void showToast(String content) {
         if (toast == null) {
             toast = Toast.makeText(context,
                     content,

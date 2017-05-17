@@ -30,14 +30,14 @@ public class UploadOKActivity extends AppCompatActivity {
         switch (v.getId()) {
             case R.id.login_wx :
 
-                ToastUtils.showToast(UploadOKActivity.this,"微信好友");
+                ToastUtils.showToast("微信好友");
                 finish();
 
                 break;
 
             case R.id.login_yk :
 
-                ToastUtils.showToast(UploadOKActivity.this,"微信朋友圈");
+                ToastUtils.showToast("微信朋友圈");
                 finish();
 
                 break;

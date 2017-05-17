@@ -39,7 +39,7 @@ public class InteractAdapter extends RecyclerView.Adapter <InteractAdapter.MyVie
         holder.mInteract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showToast(context,"关注");
+                ToastUtils.showToast("关注");
             }
         });
 
